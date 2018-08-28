@@ -47,7 +47,7 @@ app.get('/oauth', function(req, res) {
         res.send({"Error": "Looks like we're not getting code."});
         console.log("Looks like we're not getting code.");
     } else {
-        // If it's there...
+        // If it's there... 
         res.redirect(url.format({
                         pathname: '/',
                         query: {
@@ -55,34 +55,6 @@ app.get('/oauth', function(req, res) {
                         }
                     }))
 
-        // We'll do a GET call to Slack's `oauth.access` endpoint, passing our app's client ID, client secret, and the code we just got as query parameters.
-       /* request({
-            url: 'https://slack.com/api/oauth.access', //URL to hit
-            qs: {code: req.query.code, client_id: clientId, client_secret: clientSecret}, //Query string data
-            method: 'GET', //Specify the method
-
-        }, function (error, response, body) {
-            if (error) {
-                console.log(error);
-            } else {
-                const parsedObject = JSON.parse(body);
-                console.log('Here is the data !! ', parsedObject.user.email);
-                //res.json(JSON.parse(body));
-                if (parsedObject.user.email === 'jvertil@nd.edu') {
-                    //res.redirect('/');
-                    res.redirect(url.format({
-                        pathname: '/',
-                        query: {
-                            'email': 'jvertil@nd.edu'
-                        }
-                    }))
-                } else {
-                    res.sendStatus(400);
-                }
-                
-
-            }
-        })*/
     }
 });
 
