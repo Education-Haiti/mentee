@@ -11,9 +11,9 @@ const getAuthedMentee = (theEmail, whenGotten) => {
 	})
 }
 
-getAuthedMentee('jvertil@nd.edu', (err, res) => {
+/*getAuthedMentee('jvertil@nd.edu', (err, res) => {
 	console.log('Here it is! ', res);
-})
+})*/
 
 module.exports = {
 	getAuthedMentee,

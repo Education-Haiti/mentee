@@ -2,6 +2,7 @@ env = require('env2')('../.env');  // required to access the environment variabl
 const bodyParser = require('body-parser');
 const path = require('path');
 const url = require('url');
+const queries = require('../database/queries.js');
 // Import express and request modules
 var express = require('express');
 var request = require('request');
@@ -58,7 +59,46 @@ app.get('/oauth', function(req, res) {
     }
 });
 
+app.get('/mentees/authed/:email/', (req, res) => {
+    var theEmail = req.params.email;
+    queries.getAuthedMentee(theEmail, (err, results) => {
+        if (err) {
+            console.log('Server-side error in retrieving info of authed mentee');
+            res.end();
+        } else {
+            res.json(results);
+
+        }
+    })
+})
+
 // Route the endpoint that our slash command will point to and send back a simple response to indicate that ngrok is working
 app.post('/command', function(req, res) {
     res.send('Your ngrok tunnel is up and running!');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
