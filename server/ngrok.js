@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const url = require('url');
 const queries = require('../database/queries.js');
+const queries2 = require('../database/index2.js');
 const { WebClient } = require('@slack/client');
 
 // Import express and request modules
@@ -61,6 +62,16 @@ app.get('/oauth', function(req, res) {
     }
 });
 
+app.get('/mentees/', (req, res) => {
+    queries2.getMentees((err, results) => {
+        if (err) {
+            console.log('Server-side error in retrieving mentees');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 app.get('/mentees/authed/:email/', (req, res) => {
     var theEmail = req.params.email;
     queries.getAuthedMentee(theEmail, (err, results) => {
@@ -71,8 +82,8 @@ app.get('/mentees/authed/:email/', (req, res) => {
             res.json(results);
 
         }
-    })
-})
+    });
+});
 
 // Posting to Slack
 app.post('/mentees/slack/dev', (req, res) => {
