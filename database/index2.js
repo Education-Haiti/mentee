@@ -31,7 +31,6 @@ let saveMentee = (inputObj) => {
         if (err) {
             console.log('Database-side error is saving mentee : ', err);
         } else {
-            console.log(mentee);
             console.log('Saved'); 
         }
     })
@@ -42,6 +41,17 @@ let getMentees = (whenGotten) => {
     .exec((err, data) => {
         if (err) {
             console.log('Database-side error in getting mentees : ', err);
+        } else {
+            whenGotten(null, data);
+        }
+    })
+}
+
+let getMenteeByEmail = (theEmail, whenGotten) => {
+    Mentee.find({email: theEmail})
+    .exec((err, data) => {
+        if (err) {
+            console.log('Database-side error in getting mentee : ', err);
         } else {
             whenGotten(null, data);
         }
@@ -81,6 +91,10 @@ let sampleData2 = {
 // getMentees((err, result) => {
 //     console.log(result);
 // })
+
+getMenteeByEmail('jluc.vertil@gmail.com', (err, result) => {
+    console.log(result);
+})
 
 module.exports = {
     saveMentee, 

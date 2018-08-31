@@ -73,10 +73,10 @@ app.get('/mentees/', (req, res) => {
 });
 
 app.get('/mentees/authed/:email/', (req, res) => {
-    var theEmail = req.params.email;
+    const theEmail = req.params.email;
     queries.getAuthedMentee(theEmail, (err, results) => {
         if (err) {
-            console.log('Server-side error in retrieving info of authed mentee');
+            console.log('Server-side error in retrieving info of authed mentee : ', err);
             res.end();
         } else {
             res.json(results);
@@ -84,6 +84,19 @@ app.get('/mentees/authed/:email/', (req, res) => {
         }
     });
 });
+
+app.post('/mentee/new', (req, res) => {
+    const menteeObj = req.body.mentee;
+    queries2.saveMentee(menteeObj, (err, results) => {
+        if (err) {
+            console.log('Server-side error in creating new mentee : ', err);
+            res.sendStatus(500);
+        } else {
+            console.log('Success');
+        }
+    })
+    res.sendStatus(201);
+})
 
 // Posting to Slack
 app.post('/mentees/slack/dev', (req, res) => {
@@ -103,13 +116,14 @@ app.post('/mentees/slack/dev', (req, res) => {
         .catch(console.error);
         
     res.sendStatus(201);
-
-    })
+})
 
 // Route the endpoint that our slash command will point to and send back a simple response to indicate that ngrok is working
 app.post('/command', function(req, res) {
     res.send('Your ngrok tunnel is up and running!');
 });
+
+
 
 
 
