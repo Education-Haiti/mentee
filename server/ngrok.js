@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const url = require('url');
 const queries = require('../database/queries.js');
+const { WebClient } = require('@slack/client');
+
 // Import express and request modules
 var express = require('express');
 var request = require('request');
@@ -71,6 +73,27 @@ app.get('/mentees/authed/:email/', (req, res) => {
         }
     })
 })
+
+// Posting to Slack
+app.post('/mentees/slack/dev', (req, res) => {
+        const theMessage = req.body.message;
+        const theChannel = req.body.channel;
+
+        // An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)
+        const token = process.env.SLACK_TOKEN;
+        const web = new WebClient(token);
+        
+
+       web.chat.postMessage({ channel: theChannel, text: theMessage })
+        .then((res) => {
+        // `res` contains information about the posted message
+        console.log('Message sent: ', res.ts);
+        })
+        .catch(console.error);
+        
+    res.sendStatus(201);
+
+    })
 
 // Route the endpoint that our slash command will point to and send back a simple response to indicate that ngrok is working
 app.post('/command', function(req, res) {

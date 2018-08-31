@@ -7,13 +7,25 @@ class MenteeHome extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
+			menteeInfo: {},
+		
 
 		}
 	}
 
 	componentDidMount() {
 		this.getAuthedUserInfo();
+	}
+
+	identifyMentee(theEmail) {
+		axios.get(`/mentees/authed/${theEmail}`)
+			.then((response) => {
+				console.log('from client', response);
+				this.setState({menteeInfo: response.data[0]});
+			})
+			.cath((error) => {
+				console.log('Axios error in getting authed mentee info');
+			});
 	}
 
 	getAuthedUserInfo() {
@@ -28,19 +40,44 @@ class MenteeHome extends React.Component {
 			}
 		})
 		.then((response) => {
-			console.log('Here is the response !!', response);
+			this.identifyMentee(response.data.user.email);
 		})
 		.catch((error)=> {
-			console.log('Axios error in getting authed user info !! : ', error);
-		});
+			console.log('Axios error in getting authed user info !! : ', error); });
+	}
 
+	handleChange(event) {
+		console.log(event)
+		this.setState({value: event.target.value}, console.log(this.state))
+	}
 
+	handleSubmit(event) {
+		axios.post('/mentees/slack/dev', {
+			message: this.state.value,
+			channel: 'websitetesting'
+		})
+		.then((response) => {
+
+		})
+		.catch((error) => {
+			console.log('Axios error in making post to slack');
+		})
 	}
 
 	render() {
 	    return (
-	      <div>
-	        I am da mentee react component!!
+	       <div>
+	      	<div className="welcome-text">
+	        	Welcome {this.state.menteeInfo.first_name + ' ' + this.state.menteeInfo.last_name}
+	        </div>
+
+	        <div>
+	        	Submit a text to Slack!
+	        </div>
+
+		        <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} />
+		        <button type="submit" onClick={this.handleSubmit.bind(this)}> Sumbit </button>
+
 	      </div>
 	    );
   	  }
