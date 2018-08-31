@@ -58,7 +58,6 @@ app.get('/oauth', function(req, res) {
                             'slack': req.query.code,
                         }
                     }))
-
     }
 });
 
@@ -74,7 +73,7 @@ app.get('/mentees/', (req, res) => {
 
 app.get('/mentees/authed/:email/', (req, res) => {
     const theEmail = req.params.email;
-    queries.getAuthedMentee(theEmail, (err, results) => {
+    queries2.getMenteeByEmail(theEmail, (err, results) => {
         if (err) {
             console.log('Server-side error in retrieving info of authed mentee : ', err);
             res.end();

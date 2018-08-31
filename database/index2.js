@@ -92,11 +92,12 @@ let sampleData2 = {
 //     console.log(result);
 // })
 
-getMenteeByEmail('jluc.vertil@gmail.com', (err, result) => {
-    console.log(result);
-})
+// getMenteeByEmail('jluc.vertil@gmail.com', (err, result) => {
+//     console.log(result);
+// })
 
 module.exports = {
     saveMentee, 
-    getMentees
+    getMentees,
+    getMenteeByEmail
 }
