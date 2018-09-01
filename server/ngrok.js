@@ -90,7 +90,7 @@ app.get('/mentees/authed/:email/', (req, res) => {
     });
 });
 
-app.post('/mentee/new', (req, res) => {
+app.post('/mentees/new', (req, res) => {
     const menteeObj = req.body.mentee;
     queries2.saveMentee(menteeObj, (err, results) => {
         if (err) {
@@ -104,8 +104,9 @@ app.post('/mentee/new', (req, res) => {
 })
 
 // Posting to Slack
-app.post('/mentees/slack/dev', (req, res) => {
-        const theMessage = req.body.message;
+app.post('/mentees/slack/kudos', (req, res) => {
+        //const theMessage = req.body.message;
+        const theMessage = "this is a tag testing @kphammusic"
         const theChannel = req.body.channel;
 
         // An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)

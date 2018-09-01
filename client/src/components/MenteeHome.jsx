@@ -73,8 +73,8 @@ class MenteeHome extends React.Component {
 		this.setState({value: event.target.value}, console.log(this.state))
 	}
 
-	handleSubmit(event) {
-		axios.post('/mentees/slack/dev', {
+	sendKudos(event) {
+		axios.post('/mentees/slack/kudos', {
 			message: this.state.value,
 			channel: 'websitetesting'
 		})
@@ -98,7 +98,7 @@ class MenteeHome extends React.Component {
 	        </div>
 
 		        <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} />
-		        <button type="submit" onClick={this.handleSubmit.bind(this)}> Sumbit </button>
+		        <button type="submit" onClick={this.sendKudos.bind(this)}> Sumbit </button>
 
 	      </div>
 	    );
