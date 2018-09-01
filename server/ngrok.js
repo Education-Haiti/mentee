@@ -47,9 +47,15 @@ app.listen(PORT, function () {
 app.get('/oauth', function(req, res) {
     // When a user authorizes an app, a code query parameter is passed on the oAuth endpoint. If that code is not there, we respond with an error message
     if (!req.query.code) {
-        res.status(500);
-        res.send({"Error": "Looks like we're not getting code."});
+        //res.status(500);
+        //res.send({"Error": "Looks like we're not getting code."});
         console.log("Looks like we're not getting code.");
+        res.redirect(url.format({
+            pathname: 'http://localhost:3000',
+            query: {
+                'slack': req.query.code,
+            }
+        }))
     } else {
         // If it's there... 
         res.redirect(url.format({
