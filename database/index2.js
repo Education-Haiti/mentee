@@ -70,7 +70,7 @@ let getChecklist = (theEmail, whenGotten) => {
     })
 }
 
-let updateChecklist = (theEmail, newCheckList, whenUpdated) => {
+let updateChecklist = (theEmail, newChecklist, whenUpdated) => {
     Mentee.findOneAndUpdate({ email: theEmail }, { checklist: newChecklist }, {upsert: true}, (err, doc) => {
         if (err) {
             console.log('Error', err);

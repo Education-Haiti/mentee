@@ -112,7 +112,17 @@ app.get('/mentees/checklist/:email/', (req, res) => {
             res.json(results);
         }
     })
-    
+})
+
+app.put('/mentees/checklist/:email/', (req, res) => {
+    const theEmail = req.params.email; 
+    const newChecklist = req.body.newChecklist;
+    queries2.updateChecklist(theEmail, newChecklist, (err, results) => {
+        if (err) {
+            console.log('Server-side error in updating the checklist : ', err);
+        } 
+    })
+    res.sendStatus(200);
 })
 
 // Posting to Slack
