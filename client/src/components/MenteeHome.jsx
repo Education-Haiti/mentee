@@ -15,16 +15,28 @@ class MenteeHome extends React.Component {
 
 	componentDidMount() {
 		this.getAuthedUserInfo();
+		this.findUserByEmail('jvertil@nd.edu');
 	}
 
-	identifyMentee(theEmail) {
+	identifyMentee(theEmail) { // identifying mentee on database
 		axios.get(`/mentees/authed/${theEmail}`)
 			.then((response) => {
 				this.setState({menteeInfo: response.data[0]});
 			})
-			.cath((error) => {
-				console.log('Axios error in getting authed mentee info');
+			.catch((error) => {
+				console.log('Axios error in getting authed mentee info : ', error);
 			});
+	}
+
+	findUserByEmail(theEmail) { // identifying user on slack API 
+		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
+			.then((response) => {
+				console.log('User info from SLACK API !! : ', response.data.user.profile);
+			})
+			.catch((error) => {
+				console.log('Axios error in getting user info from SLACK API : ', error);
+			});
+
 	}
 
 	getAuthedUserInfo() {
