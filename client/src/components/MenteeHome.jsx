@@ -8,6 +8,7 @@ class MenteeHome extends React.Component {
 		super(props);
 		this.state = {
 			menteeInfo: {},
+			allusers: []
 		
 
 		}
@@ -15,20 +16,21 @@ class MenteeHome extends React.Component {
 
 	componentDidMount() {
 		this.getAuthedUserInfo();
-		this.findUserByEmail('jvertil@nd.edu');
+		this.findUserByEmail_slack('jvertil@nd.edu');
+		this.getAllUsers_slack();
 	}
 
 	identifyMentee(theEmail) { // identifying mentee on database
 		axios.get(`/mentees/authed/${theEmail}`)
 			.then((response) => {
-				this.setState({menteeInfo: response.data[0]});
+				this.setState({ menteeInfo: response.data[0] });
 			})
 			.catch((error) => {
 				console.log('Axios error in getting authed mentee info : ', error);
 			});
 	}
 
-	findUserByEmail(theEmail) { // identifying user on slack API 
+	findUserByEmail_slack(theEmail) { // identifying user on slack API 
 		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
 			.then((response) => {
 				console.log('User info from SLACK API !! : ', response.data.user.profile);
@@ -37,6 +39,14 @@ class MenteeHome extends React.Component {
 				console.log('Axios error in getting user info from SLACK API : ', error);
 			});
 
+	}
+
+	getAllUsers_slack() {
+		axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
+			.then((response) => {
+				console.log('All users from slack !! : ', response.data.members);
+				this.setState({ allusers: response.data.members })
+			})
 	}
 
 	getAuthedUserInfo() {
