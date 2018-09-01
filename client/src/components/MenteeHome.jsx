@@ -20,7 +20,6 @@ class MenteeHome extends React.Component {
 	identifyMentee(theEmail) {
 		axios.get(`/mentees/authed/${theEmail}`)
 			.then((response) => {
-				console.log('from client', response);
 				this.setState({menteeInfo: response.data[0]});
 			})
 			.cath((error) => {
@@ -40,6 +39,7 @@ class MenteeHome extends React.Component {
 			}
 		})
 		.then((response) => {
+			console.log('Email is ... : ', response.data.user.email);
 			this.identifyMentee(response.data.user.email);
 		})
 		.catch((error)=> {
