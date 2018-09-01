@@ -19,7 +19,8 @@ let menteeSchema = mongoose.Schema({
     parent1_email: String, 
     parent2_name: String, 
     parent2_phone: String, 
-    parent2_email: String
+    parent2_email: String,
+    checklist: Object
 });
 
 let Mentee = mongoose.model('Mentee', menteeSchema); // Mentee is the collection
@@ -48,7 +49,7 @@ let getMentees = (whenGotten) => {
 }
 
 let getMenteeByEmail = (theEmail, whenGotten) => {
-    Mentee.find({email: theEmail})
+    Mentee.find({ email: theEmail })
     .exec((err, data) => {
         if (err) {
             console.log('Database-side error in getting mentee : ', err);
@@ -58,21 +59,37 @@ let getMenteeByEmail = (theEmail, whenGotten) => {
     })
 }
 
-let sampleData = {
-    first_name: 'JP', 
-    last_name: 'Vertil', 
-    sex: 'M', 
-    email: 'jpvertil@hotmail.com',
-    hometown: 'Charlottesville', 
-    school: 'SLG', 
-    phone_number: '409-454-5188'
+let getChecklist = (theEmail, whenGotten) => {
+    Mentee.find({ email: theEmail }, { checklist:1 })
+    .exec((err, data) => {
+        if (err) {
+            console.log('Database-side error in getting checklist : ', err);
+        } else {
+            whenGotten(null, data)
+        }
+    })
 }
 
-let sampleData2 = {
-    first_name: 'JP', 
-    last_name: 'Vertil', 
+let updateChecklist = (theEmail, newCheckList, whenUpdated) => {
+    Mentee.findOneAndUpdate({ email: theEmail }, { checklist: newChecklist }, {upsert: true}, (err, doc) => {
+        if (err) {
+            console.log('Error', err);
+        } else {
+            console.log('Successfully updated')
+        }
+    })
+
+ 
+}
+
+
+
+
+let sampleData = {
+    first_name: 'Kony', 
+    last_name: 'Pham', 
     sex: 'M', 
-    email: 'jpvertil@hotmail.com',
+    email: 'kphammusic@gmail.com',
     hometown: 'Charlottesville', 
     school: 'SLG', 
     phone_number: '409-454-5188',
@@ -81,23 +98,43 @@ let sampleData2 = {
     parent1_phone: '223-5133',
     parent2_name: 'Gina',
     parent2_email: 'g@gmail.com',
-    parent2_phone: '444-4444'
+    parent2_phone: '444-4444',
+    checklist: {
+        "SAT": true,
+        "GMAT": true
+    }
 }
 
 
 //saveMentee(sampleData);
 //saveMentee(sampleData2);
 
-// getMentees((err, result) => {
+//  getMentees((err, result) => {
+//      console.log(result);
+//  })
+
+// getMenteeByEmail('jvertil@nd.edu', (err, result) => {
 //     console.log(result);
 // })
 
-// getMenteeByEmail('jluc.vertil@gmail.com', (err, result) => {
+// getChecklist('jvertil@nd.edu', (err, result) => {
+//     console.log(result);
+// })
+
+// var newChecklist = {
+//     "SAT": true,
+//     "GMAT": false,
+// }
+
+// updateChecklist('kphammusic@gmail.com', newChecklist, (err, result) => {
 //     console.log(result);
 // })
 
 module.exports = {
     saveMentee, 
     getMentees,
-    getMenteeByEmail
+    getMenteeByEmail,
+    getChecklist, 
+    updateChecklist
+
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import SECRETS from './client_secrets.js'
 import { Route, Switch } from 'react-router-dom';
+import Checklist from './Checklist.jsx';
 
 class MenteeHome extends React.Component {
 	constructor(props) {
@@ -89,6 +90,9 @@ class MenteeHome extends React.Component {
 	render() {
 	    return (
 	       <div>
+			<div>
+				<Checklist/>
+			</div>
 	      	<div className="welcome-text">
 	        	Welcome {this.state.menteeInfo.first_name + ' ' + this.state.menteeInfo.last_name}
 	        </div>
