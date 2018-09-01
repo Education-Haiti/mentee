@@ -78,12 +78,7 @@ let updateChecklist = (theEmail, newCheckList, whenUpdated) => {
             console.log('Successfully updated')
         }
     })
-
- 
 }
-
-
-
 
 let sampleData = {
     first_name: 'Kony', 

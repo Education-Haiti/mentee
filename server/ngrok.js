@@ -103,6 +103,18 @@ app.post('/mentees/new', (req, res) => {
     res.sendStatus(201);
 })
 
+app.get('/mentees/checklist/:email/', (req, res) => {
+    const theEmail = req.params.email;
+    queries2.getChecklist(theEmail, (err, results) => {
+        if (err) {
+            console.log('Server-side error in getting the checklist : ', err);
+        } else {
+            res.json(results);
+        }
+    })
+    
+})
+
 // Posting to Slack
 app.post('/mentees/slack/kudos', (req, res) => {
         //const theMessage = req.body.message;
