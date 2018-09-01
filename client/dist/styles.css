@@ -1,5 +1,37 @@
+
+body {
+	font-family: Hevetica, sans-serif;
+	color: green;
+	width: 100%;
+	height: 100%;
+	margin:0px;
+}
 .welcome-text {
 	font-weight: bold;
 	font-size: 30px;
 
+}
+
+.preload {
+	background-color: white;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.preload-horizontal {
+	display: flex;
+	justify-content: center;
+}
+
+.preload-logo {
+	width: auto;
+	height: 150px;
+}
+
+.loading {
+	font-size: 15px;
+	color: #234060;
 }
