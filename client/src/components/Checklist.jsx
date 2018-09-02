@@ -8,7 +8,8 @@ class Checklist extends React.Component {
                 items: {
                 },
                 email: 'jvertil@nd.edu',
-                addItem: false
+                addItem: false,
+                typedVal: '',
         }
     }
 
@@ -62,16 +63,30 @@ class Checklist extends React.Component {
         }
     }
 
+    handleChange(event) {
+        this.setState({typedVal : event.target.value});
+    }
+
+    submitNewItem() {
+        let newItems = this.state.items;
+        newItems[`${this.state.typedVal}`] = false;
+        this.setState({items: newItems}, () => {
+            this.updateChecklist(this.state.email);
+        })
+        this.setState({typedVal: ''});
+        this.handleAddItemClick();
+    }
+
     render() {
         let addItemComp = null;
         let addItemButton = null;
         if (this.state.addItem === true) {
             addItemComp = 
             <div class="addItemContainer">
-                <input class="addItemText">
+                <input class="addItemText" onChange={this.handleChange.bind(this)}>
                 </input>
 
-                <button class="addItemB">
+                <button class="addItemB" onClick={this.submitNewItem.bind(this)}>
                     Add
                 </button>
 
