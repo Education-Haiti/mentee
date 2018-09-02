@@ -7,7 +7,8 @@ class Checklist extends React.Component {
             this.state = {
                 items: {
                 },
-                email: 'jvertil@nd.edu'
+                email: 'jvertil@nd.edu',
+                addItem: false
         }
     }
 
@@ -53,20 +54,66 @@ class Checklist extends React.Component {
         })
     }
 
+    handleAddItemClick() {
+        if (this.state.addItem === true) {
+            this.setState({addItem: false});
+        } else {
+            this.setState({addItem: true});
+        }
+    }
+
     render() {
+        let addItemComp = null;
+        let addItemButton = null;
+        if (this.state.addItem === true) {
+            addItemComp = 
+            <div class="addItemContainer">
+                <input class="addItemText">
+                </input>
+
+                <button class="addItemB">
+                    Add
+                </button>
+
+                <button class="addItemB" onClick={this.handleAddItemClick.bind(this)}>
+                    Cancel
+                </button>
+            </div>
+        } else {
+            addItemButton = 
+            <button class="addItemButton" onClick={this.handleAddItemClick.bind(this)}>
+                   Add an item
+            </button>
+        }
         return (
             <div>
-                {
-                    Object.keys(this.state.items).map((keyName, keyIndex) => {
-                        return <div>
-                                <input type="checkbox" 
-                                    checked={this.state.items[`${keyName}`]} 
-                                    name={keyName} 
-                                    onChange={this.handleCheckedItem.bind(this)}/>
-                                {keyName}
-                            </div>
-                    })
-                }
+                <div className="checklist">
+                    <div class="checklist-title">
+                        CHECKLIST
+                    </div>
+
+                    {
+                        Object.keys(this.state.items).map((keyName, keyIndex) => {
+                            return <div className="checklist-item-container">
+                                    <input class="checkbox" type="checkbox" 
+                                        checked={this.state.items[`${keyName}`]} 
+                                        name={keyName} 
+                                        onChange={this.handleCheckedItem.bind(this)}/>
+                                <div className="checklist-item-name">
+                                        {keyName}
+                                </div>
+                                </div>
+                        })
+                    }
+                
+                </div>
+                
+
+                {addItemButton}
+                {addItemComp}
+
+                
+
             </div>
         )
     }
