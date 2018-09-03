@@ -56,8 +56,6 @@ class MenteeHome extends React.Component {
 	      	{/* <div className="welcome-text">
 	        	Welcome {this.state.menteeInfo.first_name + ' ' + this.state.menteeInfo.last_name}
 	        </div> */}
-
-
 	      </div>
 	    );
   	  }

@@ -62,8 +62,14 @@ class GiveKudos extends React.Component {
 		})
 		.catch((error) => {
 			console.log('Axios error in making post to slack');
-		})
+        });
+        
+        this.setState({ kudosMessage: '' });
     }
+
+    cancelKudos() {
+        this.setState({ kudosMessage: '' });
+    } 
 
     render () {
         return (
@@ -83,11 +89,11 @@ class GiveKudos extends React.Component {
                     </select>
                 </div>
 
-                <input class="give-kudos-input" type="text" onChange={this.handleChange.bind(this)}/>
+                <input value={this.state.kudosMessage} class="give-kudos-input" type="text" onChange={this.handleChange.bind(this)}/>
                    
                 <div>
                     <button class="give-kudos-b" onClick={this.submitKudos.bind(this)}> Submit </button>
-                    <button class="give-kudos-b"> Cancel </button>
+                    <button class="give-kudos-b" onClick={this.cancelKudos.bind(this)}> Cancel </button>
                 </div>
             </div>
         )
