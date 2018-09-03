@@ -127,8 +127,7 @@ app.put('/mentees/checklist/:email/', (req, res) => {
 
 // Posting to Slack
 app.post('/mentees/slack/kudos', (req, res) => {
-        //const theMessage = req.body.message;
-        const theMessage = "this is a tag testing @kphammusic"
+        const theMessage = req.body.message;
         const theChannel = req.body.channel;
 
         // An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)

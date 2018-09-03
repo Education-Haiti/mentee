@@ -10,16 +10,11 @@ class MenteeHome extends React.Component {
 		super(props);
 		this.state = {
 			menteeInfo: {},
-			allusers: []
-		
-
 		}
 	}
 
 	componentDidMount() {
 		this.getAuthedUserInfo();
-		this.findUserByEmail_slack('jvertil@nd.edu');
-		this.getAllUsers_slack();
 	}
 
 	identifyMentee(theEmail) { // identifying mentee on database
@@ -32,15 +27,6 @@ class MenteeHome extends React.Component {
 			});
 	}
 
-	
-
-	getAllUsers_slack() {
-		axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
-			.then((response) => {
-				console.log('All users from slack !! : ', response.data.members);
-				this.setState({ allusers: response.data.members })
-			})
-	}
 
 	getAuthedUserInfo() {
 		const slackCodeRaw = window.location.search;
@@ -62,7 +48,7 @@ class MenteeHome extends React.Component {
 	}
 
 	handleChange(event) {
-		console.log(event)
+		//console.log(event)
 		this.setState({value: event.target.value}, console.log(this.state))
 	}
 

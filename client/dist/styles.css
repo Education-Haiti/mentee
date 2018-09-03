@@ -55,12 +55,6 @@ button {
 	justify-content: space-between;
 }
 
-
-
-
-
-
-
 .checklist {
 	height: 80%;
 	width: 250px;overflow: scroll;
@@ -99,10 +93,15 @@ button {
 	width: 250px;
 	height: 50px;
 	font-size: 15px;
-	color:  #a33030;
-	background-color: #ffdfe7;
+	color:  white;
+	background-color: #a33030;
 	border-radius: 0px;
 } 
+
+.addItemButton:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
+}
 
 .addItemContainer {
 	width: 250px;
@@ -123,3 +122,46 @@ button {
 	background-color: #234060;
 	color: white;
 }
+
+.addItemB:hover {
+	color: #234060;
+	background-color: #d9edfc;
+}
+
+.give-kudos-container {
+	display: flex;
+	border: .5px solid #f2f2f2	;
+	justify-content: space-between;
+	flex-direction: column;
+	margin: 15px;
+	padding: 10px;
+	width: 300px;
+	height: 200px;
+}
+
+.give-kudos-title {
+	color: #a33030;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
+.give-kudos-input {
+	font-size: 15px;
+	height: 75px;
+}
+
+.give-kudos-b {
+	min-width: 75px;
+	width: 20px;
+	font-size: 10px;
+	margin-right: 3px;
+	color:  white;
+	background-color: #a33030;
+}
+
+.give-kudos-b:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
+}
+

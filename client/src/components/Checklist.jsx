@@ -109,7 +109,7 @@ class Checklist extends React.Component {
 
                     {
                         Object.keys(this.state.items).map((keyName, keyIndex) => {
-                            return <div className="checklist-item-container">
+                            return <div className="checklist-item-container" key = { keyIndex }>
                                     <input class="checkbox" type="checkbox" 
                                         checked={this.state.items[`${keyName}`]} 
                                         name={keyName} 
