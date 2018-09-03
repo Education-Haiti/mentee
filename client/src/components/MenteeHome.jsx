@@ -3,6 +3,7 @@ import axios from 'axios';
 import SECRETS from './client_secrets.js'
 import { Route, Switch } from 'react-router-dom';
 import Checklist from './Checklist.jsx';
+import GiveKudos from './GiveKudos.jsx';
 
 class MenteeHome extends React.Component {
 	constructor(props) {
@@ -31,16 +32,7 @@ class MenteeHome extends React.Component {
 			});
 	}
 
-	findUserByEmail_slack(theEmail) { // identifying user on slack API 
-		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
-			.then((response) => {
-				console.log('User info from SLACK API !! : ', response.data.user.profile);
-			})
-			.catch((error) => {
-				console.log('Axios error in getting user info from SLACK API : ', error);
-			});
-
-	}
+	
 
 	getAllUsers_slack() {
 		axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
@@ -90,8 +82,9 @@ class MenteeHome extends React.Component {
 	render() {
 	    return (
 	       <div>
-			<div>
+			<div class="menteeHomeMainContainer">
 				<Checklist/>
+				<GiveKudos/>
 			</div>
 	      	<div className="welcome-text">
 	        	Welcome {this.state.menteeInfo.first_name + ' ' + this.state.menteeInfo.last_name}
@@ -107,7 +100,6 @@ class MenteeHome extends React.Component {
 	      </div>
 	    );
   	  }
-	
 }
 
 export default MenteeHome;
