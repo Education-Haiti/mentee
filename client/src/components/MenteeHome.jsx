@@ -27,7 +27,6 @@ class MenteeHome extends React.Component {
 			});
 	}
 
-
 	getAuthedUserInfo() {
 		const slackCodeRaw = window.location.search;
 		const slackCode = slackCodeRaw.slice(7); // to remove the key of 'slack=' specified on the server side
@@ -47,24 +46,6 @@ class MenteeHome extends React.Component {
 			console.log('Axios error in getting authed user info !! : ', error); });
 	}
 
-	handleChange(event) {
-		//console.log(event)
-		this.setState({value: event.target.value}, console.log(this.state))
-	}
-
-	sendKudos(event) {
-		axios.post('/mentees/slack/kudos', {
-			message: this.state.value,
-			channel: 'websitetesting'
-		})
-		.then((response) => {
-
-		})
-		.catch((error) => {
-			console.log('Axios error in making post to slack');
-		})
-	}
-
 	render() {
 	    return (
 	       <div>
@@ -72,16 +53,10 @@ class MenteeHome extends React.Component {
 				<Checklist/>
 				<GiveKudos/>
 			</div>
-	      	<div className="welcome-text">
+	      	{/* <div className="welcome-text">
 	        	Welcome {this.state.menteeInfo.first_name + ' ' + this.state.menteeInfo.last_name}
-	        </div>
+	        </div> */}
 
-	        <div>
-	        	Submit a text to Slack!
-	        </div>
-
-		        <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} />
-		        <button type="submit" onClick={this.sendKudos.bind(this)}> Sumbit </button>
 
 	      </div>
 	    );
