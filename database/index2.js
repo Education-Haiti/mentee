@@ -159,6 +159,60 @@ let sampleData = {
     ]
 }
 
+let sampleData2 = {
+    first_name: 'Kony', 
+    last_name: 'Pham', 
+    sex: 'F', 
+    email: 'kphammusic@gmail.com',
+    hometown: 'Cali Baby', 
+    school: 'ND', 
+    phone_number: '409-454-5188',
+    parent1_name: 'Mario',
+    parent1_email: 'm@gmail.com',
+    parent1_phone: '223-5133',
+    parent2_name: 'Preta',
+    parent2_email: 'g@gmail.com',
+    parent2_phone: '444-4444',
+    checklist: {
+        "SAT": true,
+        "TOEFL": false, 
+        "ND": true,
+        "Dessanlines": true,
+        "Toussaint": false, 
+        "Gonaives": true,
+        "Mais": true,
+    },
+    kudos_given: [
+        {
+            name: "Kony Pham",
+            date: "09/03/2018",
+            message: "helping me review my resume",
+            email: "kphammusic@gmail.com"
+        },
+
+        {
+            name: "Christina Bastion",
+            date: "09/01/2018",
+            message: "helping me design an assignment for my mentee",
+            email: "christiti14@gmail.com"
+        } 
+    ],
+    kudos_received: [
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        }
+    ]
+}
+
 
 //saveMentee(sampleData);
 //saveMentee(sampleData2);

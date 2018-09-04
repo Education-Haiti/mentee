@@ -56,7 +56,7 @@ class MenteeHome extends React.Component {
 			<div className="menteeHomeMainContainer">
 				<Checklist email={this.state.email}/>
 				<KudosSummary menteeInfo={this.state.menteeInfo}/>
-				<GiveKudos email={this.state.email}/>
+				<GiveKudos menteeInfo={this.state.menteeInfo} email={this.state.email}/>
 			</div>
 	      </div>
 	    );
