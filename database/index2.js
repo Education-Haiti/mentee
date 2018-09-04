@@ -182,54 +182,54 @@ let sampleData = {
 
 // updateChecklist('kphammusic@gmail.com', newChecklist);
 
-var newKuddosGiven = 
-    [
-        {
-            receiver_name: "Kony Pham",
-            date: "09/03/2018",
-            message: "helping me review my resume",
-            receiver_email: "kphammusic@gmail.com"
-        },
+// var newKuddosGiven = 
+//     [
+//         {
+//             receiver_name: "Kony Pham",
+//             date: "09/03/2018",
+//             message: "helping me review my resume",
+//             receiver_email: "kphammusic@gmail.com"
+//         },
 
-        {
-            receiver_name: "Christina Bastion",
-            date: "09/01/2018",
-            message: "helping me design an assignment for my mentee",
-            receiver_email: "christiti14@gmail.com"
-        },
-        {
-            receiver_name: "Jules Walter",
-            date: "09/03/2018",
-            message: "helping me review my essays",
-            receiver_email: "jules.walter@gmail.com"
-        }
-    ]
+//         {
+//             receiver_name: "Christina Bastion",
+//             date: "09/01/2018",
+//             message: "helping me design an assignment for my mentee",
+//             receiver_email: "christiti14@gmail.com"
+//         },
+//         {
+//             receiver_name: "Jules Walter",
+//             date: "09/03/2018",
+//             message: "helping me review my essays",
+//             receiver_email: "jules.walter@gmail.com"
+//         }
+//     ]
 
     //updateKudosGiven('jvertil@nd.edu', newKuddosGiven);
 
-var newKuddosReceived = 
-[
-    {
-        sender_name: "Jonathan Marcelin",
-        date: "09/02/2018",
-        message: "helping me with a mock interview",
-        sender_email: "jonathanmarcelin28@gmail.com"
-    },
-    {
-        sender_name: "Jeffry Magloire",
-        date: "09/05/2018",
-        message: "helping me with a mock interview",
-        sender_email: "jonathanmarcelin28@gmail.com"
-    }, 
-    {
-        sender_name: "Corinne Joachim Sanon",
-        date: "09/04/2018",
-        message: "introducing me to a new customer",
-        sender_email: "corinnejoachimsanon@gmail.com"
-    }
-]
+// var newKuddosReceived = 
+// [
+//     {
+//         sender_name: "Jonathan Marcelin",
+//         date: "09/02/2018",
+//         message: "helping me with a mock interview",
+//         sender_email: "jonathanmarcelin28@gmail.com"
+//     },
+//     {
+//         sender_name: "Jeffry Magloire",
+//         date: "09/05/2018",
+//         message: "helping me with a mock interview",
+//         sender_email: "jonathanmarcelin28@gmail.com"
+//     }, 
+//     {
+//         sender_name: "Corinne Joachim Sanon",
+//         date: "09/04/2018",
+//         message: "introducing me to a new customer",
+//         sender_email: "corinnejoachimsanon@gmail.com"
+//     }
+// ]
 
-updateKudosReceived('jvertil@nd.edu', newKuddosReceived);
+//updateKudosReceived('jvertil@nd.edu', newKuddosReceived);
 
 module.exports = {
     saveMentee, 
@@ -237,6 +237,6 @@ module.exports = {
     getMenteeByEmail,
     getChecklist, 
     updateChecklist,
-    updateKudosGiven
-
+    updateKudosGiven,
+    updateKudosReceived
 }
