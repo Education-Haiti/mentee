@@ -20,7 +20,9 @@ let menteeSchema = mongoose.Schema({
     parent2_name: String, 
     parent2_phone: String, 
     parent2_email: String,
-    checklist: Object
+    checklist: Object,
+    kudos_given: Array,
+    kudos_received: Array
 });
 
 let Mentee = mongoose.model('Mentee', menteeSchema); // Mentee is the collection
@@ -96,12 +98,49 @@ let sampleData = {
     parent2_phone: '444-4444',
     checklist: {
         "SAT": true,
-        "GMAT": true
-    }
+        "TOEFL": false, 
+        "ND": true,
+        "Petion": false,
+        "Dessanlines": true,
+        "Toussaint": false, 
+        "Gonaives": true,
+        "Catherine Flow": false,
+        "Mais": true,
+        "Moulen": false
+    },
+    kudos_given: [
+        {
+            receiver_name: "Kony Pham",
+            date: "09/03/2018",
+            message: "helping me review my resume",
+            receiver_email: "kphammusic@gmail.com"
+        },
+
+        {
+            receiver_name: "Christina Bastion",
+            date: "09/01/2018",
+            message: "helping me design an assignment for my mentee",
+            receiver_email: "christiti14@gmail.com"
+        } 
+    ],
+    kudos_received: [
+        {
+            sender_name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "helping me with a mock interview",
+            sender_email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            sender_name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            sender_email: "jonathanmarcelin28@gmail.com"
+        }
+    ]
 }
 
 
-//saveMentee(sampleData);
+saveMentee(sampleData);
 //saveMentee(sampleData2);
 
 //  getMentees((err, result) => {
