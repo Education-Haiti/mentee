@@ -183,3 +183,47 @@ button {
 	font-size: 20px;
 	font-weight: bold;
 }
+
+.kudos-card-container {
+	border: .5px solid #f2f2f2;
+	display: flex;
+	height: 125px;
+	margin: 15px;
+
+}
+
+.kudos-card-photo {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin: 10px;
+	margin-right: 20px;
+}
+
+.kudos-text-container {
+	display: flex;
+	flex-direction: column;
+	width: 350px;
+}
+
+.kudos-card-name {
+	color: black;
+	font-size: 18px;
+	margin: 10px;
+	margin-bottom: 0px;
+
+}
+
+.kudos-description {
+	color: #67777f;
+	font-size: 15px;
+	margin: 10px;
+	margin-top: 2px;
+}
+
+.kudos-date {
+	color: #67777f;
+	font-size: 12px;
+	margin: 10px;
+	margin-bottom: 0px;
+}

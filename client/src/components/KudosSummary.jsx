@@ -12,8 +12,36 @@ class KudosSummary extends React.Component {
     render() {
         return (
             <div className="kudos-summary-container">
-               <div>
-                   Kudos Summary
+               <div className="kudos-summary-title">
+                   Kudos Received
+               </div>
+
+               <div className="kudos-card-container">
+                   <img src="https://avatars.slack-edge.com/2018-09-04/428709791669_35ffa81775a6f45afe6c_512.jpg" className="kudos-card-photo"/>
+
+                   <div className="kudos-text-container">
+                     <div className="kudos-card-name">
+                       Anaise Bruno
+                     </div>
+
+                     <div className="kudos-description">
+                     I would like to thank Christina Bastien for having helped me study for the SAT. Her help was very valuable to my growth and I am forever grateful. 
+                     </div>
+
+                   </div>
+
+                   <div className="kudos-date">
+                    09/04/2018
+                   </div>
+
+               </div>
+
+               <div className="kudos-card-container">
+
+               </div>
+
+               <div className="kudos-card-container">
+
                </div>
 
             </div>
