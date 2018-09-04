@@ -7,7 +7,7 @@ class GiveKudos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'jvertil@nd.edu', 
+            email: '', 
             allUsers: [],
             displayName: '',
             kudosMessage: '',
@@ -15,9 +15,15 @@ class GiveKudos extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.getAllUsers_slack();
-        this.findUserByEmail_slack(this.state.email); // update the displayName of the current user
+    componentDidUpdate(prevProps) {
+        if (this.props.email !== prevProps.email) { // IT IS EXTREMLY IMPORTANT TO CHECK THE CURRENT AND THE PREVIOUS PROPS. THIS IS REACT DOCUMENTATION. ELSE IT BREAK AND RENDERS TWICE!!
+            this.setState({ email: this.props.email }, () => { // must be called-backs to be properly called
+                this.getAllUsers_slack(); 
+                this.findUserByEmail_slack(this.state.email); // update the displayName of the current user
+            })
+        }
+        
+        
     }
 
     findUserByEmail_slack(theEmail) { // identifying user on slack API 
@@ -73,8 +79,8 @@ class GiveKudos extends React.Component {
 
     render () {
         return (
-            <div class="give-kudos-container">
-                <div class="give-kudos-title">
+            <div className="give-kudos-container">
+                <div className="give-kudos-title">
                     Give kudos!
                 </div>
 
@@ -89,11 +95,11 @@ class GiveKudos extends React.Component {
                     </select>
                 </div>
 
-                <input value={this.state.kudosMessage} class="give-kudos-input" type="text" onChange={this.handleChange.bind(this)}/>
+                <input value={this.state.kudosMessage} className="give-kudos-input" type="text" onChange={this.handleChange.bind(this)}/>
                    
                 <div>
-                    <button class="give-kudos-b" onClick={this.submitKudos.bind(this)}> Submit </button>
-                    <button class="give-kudos-b" onClick={this.cancelKudos.bind(this)}> Cancel </button>
+                    <button className="give-kudos-b" onClick={this.submitKudos.bind(this)}> Submit </button>
+                    <button className="give-kudos-b" onClick={this.cancelKudos.bind(this)}> Cancel </button>
                 </div>
             </div>
         )
