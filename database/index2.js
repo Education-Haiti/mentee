@@ -75,7 +75,7 @@ let getChecklist = (theEmail, whenGotten) => {
 let updateChecklist = (theEmail, newChecklist) => {
     Mentee.findOneAndUpdate({ email: theEmail }, { checklist: newChecklist }, {upsert: true}, (err, doc) => {
         if (err) {
-            console.log('Error updating the checklist : ', err);
+            console.log('Database-side error in updating the checklist : ', err);
         } else {
             console.log('Successfully updated checklist')
         }
@@ -85,9 +85,19 @@ let updateChecklist = (theEmail, newChecklist) => {
 let updateKudosGiven = (theEmail, newKuddosGivenObj) => {
     Mentee.findOneAndUpdate({ email: theEmail }, { kudos_given: newKuddosGivenObj }, { upsert: true }, (err, doc) => {
         if (err) {
-            console.log('Error updating the kudos given object : ', err);
+            console.log('Database-side error in updating  kudos given : ', err);
         } else {
             console.log('Successfully updated kudos given');
+        }
+    })
+}
+
+let updateKudosReceived = (theEmail, newKudosReceivedObj) => {
+    Mentee.findOneAndUpdate({ email: theEmail }, { kudos_received: newKudosReceivedObj }, { upsert: true }, (err, doc) => {
+        if (err) {
+            console.log('Database-side error in updating kudos received : ', err);
+        } else {
+            console.log('Successfully updated kudos received')
         }
     })
 }
@@ -197,11 +207,36 @@ var newKuddosGiven =
 
     //updateKudosGiven('jvertil@nd.edu', newKuddosGiven);
 
+var newKuddosReceived = 
+[
+    {
+        sender_name: "Jonathan Marcelin",
+        date: "09/02/2018",
+        message: "helping me with a mock interview",
+        sender_email: "jonathanmarcelin28@gmail.com"
+    },
+    {
+        sender_name: "Jeffry Magloire",
+        date: "09/05/2018",
+        message: "helping me with a mock interview",
+        sender_email: "jonathanmarcelin28@gmail.com"
+    }, 
+    {
+        sender_name: "Corinne Joachim Sanon",
+        date: "09/04/2018",
+        message: "introducing me to a new customer",
+        sender_email: "corinnejoachimsanon@gmail.com"
+    }
+]
+
+updateKudosReceived('jvertil@nd.edu', newKuddosReceived);
+
 module.exports = {
     saveMentee, 
     getMentees,
     getMenteeByEmail,
     getChecklist, 
-    updateChecklist
+    updateChecklist,
+    updateKudosGiven
 
 }
