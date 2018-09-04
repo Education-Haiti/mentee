@@ -21,9 +21,7 @@ class GiveKudos extends React.Component {
                 this.getAllUsers_slack(); 
                 this.findUserByEmail_slack(this.state.email); // update the displayName of the current user
             })
-        }
-        
-        
+        } 
     }
 
     findUserByEmail_slack(theEmail) { // identifying user on slack API 
