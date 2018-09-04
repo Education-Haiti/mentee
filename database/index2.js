@@ -130,31 +130,31 @@ let sampleData = {
     },
     kudos_given: [
         {
-            receiver_name: "Kony Pham",
+            name: "Kony Pham",
             date: "09/03/2018",
             message: "helping me review my resume",
-            receiver_email: "kphammusic@gmail.com"
+            email: "kphammusic@gmail.com"
         },
 
         {
-            receiver_name: "Christina Bastion",
+            name: "Christina Bastion",
             date: "09/01/2018",
             message: "helping me design an assignment for my mentee",
-            receiver_email: "christiti14@gmail.com"
+            email: "christiti14@gmail.com"
         } 
     ],
     kudos_received: [
         {
-            sender_name: "Jonathan Marcelin",
+            name: "Jonathan Marcelin",
             date: "09/02/2018",
             message: "helping me with a mock interview",
-            sender_email: "jonathanmarcelin28@gmail.com"
+            email: "jonathanmarcelin28@gmail.com"
         },
         {
-            sender_name: "Jeffry Magloire",
+            name: "Jeffry Magloire",
             date: "09/05/2018",
             message: "helping me with a mock interview",
-            sender_email: "jonathanmarcelin28@gmail.com"
+            email: "jonathanmarcelin28@gmail.com"
         }
     ]
 }
@@ -185,23 +185,23 @@ let sampleData = {
 // var newKuddosGiven = 
 //     [
 //         {
-//             receiver_name: "Kony Pham",
+//             name: "Kony Pham",
 //             date: "09/03/2018",
 //             message: "helping me review my resume",
-//             receiver_email: "kphammusic@gmail.com"
+//             email: "kphammusic@gmail.com"
 //         },
 
 //         {
-//             receiver_name: "Christina Bastion",
+//             name: "Christina Bastion",
 //             date: "09/01/2018",
 //             message: "helping me design an assignment for my mentee",
-//             receiver_email: "christiti14@gmail.com"
+//             email: "christiti14@gmail.com"
 //         },
 //         {
-//             receiver_name: "Jules Walter",
+//             name: "Jules Walter",
 //             date: "09/03/2018",
 //             message: "helping me review my essays",
-//             receiver_email: "jules.walter@gmail.com"
+//             email: "jules.walter@gmail.com"
 //         }
 //     ]
 
@@ -210,22 +210,22 @@ let sampleData = {
 // var newKuddosReceived = 
 // [
 //     {
-//         sender_name: "Jonathan Marcelin",
+//         name: "Jonathan Marcelin",
 //         date: "09/02/2018",
 //         message: "helping me with a mock interview",
-//         sender_email: "jonathanmarcelin28@gmail.com"
+//         email: "jonathanmarcelin28@gmail.com"
 //     },
 //     {
-//         sender_name: "Jeffry Magloire",
+//         name: "Jeffry Magloire",
 //         date: "09/05/2018",
 //         message: "helping me with a mock interview",
-//         sender_email: "jonathanmarcelin28@gmail.com"
+//         email: "jonathanmarcelin28@gmail.com"
 //     }, 
 //     {
-//         sender_name: "Corinne Joachim Sanon",
+//         name: "Corinne Joachim Sanon",
 //         date: "09/04/2018",
 //         message: "introducing me to a new customer",
-//         sender_email: "corinnejoachimsanon@gmail.com"
+//         email: "corinnejoachimsanon@gmail.com"
 //     }
 // ]
 
