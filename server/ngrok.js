@@ -125,6 +125,17 @@ app.put('/mentees/checklist/:email/', (req, res) => {
     res.sendStatus(200);
 })
 
+app.put('/mentees/givenkudos/:email/', (req, res) => {
+    const theEmail = req.params.email;
+    const newKudosGiven = req.body.kudosGiven;
+    queries2.updateKudosGiven(theEmail, newKudosGiven, (err, results) => {
+        if (err) {
+            console.log('Server-side error in updating kudos given : ', err);
+        }
+    })
+    res.sendStatus(200);
+})
+
 // Posting to Slack
 app.post('/mentees/slack/kudos', (req, res) => {
         const theMessage = req.body.message;
