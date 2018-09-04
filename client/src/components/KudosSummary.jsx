@@ -9,6 +9,14 @@ class KudosSummary extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.menteeInfo !== prevProps.menteeInfo) {
+            this.setState({ menteeInfo: this.props.menteeInfo }, () => {
+                console.log('mentee info here:: ', this.state.menteeInfo);
+            })
+        }
+    }
+
     render() {
         return (
             <div className="kudos-summary-container">

@@ -43,8 +43,8 @@ class MenteeHome extends React.Component {
 		})
 		.then((response) => {
 			console.log('Email is ... : ', response.data.user.email);
-			this.setState({ email: 'jvertil@nd.edu'});
-			this.identifyMentee('response.data.user.email');
+			this.setState({ email: response.data.user.email});
+			this.identifyMentee(response.data.user.email);
 		})
 		.catch((error)=> {
 			console.log('Axios error in getting authed user info !! : ', error); });
@@ -55,7 +55,7 @@ class MenteeHome extends React.Component {
 	       <div>
 			<div className="menteeHomeMainContainer">
 				<Checklist email={this.state.email}/>
-				<KudosSummary/>
+				<KudosSummary menteeInfo={this.state.menteeInfo}/>
 				<GiveKudos email={this.state.email}/>
 			</div>
 	      </div>

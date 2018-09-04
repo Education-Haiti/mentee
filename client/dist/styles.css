@@ -227,3 +227,7 @@ button {
 	margin: 10px;
 	margin-bottom: 0px;
 }
+
+.kudos-background-1 {
+	background-image: linear-gradient(to right, red , yellow);
+}
