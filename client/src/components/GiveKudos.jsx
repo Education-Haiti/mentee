@@ -57,18 +57,23 @@ class GiveKudos extends React.Component {
     }
 
     submitKudos() {
-        axios.post('/mentees/slack/kudos', {
-			message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.receiver} for ${this.state.kudosMessage} \n\n *** Let's keep helping each other! ***`,
-			channel: 'websitetesting'
-		})
-		.then((response) => {
-
-		})
-		.catch((error) => {
-			console.log('Axios error in making post to slack');
-        });
+        if (this.state.kudosMessage.length > 150) {
+            alert('Please make a kudos of less than 150 characters :) ');
+        } else {
+            axios.post('/mentees/slack/kudos', {
+                message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.receiver} for ${this.state.kudosMessage} \n\n *** Let's keep helping each other! ***`,
+                channel: 'websitetesting'
+            })
+            .then((response) => {
+    
+            })
+            .catch((error) => {
+                console.log('Axios error in making post to slack');
+            });
+            
+            this.setState({ kudosMessage: '' });
+        }
         
-        this.setState({ kudosMessage: '' });
     }
 
     cancelKudos() {
