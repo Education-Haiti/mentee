@@ -4,7 +4,7 @@ import SECRETS from './client_secrets.js'
 import { Route, Switch } from 'react-router-dom';
 import Checklist from './Checklist.jsx';
 import GiveKudos from './GiveKudos.jsx';
-import PropsSummary from './PropsSummary.jsx';
+import KudosSummary from './KudosSummary.jsx';
 
 class MenteeHome extends React.Component {
 	constructor(props) {
@@ -55,7 +55,7 @@ class MenteeHome extends React.Component {
 	       <div>
 			<div className="menteeHomeMainContainer">
 				<Checklist email={this.state.email}/>
-				<PropsSummary/>
+				<KudosSummary/>
 				<GiveKudos email={this.state.email}/>
 			</div>
 	      </div>

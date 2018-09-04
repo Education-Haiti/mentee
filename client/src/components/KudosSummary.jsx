@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-class PropsSummary extends React.Component {
+class KudosSummary extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,11 +11,14 @@ class PropsSummary extends React.Component {
 
     render() {
         return (
-            <div>
-                This is the Props Summary Component!
+            <div className="kudos-summary-container">
+               <div>
+                   Kudos Summary
+               </div>
+
             </div>
         )
     }
 }
 
-export default PropsSummary;
+export default KudosSummary;
