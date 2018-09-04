@@ -27,7 +27,7 @@ class GiveKudos extends React.Component {
     findUserByEmail_slack(theEmail) { // identifying user on slack API 
 		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
 			.then((response) => {
-                console.log('User info from SLACK API !! : ', response.data.user.profile);
+                //console.log('User info from SLACK API !! : ', response.data.user.profile);
                 this.setState({ displayName : response.data.user.name }, () => {
                     console.log('new: ', this.state.displayName);
                 });
@@ -43,7 +43,10 @@ class GiveKudos extends React.Component {
 			.then((response) => {
 				console.log('All users from slack !! : ', response.data.members);
 				this.setState({ allUsers: response.data.members })
-			})
+            })
+            .catch((error) => {
+                console.log('Axios error in getting all users from SLACK API : ', error);
+            });
     }
 
     handleChange(e) {
