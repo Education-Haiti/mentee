@@ -8,10 +8,12 @@ class GiveKudos extends React.Component {
         super(props);
         this.state = {
             email: '', 
+            menteeInfo: {}, // may not be necessary
             allUsers: [],
             displayName: '',
             kudosMessage: '',
             receiverEmail: '',
+            receiverInfo: {},
             kuddosReceived: Array,
             kuddosGiven: Array,
             usernames: {}, // object to hold all usernames with email as key
@@ -19,10 +21,11 @@ class GiveKudos extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        
         if (this.props.email !== prevProps.email) { // IT IS EXTREMLY IMPORTANT TO CHECK THE CURRENT AND THE PREVIOUS PROPS. THIS IS REACT DOCUMENTATION. ELSE IT BREAK AND RENDERS TWICE!!
             this.setState({ email: this.props.email }, () => { // must be called-backs to be properly called
                 this.getAllUsers_slack(); 
-                this.findUserByEmail_slack(this.state.email); // update the displayName of the current user
+                this.findUserByEmail_slack(this.state.email, 1); // update the displayName of the current user
                 this.initializeUsernamesObj();
             })
         } 
@@ -53,13 +56,13 @@ class GiveKudos extends React.Component {
             })
     }
 
-    findUserByEmail_slack(theEmail) { // identifying user on slack API 
+    findUserByEmail_slack(theEmail, option) { // identifying user on slack API . 
 		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
 			.then((response) => {
                 //console.log('User info from SLACK API !! : ', response.data.user.profile);
                 this.setState({ displayName : response.data.user.name }, () => {
                     console.log('new: ', this.state.displayName);
-                });
+                });  
 			})
 			.catch((error) => {
 				console.log('Axios error in getting user info from SLACK API : ', error);
@@ -77,6 +80,20 @@ class GiveKudos extends React.Component {
             });
     }
 
+    identifyReceiver(theEmail) { // identifying on database
+		axios.get(`/mentees/authed/${theEmail}`)
+			.then((response) => {
+				//console.log(response.data);
+				this.setState({ receiverInfo: response.data[0] }, () => {
+                    console.log('receiver: ', this.state.receiverInfo);
+                    this.updateGivenKudos();
+                });
+			})
+			.catch((error) => {
+				console.log('Axios error in getting authed mentee info : ', error);
+			});
+	}
+
     handleChange(e) {
         //console.log(e.target.value);
         this.setState({ kudosMessage: e.target.value })
@@ -89,12 +106,44 @@ class GiveKudos extends React.Component {
 
     }
 
-    updateGivenKudos(theEmail, newKuddosGivenObj) { // for user giving kudos
+    updateGivenKudos() { // for user giving kudos
+        let theName = this.state.receiverInfo.first_name + ' ' + this.state.receiverInfo.last_name;
+        let date = new Date();
+        let formattedDate = date.toLocaleDateString('us-EN', {year: 'numeric', month: 'long', day: 'numeric'});
+        let theMessage = this.state.kudosMessage;
+        let theEmail = this.state.receiverInfo.email;
 
+        let tempGivenKudosObj = {
+            name: theName,
+            date: formattedDate,
+            message: theMessage,
+            email: theEmail
+        }
+
+        let kuddosObj = this.state.kuddosGiven;
+
+        kuddosObj.push(tempGivenKudosObj);
+
+        // update state 
+        this.setState({ kuddosGiven: kuddosObj }, () => {
+            this.setState({ kudosMessage: '' });
+        });
+
+        // now update db
+        axios.put(`/mentees/givenkudos/${this.state.email}`, {
+            kudosGiven: kuddosObj
+        })
+        .then((response) => {
+
+        })
+        .catch((error) => {
+            console.log('Axios-side error in updating given kudos')
+        })
+        
     }
 
     updateReceivedKudos(theEmail, newKuddosReceivedObj) { // for user receiving kudos
-
+       // newKudosReceived: this.
     }
 
 
@@ -109,10 +158,8 @@ class GiveKudos extends React.Component {
             })
             .then((response) => {
                 // update the database for user giving kudos
-                let newKuddosObj = {
-                   // name: 
-                }
-                this.updateGivenKudos(this.state.email)
+                this.identifyReceiver(this.state.receiverEmail);
+                
                 // udpate the database for user receiving kudos
 
             })
@@ -120,7 +167,7 @@ class GiveKudos extends React.Component {
                 console.log('Axios error in making post to slack');
             });
             
-            this.setState({ kudosMessage: '' });
+            
         }
         
     }

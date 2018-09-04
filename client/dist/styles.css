@@ -178,6 +178,11 @@ button {
 	overflow: scroll;
 }
 
+.kudos-summary-top-container {
+	display: flex;
+	justify-content: space-between;
+}
+
 .kudos-summary-title {
 	color: #a33030;
 	font-size: 20px;
@@ -230,4 +235,16 @@ button {
 
 .kudos-background-1 {
 	background-image: linear-gradient(to right, red , yellow);
+}
+
+.kudos-switch-button {
+	font-size: 10px;
+	margin-right: 3px;
+	color:  white;
+	background-color: #a33030;
+}
+
+.kudos-switch-button:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
 }

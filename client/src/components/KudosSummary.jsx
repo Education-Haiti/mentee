@@ -10,7 +10,8 @@ class KudosSummary extends React.Component {
             menteeInfo: {},
             kuddosReceived: [],
             kuddosGiven: [], 
-            displayPhotos: {}
+            displayPhotos: {},
+            showKudosReceived: true
         }
     }
 
@@ -20,7 +21,7 @@ class KudosSummary extends React.Component {
                 this.initializeDisplayPhotosObj();
             });
             this.setState({ kuddosReceived: this.props.menteeInfo.kudos_received });
-            
+            this.setState({ kuddosGiven: this.props.menteeInfo.kudos_given });
         }
     }
 
@@ -41,14 +42,32 @@ class KudosSummary extends React.Component {
             .catch((error) => {
                 console.log('Axios error in getting all users from SLACK API : ', error);
             })
+    }
 
+    handleShowKudosGiven() {
+        this.setState({ showKudosReceived: false });
+    }
+
+    handleShowKudosReceived() {
+        this.setState({ showKudosReceived: true });
     }
 
     render() {
-        return (
-            <div className="kudos-summary-container">
-               <div className="kudos-summary-title">
-                   Kudos Received
+        let kuddosReceived = null;
+        let kuddosGiven = null; 
+
+        if (this.state.showKudosReceived === true) {
+            kuddosReceived = 
+            <div>
+               <div className="kudos-summary-top-container">
+                 <div className="kudos-summary-title"> 
+                   {this.state.kuddosReceived.length}  Kudos Received
+                 </div>
+
+                 <button className="kudos-switch-button" onClick={this.handleShowKudosGiven.bind(this)}>
+                     See Kuddos Given
+                 </button>
+                  
                </div>
 
                {
@@ -71,12 +90,56 @@ class KudosSummary extends React.Component {
                             <div className="kudos-date">
                                 {kudo.date}
                             </div>
-
                         </div>
-                       )
-                        
+                       )   
                    })
                }
+            </div>
+        } else {
+            kuddosGiven = 
+            <div>
+               <div className="kudos-summary-top-container">
+                 <div className="kudos-summary-title"> 
+                   {this.state.kuddosGiven.length}  Kudos Given
+                 </div>
+
+                 <button className="kudos-switch-button" onClick={this.handleShowKudosReceived.bind(this)}>
+                     See Kuddos Received
+                 </button>
+                  
+               </div>
+
+               {
+                   this.state.kuddosGiven.map((kudo, index) => {
+                       return (
+                        <div className="kudos-card-container" key={index}>
+                            <img className="kudos-card-photo" src={this.state.displayPhotos[kudo.email]}/>
+
+                            <div className="kudos-text-container">
+                                <div className="kudos-card-name">
+                                {kudo.name}
+                                </div>
+
+                                <div className="kudos-description">
+                                {kudo.message}
+                                </div>
+
+                            </div>
+
+                            <div className="kudos-date">
+                                {kudo.date}
+                            </div>
+                        </div>
+                       )   
+                   })
+               }
+            </div>
+        }
+        return (
+            <div className="kudos-summary-container">
+                {kuddosGiven}
+                {kuddosReceived}
+
             </div>
         )
     }
