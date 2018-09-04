@@ -72,21 +72,31 @@ let getChecklist = (theEmail, whenGotten) => {
     })
 }
 
-let updateChecklist = (theEmail, newChecklist, whenUpdated) => {
+let updateChecklist = (theEmail, newChecklist) => {
     Mentee.findOneAndUpdate({ email: theEmail }, { checklist: newChecklist }, {upsert: true}, (err, doc) => {
         if (err) {
-            console.log('Error', err);
+            console.log('Error updating the checklist : ', err);
         } else {
-            console.log('Successfully updated')
+            console.log('Successfully updated checklist')
+        }
+    })
+}
+
+let updateKudosGiven = (theEmail, newKuddosGivenObj) => {
+    Mentee.findOneAndUpdate({ email: theEmail }, { kudos_given: newKuddosGivenObj }, { upsert: true }, (err, doc) => {
+        if (err) {
+            console.log('Error updating the kudos given object : ', err);
+        } else {
+            console.log('Successfully updated kudos given');
         }
     })
 }
 
 let sampleData = {
-    first_name: 'Kony', 
-    last_name: 'Pham', 
+    first_name: 'Jean-Pierre', 
+    last_name: 'Vertil', 
     sex: 'M', 
-    email: 'kphammusic@gmail.com',
+    email: 'jvertil@nd.edu',
     hometown: 'Charlottesville', 
     school: 'SLG', 
     phone_number: '409-454-5188',
@@ -140,7 +150,7 @@ let sampleData = {
 }
 
 
-saveMentee(sampleData);
+//saveMentee(sampleData);
 //saveMentee(sampleData2);
 
 //  getMentees((err, result) => {
@@ -160,9 +170,32 @@ saveMentee(sampleData);
 //     "GMAT": false,
 // }
 
-// updateChecklist('kphammusic@gmail.com', newChecklist, (err, result) => {
-//     console.log(result);
-// })
+// updateChecklist('kphammusic@gmail.com', newChecklist);
+
+var newKuddosGiven = 
+    [
+        {
+            receiver_name: "Kony Pham",
+            date: "09/03/2018",
+            message: "helping me review my resume",
+            receiver_email: "kphammusic@gmail.com"
+        },
+
+        {
+            receiver_name: "Christina Bastion",
+            date: "09/01/2018",
+            message: "helping me design an assignment for my mentee",
+            receiver_email: "christiti14@gmail.com"
+        },
+        {
+            receiver_name: "Jules Walter",
+            date: "09/03/2018",
+            message: "helping me review my essays",
+            receiver_email: "jules.walter@gmail.com"
+        }
+    ]
+
+    //updateKudosGiven('jvertil@nd.edu', newKuddosGiven);
 
 module.exports = {
     saveMentee, 
