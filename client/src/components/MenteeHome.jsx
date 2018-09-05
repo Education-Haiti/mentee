@@ -14,12 +14,26 @@ class MenteeHome extends React.Component {
 		this.state = {
 			menteeInfo: {},
 			email: '',
+			percentComplete: 0
 		}
 	}
 
 	componentWillMount() {
 		this.getAuthedUserInfo();
 	}
+
+	calculatePercentCompleteness(items) {
+        let totalItems = Object.keys(items).length;
+        let amountCompleted = 0; 
+
+        for (var key in items) {
+            if (items[key] === true) {
+                amountCompleted++;
+            }
+		}
+		let percentComp = Math.floor((amountCompleted/totalItems)*100);
+		this.setState({ percentComplete: percentComp});
+    }
 
 	identifyMentee(theEmail) { // identifying mentee on database
 		axios.get(`/mentees/authed/${theEmail}`)
@@ -56,11 +70,11 @@ class MenteeHome extends React.Component {
 	    return (
 	       <div>
 			<div className="menteeHomeMainContainer">
-				<Checklist email={this.state.email}/>
+				<Checklist calcCompleteness={this.calculatePercentCompleteness.bind(this)} email={this.state.email}/>
 				<KudosSummary menteeInfo={this.state.menteeInfo}/>
 				<div className="mentee-rightmost-vertical-container">
 				  <GiveKudos menteeInfo={this.state.menteeInfo} email={this.state.email}/>
-				  <CircularProgressbar percentage={80} text={`${70}%`} />
+				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
 				</div>	
 			</div>
 	      </div>

@@ -17,7 +17,6 @@ class GiveKudos extends React.Component {
             kuddosReceived: Array,
             kuddosGiven: Array,
             usernames: {}, // object to hold all usernames with email as key
-            percentageCompleteness: 0,
         }
     }
 

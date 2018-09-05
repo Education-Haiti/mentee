@@ -16,17 +16,17 @@ class Checklist extends React.Component {
     componentDidUpdate(prevProps) {
         if (this.props.email !== prevProps.email) { // IT IS EXTREMLY IMPORTANT TO CHECK THE CURRENT AND THE PREVIOUS PROPS. THIS IS REACT DOCUMENTATION. ELSE IT BREAK AND RENDERS TWICE!!
             this.setState({ email: this.props.email }, () => {
-                this.getChecklist(this.state.email); // must be placed as a call back to get properly executed
+                this.getChecklist(this.state.email); // must be placed as a call back to get properly executed     
             })
         }
-        
-        
     }
 
     getChecklist(theEmail) {
         axios.get(`/mentees/checklist/${theEmail}`)
             .then((response) => {
-                this.setState({ items: response.data[0].checklist });
+                this.setState({ items: response.data[0].checklist }, () => {
+                    this.props.calcCompleteness(this.state.items);
+                });
             })
             .catch((error) => {
                 console.log('Axios error in getting checklist : ', error);
@@ -58,6 +58,7 @@ class Checklist extends React.Component {
         }
         this.setState({items: newItems}, () => {
             this.updateChecklist(this.state.email);
+            this.props.calcCompleteness(this.state.items);
         })
     }
 
