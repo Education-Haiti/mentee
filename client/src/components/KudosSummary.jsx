@@ -72,7 +72,7 @@ class KudosSummary extends React.Component {
                  </div>
 
                  <button className="kudos-switch-button" onClick={this.handleShowKudosGiven.bind(this)}>
-                     See Kuddos Given
+                     See Kudos Given
                  </button>
                   
                </div>
@@ -111,7 +111,7 @@ class KudosSummary extends React.Component {
                  </div>
 
                  <button className="kudos-switch-button" onClick={this.handleShowKudosReceived.bind(this)}>
-                     See Kuddos Received
+                     See Kudos Received
                  </button>
                   
                </div>

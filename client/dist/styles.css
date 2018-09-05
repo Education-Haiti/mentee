@@ -121,7 +121,7 @@ button {
 }
 
 .checklist {
-	width: 250px;
+	width: 360px;
 	overflow: scroll;
 	background-color:  #f2f2f2	
 
@@ -156,7 +156,7 @@ button {
 
  .addItemButton {
 	margin: 0px;
-	width: 250px;
+	width: 360px;
 	height: 50px;
 	font-size: 15px;
 	color:  white;
