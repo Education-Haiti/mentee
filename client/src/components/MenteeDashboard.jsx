@@ -8,7 +8,7 @@ import KudosSummary from './KudosSummary.jsx';
 import '../../dist/styles.css';
 import CircularProgressbar from 'react-circular-progressbar';
 
-class MenteeHome extends React.Component {
+class MenteeDashboard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -82,4 +82,4 @@ class MenteeHome extends React.Component {
   	  }
 }
 
-export default MenteeHome;
+export default MenteeDashboard;
