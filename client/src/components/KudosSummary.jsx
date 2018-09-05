@@ -11,7 +11,14 @@ class KudosSummary extends React.Component {
             kuddosReceived: [],
             kuddosGiven: [], 
             displayPhotos: {},
-            showKudosReceived: true
+            showKudosReceived: true, 
+            kudosCardsBackgrounds: [
+                'kudos-background-1',
+                'kudos-background-2',
+                'kudos-background-3',
+                'kudos-background-4',
+                'kudos-background-5',
+            ]
         }
     }
 
@@ -73,7 +80,7 @@ class KudosSummary extends React.Component {
                {
                    this.state.kuddosReceived.map((kudo, index) => {
                        return (
-                        <div className="kudos-card-container" key={index}>
+                        <div className={`kudos-card-container ${this.state.kudosCardsBackgrounds[Math.floor(Math.random() * (5))]}`} key={index}>
                             <img className="kudos-card-photo" src={this.state.displayPhotos[kudo.email]}/>
 
                             <div className="kudos-text-container">
@@ -112,7 +119,7 @@ class KudosSummary extends React.Component {
                {
                    this.state.kuddosGiven.map((kudo, index) => {
                        return (
-                        <div className="kudos-card-container" key={index}>
+                        <div  className={`kudos-card-container ${this.state.kudosCardsBackgrounds[Math.floor(Math.random() * (5))]}`} key={index}>
                             <img className="kudos-card-photo" src={this.state.displayPhotos[kudo.email]}/>
 
                             <div className="kudos-text-container">

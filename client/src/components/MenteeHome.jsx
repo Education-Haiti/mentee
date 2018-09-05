@@ -5,6 +5,8 @@ import { Route, Switch } from 'react-router-dom';
 import Checklist from './Checklist.jsx';
 import GiveKudos from './GiveKudos.jsx';
 import KudosSummary from './KudosSummary.jsx';
+import '../../dist/styles.css';
+import CircularProgressbar from 'react-circular-progressbar';
 
 class MenteeHome extends React.Component {
 	constructor(props) {
@@ -56,7 +58,10 @@ class MenteeHome extends React.Component {
 			<div className="menteeHomeMainContainer">
 				<Checklist email={this.state.email}/>
 				<KudosSummary menteeInfo={this.state.menteeInfo}/>
-				<GiveKudos menteeInfo={this.state.menteeInfo} email={this.state.email}/>
+				<div className="mentee-rightmost-vertical-container">
+				  <GiveKudos menteeInfo={this.state.menteeInfo} email={this.state.email}/>
+				  <CircularProgressbar percentage={80} text={`${70}%`} />
+				</div>	
 			</div>
 	      </div>
 	    );

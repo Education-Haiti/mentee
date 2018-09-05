@@ -17,6 +17,7 @@ class GiveKudos extends React.Component {
             kuddosReceived: Array,
             kuddosGiven: Array,
             usernames: {}, // object to hold all usernames with email as key
+            percentageCompleteness: 0,
         }
     }
 
@@ -149,6 +150,9 @@ class GiveKudos extends React.Component {
 
 
     submitKudos() {
+        if(this.state.kudosMessage.length === 0) {
+            alert('Please make sure to input a kudos before submitting! :) ')
+        }
         if (this.state.kudosMessage.length > 150) {
             alert('Please make a kudos of less than 150 characters :) ');
         } else {
@@ -165,11 +169,8 @@ class GiveKudos extends React.Component {
             })
             .catch((error) => {
                 console.log('Axios error in making post to slack');
-            });
-            
-            
-        }
-        
+            });      
+        }  
     }
 
     cancelKudos() {
@@ -188,13 +189,12 @@ class GiveKudos extends React.Component {
                         {
                             this.state.allUsers.map((user, index) => {
                             return <option name="a" value={ user.profile.email } key = { index }> { user.profile.real_name } </option>  
-                            })
-                            
+                            })     
                         }
                     </select>
                 </div>
 
-                <input value={this.state.kudosMessage} className="give-kudos-input" type="text" onChange={this.handleChange.bind(this)}/>
+                <textarea value={this.state.kudosMessage} className="give-kudos-input" type="text" onChange={this.handleChange.bind(this)}/>
                    
                 <div>
                     <button className="give-kudos-b" onClick={this.submitKudos.bind(this)}> Submit </button>

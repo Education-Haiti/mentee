@@ -214,8 +214,8 @@ let sampleData2 = {
 }
 
 
-saveMentee(sampleData);
-saveMentee(sampleData2);
+//saveMentee(sampleData);
+//saveMentee(sampleData2);
 
 //  getMentees((err, result) => {
 //      console.log(result);
