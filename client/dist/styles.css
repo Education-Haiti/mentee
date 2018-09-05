@@ -208,10 +208,11 @@ button {
 	justify-content: space-between;
 	flex-direction: column;
 	margin: 15px;
+	margin-top: 0px;
 	padding: 10px;
 	width: 300px;
 	height: 200px;
-	margin-bottom: 150px;
+	margin-bottom: 100px;
 }
 
 .give-kudos-title {
@@ -248,6 +249,7 @@ button {
 	width: 520px;
 	height: 100%;
 	margin: 15px;
+	margin-top:0px;
 	padding: 10px;
 	overflow: scroll;
 }
@@ -335,6 +337,136 @@ button {
 }
 
 .kudos-switch-button:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
+}
+
+/*Mentee portal specifics*/
+.mentee-body-container {
+	height: 100vw;
+}
+.top-padding {
+	min-height: 70px;
+}
+
+.page-container {
+	width: 100vw;
+	flex-grow: 1;
+}
+
+.sidebar {
+	width: 360px;
+	padding-top: 150px;
+	justify-content: center;
+	background-color: #234060;
+}
+
+.profile-photo-holder{
+	background-image: url("https://picsum.photos/180/180/");
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	margin: auto;
+}
+
+.profile-page-body {
+	width: 80%;
+	padding-top: 100px;
+	padding-left:100px;
+}
+
+.profile-card-container {
+	width: 500px;
+	border: 1px solid #e5e1e0;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px 0px #d5d9e0;
+	padding: 24px;
+}
+
+.profile-card-entry {
+	justify-content: flex-start;
+	width: 100%;
+}
+
+.profile-card-label,
+.profile-card-field {
+	margin: 4px;
+	padding: 8px;
+}
+
+.profile-card-label {
+	width: 120px;
+	text-align: right;
+}
+
+
+.profile-card-field {
+	background-color: #eaeaea;
+	color: #d1cfcf;
+	width: 300px;
+	font-size: 11pt;
+}
+
+/*Configuration portal specifics*/
+.admin-portal-container {
+	display: flex;
+	justify-content: space-between;
+}
+.create-assignments-container {
+	display: flex;
+	flex-direction: column;
+	width: 350px;
+	height: 570px;
+	background-color: #234060;
+	padding:50px;
+	padding-top: 10px;
+	border-radius: 1.5%;
+	margin-right: 100px;
+}
+
+.create-assignment-title {
+	font-size: 16pt;
+	font-weight: bold;
+	color: #d1cfcf;
+	text-align: center;
+	border-bottom: .8px solid #f2f2f2;
+	margin-bottom: 20px;
+}
+
+.create-assignment-item {
+	margin-bottom: 10px;
+}
+
+.create-assignment-subtitle {
+	font-size: 12pt;
+	color: #d1cfcf;
+	margin-bottom: 7px;
+}
+
+.create-assignment-input {
+	height: 35px;
+	width: 330px;
+	border-radius: 5%;
+}
+
+.create-assignment-textarea {
+	height: 150px;
+	width:330px;
+	border-radius: 3%;
+}
+
+.create-assignment-buttons-container {
+	width: 330px;
+	display: flex;
+	flex-direction: column;
+}
+
+.create-assignment-sub-button {
+	color:  white;
+	background-color: #a33030;
+}
+
+.create-assignment-sub-button:hover {
 	color: #a33030;
 	background-color: #ffdfe7;
 }

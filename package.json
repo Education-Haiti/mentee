@@ -28,6 +28,7 @@
     "nodemon": "^1.18.3",
     "passport-slack": "0.0.7",
     "path": "^0.12.7",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-circular-progressbar": "^1.0.0",
     "react-dom": "^16.4.2",

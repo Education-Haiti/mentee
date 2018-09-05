@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import SECRETS from './client_secrets.js'
+import SECRETS from '../../client_secrets.js'
 import { Route, Switch } from 'react-router-dom';
 import Checklist from './Checklist.jsx';
 import GiveKudos from './GiveKudos.jsx';
 import KudosSummary from './KudosSummary.jsx';
-import '../../dist/styles.css';
+import '../../../dist/styles.css';
 import CircularProgressbar from 'react-circular-progressbar';
 
 class MenteeDashboard extends React.Component {

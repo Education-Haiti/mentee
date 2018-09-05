@@ -15,6 +15,9 @@ var request = require('request');
 var clientId = process.env.CLIENT_ID;
 var clientSecret = process.env.CLIENT_SECRET;
 
+console.log(clientId);
+console.log(clientSecret);
+console.log(process.env.SLACK_TOKEN);
 // Instantiates Express and assigns our app variable to it
 var app = express();
 
@@ -36,10 +39,7 @@ app.listen(PORT, function () {
 // This route handles GET requests to our root ngrok address and responds with the same "Ngrok is working message" we used before
  app.get('/', function(req, res) {
      res.send('Ngrok is working! Path Hit: ' + req.url);
-//     console.log('req.query is ', req.query);
-//     console.log('req.query.code is ', req.query.code);
 
-//     res.send('req.query is ', req.query);
  });
 
 
@@ -153,7 +153,7 @@ app.post('/mentees/slack/kudos', (req, res) => {
         const theChannel = req.body.channel;
 
         // An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)
-        const token = process.env.SLACK_TOKEN;
+        const token = process.env.SLACK_TOKEN; 
         const web = new WebClient(token);
         
 

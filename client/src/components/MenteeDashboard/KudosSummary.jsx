@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import SECRETS from './client_secrets.js'
+import SECRETS from '../../client_secrets.js'
 
 
 class KudosSummary extends React.Component {
