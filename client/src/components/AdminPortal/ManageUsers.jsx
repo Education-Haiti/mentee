@@ -9,8 +9,30 @@ class ManageUsers extends React.Component {
             showAddMentorView: false, 
             showDeleteMenteeView: false, 
             showDeleteMentorView: false,
+            addMenteeFullName: '',
+            addMenteeEmail: '',
+            addMenteeLevel: '3',
+            addMentorFullName: '',
+            addMentorEmail: '',
+            addMentorLevel: 'Mentor',
+            deleteMenteeEmail: '',
+            deleteMentorEmail: '',
 
         }
+    }
+
+    retrieveInfo (info) {
+        var theName = info.target.name;
+        var theValue = info.target.value;
+        this.state[theName] = theValue;
+    }
+
+    retrieveMenteeLevel (e) {
+        this.setState({ addMenteeLevel: e.target.value });
+    }
+
+    retrieveMentorLevel (e) {
+        this.setState({ addMentorLevel: e.target.value });
     }
 
     toggleAddMentee() {
@@ -64,11 +86,11 @@ class ManageUsers extends React.Component {
             addMenteeView = (
                 <div className="manage-users-add-container">
                     Mentee Full Name
-                    <input/>
+                    <input name='addMenteeFullName' onChange={this.retrieveInfo.bind(this)}/>
                     Mentee Email
-                    <input/>
+                    <input name="addMenteeEmail" onChange={this.retrieveInfo.bind(this)}/>
                     Level
-                    <select className="manage-users-mentor-level">
+                    <select className="manage-users-mentor-level" onChange={this.retrieveMenteeLevel.bind(this)}>
                         <option> 3 </option>
                         <option> 2 </option>
                         <option> 1 </option>
@@ -92,11 +114,11 @@ class ManageUsers extends React.Component {
             addMentorView = (
                 <div className="manage-users-add-container">
                     Mentor Full Name
-                    <input/>
+                    <input name='addMentorFullName' onChange={this.retrieveInfo.bind(this)}/>
                     Mentor Email
-                    <input/>
+                    <input name='addMentorEmail' onChange={this.retrieveInfo.bind(this)}/>
                     Level
-                    <select className="manage-users-mentor-level">
+                    <select className="manage-users-mentor-level" onChange={this.retrieveMentorLevel.bind(this)}>
                         <option> Mentor </option>
                         <option> Admin </option>
                     </select>
@@ -118,7 +140,7 @@ class ManageUsers extends React.Component {
             deleteMenteeView = (
                 <div className="manage-users-delete-container">
                     Mentee Email
-                    <input/>
+                    <input name='deleteMenteeEmail' onChange={this.retrieveInfo.bind(this)}/>
                     <div>
                         <button className="manage-users-delete-buttons"> Delete </button>
                         <button className="manage-users-delete-buttons" onClick={this.toggleDeleteMentee.bind(this)}> Cancel </button>
@@ -137,7 +159,7 @@ class ManageUsers extends React.Component {
             deleteMentorView = (
             <div className="manage-users-delete-container">
                 Mentor Email
-                <input/>
+                <input name='deleteMentorEmail' onChange={this.retrieveInfo.bind(this)}/>
                 <div>
                     <button className="manage-users-delete-buttons"> Delete </button>
                     <button className="manage-users-delete-buttons" onClick={this.toggleDeleteMentor.bind(this)}> Cancel </button>

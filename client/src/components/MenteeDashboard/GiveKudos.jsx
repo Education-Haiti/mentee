@@ -101,7 +101,6 @@ class GiveKudos extends React.Component {
     
     updateReceiver(e) {
         //console.log(e.target.value);
-        console.log('email', e.name);
         this.setState({ receiverEmail: e.target.value });
 
     }
