@@ -6,6 +6,7 @@ import MenteeDashboard from './MenteeDashboard/MenteeDashboard.jsx';
 import MentorProfile from './MentorProfile/MentorProfile.jsx';
 import MyProfile from  './MyProfile/MyProfile.jsx';
 import AdminPortal from './AdminPortal/AdminPortal.jsx';
+import Peers from './MyProfile/Peers.jsx';
 import SECRETS from '../client_secrets.js'
 import axios from 'axios';
 
@@ -123,7 +124,7 @@ class Mentee extends React.Component {
 		} else if (label === 'My Info') {
 			this.setState({ currentPage: 'myProfile' });
 		} else if (label === 'Peers') {
-			// TO BE DONE!!
+			this.setState({ currentPage: 'peers' });
 		} else if (label === 'My Mentor') {
 			this.setState({ currentPage: 'mentorProfile' });
 		} else if (label === 'Dashboard') {
@@ -164,6 +165,12 @@ class Mentee extends React.Component {
 		)
 	}
 
+	renderPeers() {
+		return (
+			<Peers/>
+		)
+	}
+
 	renderBody () {
 		if (this.state.currentPage === 'mentorProfile') {
 			return this.renderMentorProfile();
@@ -180,6 +187,10 @@ class Mentee extends React.Component {
 		if (this.state.currentPage === 'menteeDashboard') {
 			return this.renderMenteeDashboard();
 		}	
+
+		if (this.state.currentPage === 'peers') {
+			return this.renderPeers();
+		}
 	}
 
 	renderNav () {

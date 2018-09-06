@@ -90,6 +90,18 @@ app.get('/users/authed/:email/', (req, res) => {
     });
 });
 
+app.get('/users/mentees/grade/:grade', (req, res) => {
+    const theGrade = req.params.grade;
+    queries2.getMenteesByGrade(theGrade, (err, results) => {
+        if (err) {
+            console.log('Server-side error in retrieving mentees by grade : ', err);
+            res.end();
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 app.post('/users/new', (req, res) => {
     const userObj = req.body.user;
     queries2.saveUser(userObj, (err, results) => {

@@ -646,4 +646,42 @@ button:hover {
 	height: 30px;
 }
 
+.peers-line-container {
+	display: flex;
+	width: 900px;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
 
+.peers-container {
+	margin-top: 80px;
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.peers-photo {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	margin-right: 20px;
+	margin-bottom: 5px;
+}
+
+.peers-name {
+	margin-top: 15px;
+	font-weight: bold;
+	font-size: 20px;
+	color: #000000;
+	margin-bottom: 3px;
+	text-align: center;
+
+}
+
+.peers-description {
+	font-size: 17px;
+	color: #67777f;
+	margin-bottom: 35px;
+	text-align: center;
+}
