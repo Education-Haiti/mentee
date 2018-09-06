@@ -110,6 +110,11 @@ button {
 	height: 150px;
 }
 
+.nav-logo {
+	width: auto;
+	height: 75px;
+}
+
 .loading {
 	font-size: 15px;
 	color: #234060;
@@ -411,6 +416,85 @@ input {
 	font-size: 11pt;
 }
 
+/*shared with visit portal*/
+html {
+	width: 100vw;
+	height: 100vh;
+}
+body {
+	font-family: Hevetica, sans-serif;
+	color: #67777f;
+	width: 100%;
+	height: 100%;
+	margin:0px;
+}
+
+button {
+	padding: 5px;
+	margin: 5px;
+	margin-top:2px;
+	min-width: 70px;
+	height: 40px;
+	border: 0px;
+	border-radius: 5px;
+	background-color: white;
+	color: #67777f;
+	text-transform: uppercase;
+	font-size: 10pt;
+}
+
+button:hover {
+	color: #a33030;
+}
+
+.column {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.row {
+	display:flex;
+	flex-direction: row;
+}
+
+.header {
+	width: 105%;
+	height: 70px;
+	margin: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+  box-shadow: 3px 5px 10px 0px #67777f;
+	position: fixed;
+	background-color: white;
+	opacity: 0.7;
+	z-index: 10;
+}
+
+.header:hover {
+	opacity: 0.97;
+}
+
+.label {
+	text-transform: uppercase;
+	color: #a33030;
+	font-weight: bold;
+	font-size: 1.2em;
+	padding: 10px 0px 5px 0px;
+}
+
+.circle {
+	height: 80px;
+	width:80px;
+	border: 2px solid #a33030;
+	border-radius: 50px;
+}
+
+.wide-panel-container {
+	width: 100%;
+}
+
 /*Configuration portal specifics*/
 .admin-portal-container {
 	display: flex;
@@ -419,6 +503,7 @@ input {
 .create-assignments-container {
 	display: flex;
 	flex-direction: column;
+	border-top: 50px;
 	width: 350px;
 	height: 600px;
 	background-color: #234060;
@@ -488,6 +573,7 @@ input {
 .manage-users-container {
 	display: flex;
 	flex-direction: column;
+	border-top: 20px;
 	width: 350px;
 	height: 600px;
 	border: .8px solid #f2f2f2	;
@@ -513,10 +599,6 @@ input {
 	height: 220px;
 	color: #234060;
 	justify-content: space-between;
-}
-
-.manage-users-add-container-mentee {
-	height: 120px;
 }
 
 .manage-users-confirm-buttons-container {

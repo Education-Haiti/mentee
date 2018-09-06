@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
-var connection = mongoose.connect('mongodb://localhost:27017/mentees', { // mentees is the name of the database
+var connection = mongoose.connect('mongodb://localhost:27017/users', { // mentees is the name of the database
     useNewUrlParser: true,
 });
 
-console.log('Connected to Mongoose (mentee)');
+console.log('Connected to Mongoose (user)');
 
-let menteeSchema = mongoose.Schema({
-    first_name: String,
-    last_name: String,
+let userSchema = mongoose.Schema({
+    full_name: String,
     sex: String, 
     email: String,
     hometown: String,
@@ -40,36 +39,36 @@ let menteeSchema = mongoose.Schema({
     mentee_emails: Array
 });
 
-let Mentee = mongoose.model('Mentee', menteeSchema); // Mentee is the collection
+let User = mongoose.model('User', userSchema); // Mentee is the collection
 
-let saveMentee = (inputObj) => {
-    var mentee = new Mentee(inputObj);
+let saveUser = (inputObj) => {
+    var user = new User(inputObj);
 
-    mentee.save((err, res) => {
+    user.save((err, res) => {
         if (err) {
-            console.log('Database-side error is saving mentee : ', err);
+            console.log('Database-side error is saving user : ', err);
         } else {
             console.log('Saved'); 
         }
     })
 }
 
-let getMentees = (whenGotten) => {
-    Mentee.find()
+let getUsers = (whenGotten) => {
+    User.find()
     .exec((err, data) => {
         if (err) {
-            console.log('Database-side error in getting mentees : ', err);
+            console.log('Database-side error in getting users : ', err);
         } else {
             whenGotten(null, data);
         }
     })
 }
 
-let getMenteeByEmail = (theEmail, whenGotten) => {
-    Mentee.find({ email: theEmail })
+let getUserByEmail = (theEmail, whenGotten) => {
+    User.find({ email: theEmail })
     .exec((err, data) => {
         if (err) {
-            console.log('Database-side error in getting mentee : ', err);
+            console.log('Database-side error in getting user : ', err);
         } else {
             whenGotten(null, data);
         }
@@ -77,7 +76,7 @@ let getMenteeByEmail = (theEmail, whenGotten) => {
 }
 
 let getChecklist = (theEmail, whenGotten) => {
-    Mentee.find({ email: theEmail }, { checklist:1 })
+    User.find({ email: theEmail }, { checklist:1 })
     .exec((err, data) => {
         if (err) {
             console.log('Database-side error in getting checklist : ', err);
@@ -88,7 +87,7 @@ let getChecklist = (theEmail, whenGotten) => {
 }
 
 let updateChecklist = (theEmail, newChecklist) => {
-    Mentee.findOneAndUpdate({ email: theEmail }, { checklist: newChecklist }, {upsert: true}, (err, doc) => {
+    User.findOneAndUpdate({ email: theEmail }, { checklist: newChecklist }, {upsert: true}, (err, doc) => {
         if (err) {
             console.log('Database-side error in updating the checklist : ', err);
         } else {
@@ -98,7 +97,7 @@ let updateChecklist = (theEmail, newChecklist) => {
 }
 
 let updateKudosGiven = (theEmail, newKuddosGivenObj) => {
-    Mentee.findOneAndUpdate({ email: theEmail }, { kudos_given: newKuddosGivenObj }, { upsert: true }, (err, doc) => {
+    User.findOneAndUpdate({ email: theEmail }, { kudos_given: newKuddosGivenObj }, { upsert: true }, (err, doc) => {
         if (err) {
             console.log('Database-side error in updating  kudos given : ', err);
         } else {
@@ -108,7 +107,7 @@ let updateKudosGiven = (theEmail, newKuddosGivenObj) => {
 }
 
 let updateKudosReceived = (theEmail, newKudosReceivedObj) => {
-    Mentee.findOneAndUpdate({ email: theEmail }, { kudos_received: newKudosReceivedObj }, { upsert: true }, (err, doc) => {
+    User.findOneAndUpdate({ email: theEmail }, { kudos_received: newKudosReceivedObj }, { upsert: true }, (err, doc) => {
         if (err) {
             console.log('Database-side error in updating kudos received : ', err);
         } else {
@@ -118,8 +117,7 @@ let updateKudosReceived = (theEmail, newKudosReceivedObj) => {
 }
 
 let sampleData = {
-    first_name: 'Jean-Pierre', 
-    last_name: 'Vertil', 
+    full_name: 'Jean-Pierre', 
     sex: 'M', 
     email: 'jvertil@nd.edu',
     hometown: 'Charlottesville', 
@@ -171,8 +169,7 @@ let sampleData = {
 }
 
 let sampleData2 = {
-    first_name: 'Kony', 
-    last_name: 'Pham', 
+    full_name: 'Kony Pham', 
     sex: 'F', 
     email: 'kphammusic@gmail.com',
     hometown: 'Cali Baby', 
@@ -224,8 +221,7 @@ let sampleData2 = {
 }
 
 let sampleData3 = {
-    first_name: 'Corinne', 
-    last_name: 'Sanon', 
+    full_name: 'Corinne Joachim', 
     sex: 'F', 
     email: 'corinnejoachimsanon@gmail.com',
     school: 'Sacré Coeur', 
@@ -279,9 +275,9 @@ let sampleData3 = {
 }
 
 
-saveMentee(sampleData);
-saveMentee(sampleData2);
-saveMentee(sampleData3);
+// saveUser(sampleData);
+// saveUser(sampleData2);
+// saveUser(sampleData3);
 
 //  getMentees((err, result) => {
 //      console.log(result);
@@ -352,9 +348,9 @@ saveMentee(sampleData3);
 //updateKudosReceived('jvertil@nd.edu', newKuddosReceived);
 
 module.exports = {
-    saveMentee, 
-    getMentees,
-    getMenteeByEmail,
+    saveUser, 
+    getUsers,
+    getUserByEmail,
     getChecklist, 
     updateChecklist,
     updateKudosGiven,

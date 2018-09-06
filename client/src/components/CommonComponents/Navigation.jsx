@@ -15,7 +15,7 @@ const Navigation = (props) => {
 
 	return (
 		<div className="header row">
-			<div className="logo">Logo</div>
+			<img class="nav-logo"  src="https://s3.amazonaws.com/educationhaiti/education_haiti_logo.png"/>
 			<div className="navigation">
 				{rows}
 			</div>

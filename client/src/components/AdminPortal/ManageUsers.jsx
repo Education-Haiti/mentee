@@ -35,6 +35,38 @@ class ManageUsers extends React.Component {
         this.setState({ addMentorLevel: e.target.value });
     }
 
+    addMentee () {
+        if (this.state.addMenteeFullName === '') {
+            alert('Please add a name for the new mentee :) ');
+        } else if (this.state.addMenteeEmail === '') {
+            alert('Please add an email for the new mentee :) ');
+        } else {
+            axios.post('/users/new', {
+                user: {
+                    full_name: this.state.addMenteeFullName,
+                    email: this.state.addMenteeEmail,
+                    level: this.state.addMenteeLevel,
+                    sex: '',
+                    hometown: '',
+                    school: '',
+                    phone_number: '',
+                    parent1_name: '',
+                    parent1_phone: '',
+                    parent1_email: '',
+                    parent2_name: '',
+                    parent2_phone: '',
+                    parent2_email: ''
+                }
+            })
+            .then((response) => {
+                this.toggleAddMentee();
+            })
+            .catch((error) => {
+                console.log('Axios-side error in creating new mentee');
+            })
+        }  
+    }
+
     toggleAddMentee() {
         if (this.state.showAddMenteeView === false) {
             this.setState({ showAddMenteeView: true });
@@ -97,7 +129,7 @@ class ManageUsers extends React.Component {
                         <option> T</option>
                     </select>
                     <div>
-                        <button className="manage-users-add-buttons"> Add </button>
+                        <button className="manage-users-add-buttons" onClick={this.addMentee.bind(this)}> Add </button>
                         <button className="manage-users-add-buttons" onClick={this.toggleAddMentee.bind(this)}> Cancel </button>
                     </div>
                 

@@ -36,7 +36,7 @@ class MenteeDashboard extends React.Component {
     }
 
 	identifyMentee(theEmail) { // identifying mentee on database
-		axios.get(`/mentees/authed/${theEmail}`)
+		axios.get(`/users/authed/${theEmail}`)
 			.then((response) => {
 				//console.log(response.data);
 				this.setState({ menteeInfo: response.data[0] });

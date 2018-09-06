@@ -22,7 +22,7 @@ class Checklist extends React.Component {
     }
 
     getChecklist(theEmail) {
-        axios.get(`/mentees/checklist/${theEmail}`)
+        axios.get(`/users/checklist/${theEmail}`)
             .then((response) => {
                 this.setState({ items: response.data[0].checklist }, () => {
                     this.props.calcCompleteness(this.state.items);
@@ -34,7 +34,7 @@ class Checklist extends React.Component {
     }
 
     updateChecklist(theEmail) {
-        axios.put(`/mentees/checklist/${theEmail}`, {
+        axios.put(`/users/checklist/${theEmail}`, {
             newChecklist: this.state.items
         })
         .then((response) => {

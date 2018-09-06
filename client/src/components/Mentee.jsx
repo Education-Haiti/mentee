@@ -11,7 +11,7 @@ class Mentee extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentPage: 'adminPortal'
+			currentPage: 'myProfile'
 		}
 	}
 

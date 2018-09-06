@@ -81,7 +81,7 @@ class GiveKudos extends React.Component {
     }
 
     identifyReceiver(theEmail) { // identifying on database
-		axios.get(`/mentees/authed/${theEmail}`)
+		axios.get(`/users/authed/${theEmail}`)
 			.then((response) => {
 				//console.log(response.data);
 				this.setState({ receiverInfo: response.data[0] }, () => {
@@ -90,7 +90,7 @@ class GiveKudos extends React.Component {
                 });
 			})
 			.catch((error) => {
-				console.log('Axios error in getting authed mentee info : ', error);
+				console.log('Axios error in getting authed user info : ', error);
 			});
 	}
 
@@ -106,7 +106,7 @@ class GiveKudos extends React.Component {
     }
 
     updateGivenKudos() { // for user giving kudos
-        let theName = this.state.receiverInfo.first_name + ' ' + this.state.receiverInfo.last_name;
+        let theName = this.state.receiverInfo.full_name;
         let date = new Date();
         let formattedDate = date.toLocaleDateString('us-EN', {year: 'numeric', month: 'long', day: 'numeric'});
         let theMessage = this.state.kudosMessage;
@@ -129,7 +129,7 @@ class GiveKudos extends React.Component {
         });
 
         // now update db
-        axios.put(`/mentees/givenkudos/${this.state.email}`, {
+        axios.put(`/users/givenkudos/${this.state.email}`, {
             kudosGiven: kuddosObj
         })
         .then((response) => {
@@ -154,7 +154,7 @@ class GiveKudos extends React.Component {
         if (this.state.kudosMessage.length > 150) {
             alert('Please make a kudos of less than 150 characters :) ');
         } else {
-            axios.post('/mentees/slack/kudos', {
+            axios.post('/users/slack/kudos', {
                 message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.usernames[this.state.receiverEmail]} for ${this.state.kudosMessage} \n\n *** Let's keep helping each other! ***`,
                 channel: 'websitetesting'
             })

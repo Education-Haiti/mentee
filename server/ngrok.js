@@ -67,21 +67,21 @@ app.get('/oauth', function(req, res) {
     }
 });
 
-app.get('/mentees/', (req, res) => {
-    queries2.getMentees((err, results) => {
+app.get('/users/', (req, res) => {
+    queries2.getUsers((err, results) => {
         if (err) {
-            console.log('Server-side error in retrieving mentees');
+            console.log('Server-side error in retrieving users');
         } else {
             res.json(results);
         }
     });
 });
 
-app.get('/mentees/authed/:email/', (req, res) => {
+app.get('/users/authed/:email/', (req, res) => {
     const theEmail = req.params.email;
-    queries2.getMenteeByEmail(theEmail, (err, results) => {
+    queries2.getUserByEmail(theEmail, (err, results) => {
         if (err) {
-            console.log('Server-side error in retrieving info of authed mentee : ', err);
+            console.log('Server-side error in retrieving info of authed user : ', err);
             res.end();
         } else {
             res.json(results);
@@ -90,11 +90,11 @@ app.get('/mentees/authed/:email/', (req, res) => {
     });
 });
 
-app.post('/mentees/new', (req, res) => {
-    const menteeObj = req.body.mentee;
-    queries2.saveMentee(menteeObj, (err, results) => {
+app.post('/users/new', (req, res) => {
+    const userObj = req.body.user;
+    queries2.saveUser(userObj, (err, results) => {
         if (err) {
-            console.log('Server-side error in creating new mentee : ', err);
+            console.log('Server-side error in creating new user : ', err);
             res.sendStatus(500);
         } else {
             console.log('Success');
@@ -103,7 +103,7 @@ app.post('/mentees/new', (req, res) => {
     res.sendStatus(201);
 })
 
-app.get('/mentees/checklist/:email/', (req, res) => {
+app.get('/users/checklist/:email/', (req, res) => {
     const theEmail = req.params.email;
     queries2.getChecklist(theEmail, (err, results) => {
         if (err) {
@@ -114,7 +114,7 @@ app.get('/mentees/checklist/:email/', (req, res) => {
     })
 })
 
-app.put('/mentees/checklist/:email/', (req, res) => {
+app.put('/users/checklist/:email/', (req, res) => {
     const theEmail = req.params.email; 
     const newChecklist = req.body.newChecklist;
     queries2.updateChecklist(theEmail, newChecklist, (err, results) => {
@@ -125,7 +125,7 @@ app.put('/mentees/checklist/:email/', (req, res) => {
     res.sendStatus(200);
 })
 
-app.put('/mentees/givenkudos/:email/', (req, res) => {
+app.put('/users/givenkudos/:email/', (req, res) => {
     const theEmail = req.params.email;
     const newKudosGiven = req.body.kudosGiven;
     queries2.updateKudosGiven(theEmail, newKudosGiven, (err, results) => {
@@ -136,7 +136,7 @@ app.put('/mentees/givenkudos/:email/', (req, res) => {
     res.sendStatus(200);
 })
 
-app.put('/mentees/receivedkudos/:email/', (req, res) => {
+app.put('/users/receivedkudos/:email/', (req, res) => {
     const theEmail = req.params.email;
     const newKudosReceived = req.body.kudosReceived;
     queries2.updateKudosReceived(theEmail, newKudosReceived, (err, results) => {
@@ -148,7 +148,7 @@ app.put('/mentees/receivedkudos/:email/', (req, res) => {
 })
 
 // Posting to Slack
-app.post('/mentees/slack/kudos', (req, res) => {
+app.post('/users/slack/kudos', (req, res) => {
         const theMessage = req.body.message;
         const theChannel = req.body.channel;
 
