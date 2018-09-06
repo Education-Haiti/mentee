@@ -221,11 +221,15 @@ button {
 	font-weight: bold;
 }
 
+input {
+	font-size: 15px;
+	height: 30px;
+	margin-bottom: 5px;
+}
 
-.give-kudos-input {
+.give-kudos-input { 
 	font-size: 15px;
 	height: 75px;
-	
 }
 
 .give-kudos-b {
@@ -416,7 +420,7 @@ button {
 	display: flex;
 	flex-direction: column;
 	width: 350px;
-	height: 570px;
+	height: 600px;
 	background-color: #234060;
 	padding:50px;
 	padding-top: 10px;
@@ -470,3 +474,78 @@ button {
 	color: #a33030;
 	background-color: #ffdfe7;
 }
+
+.add-mentor-mentee-button {
+	background-color: #234060;
+	color: white;
+}
+
+.add-mentor-mentee-button:hover {
+	color: #234060;
+	background-color: #d9edfc;
+}
+
+.manage-users-container {
+	display: flex;
+	flex-direction: column;
+	width: 350px;
+	height: 600px;
+	border: .8px solid #f2f2f2	;
+	border-radius: 1.5%;
+	justify-content: space-between;
+	padding: 50px;
+	margin-left: 50px;
+}
+
+.manage-users-delete-container {
+	display: flex;
+	flex-direction: column;
+	width: 320px;
+	height: 100px;
+	color: #a33030;
+	justify-content: space-between;
+}
+
+.manage-users-add-container {
+	display: flex;
+	flex-direction: column;
+	width: 320px;
+	height: 220px;
+	color: #234060;
+	justify-content: space-between;
+}
+
+.manage-users-add-container-mentee {
+	height: 120px;
+}
+
+.manage-users-confirm-buttons-container {
+	display: flex;
+}
+
+.manage-users-add-buttons {
+	background-color: #234060;
+	color: white;
+	padding:5px;
+}
+
+.manage-users-add-buttons:hover {
+	color: #234060;
+	background-color: #d9edfc;
+}
+.manage-users-delete-buttons {
+	color:  white;
+	background-color: #a33030;
+	padding:5px;
+}
+
+.manage-users-delete-buttons:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
+}
+
+.manage-users-mentor-level {
+	height: 30px;
+}
+
+
