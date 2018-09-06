@@ -12,7 +12,7 @@
      { label: 'Home', url: 'www.google.com'},
      { label: 'My Info', url: 'www.google.com'},
      { label: 'Peers', url: 'www.google.com'},
-     { label: 'Mentors', url: 'www.google.com'},
+     { label: 'My Mentor', url: 'www.google.com'},
  ]
  
  const demoMentor = {

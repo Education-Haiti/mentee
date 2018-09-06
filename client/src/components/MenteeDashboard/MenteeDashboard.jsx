@@ -18,9 +18,24 @@ class MenteeDashboard extends React.Component {
 		}
 	}
 
-	componentWillMount() {
-		this.getAuthedUserInfo();
-	}
+	 componentDidMount() {
+	// 	//this.getAuthedUserInfo();
+	 	this.setState({ menteeInfo: this.props.userInfo });
+	 	this.setState({ email: this.props.email });
+		
+	 }
+
+	// componentWillReceiveProps(prevProps) {
+	// 	if (this.props.email !== prevProps.email) {
+	// 		this.setState({ email: this.props.email });
+	// 		console.log('hhh', this.state.email);
+	// 		console.log('aaa', this.state.menteeInfo);
+	// 	}
+
+	// 	if (this.props.menteeInfo !== prevProps.menteeInfo) {
+	// 		this.setState({ menteeInfo: this.props.userInfo });
+	// 	}
+	// }
 
 	calculatePercentCompleteness(items) {
         let totalItems = Object.keys(items).length;
@@ -35,7 +50,7 @@ class MenteeDashboard extends React.Component {
 		this.setState({ percentComplete: percentComp});
     }
 
-	identifyMentee(theEmail) { // identifying mentee on database
+	identifyMentee(theEmail) { // identifying mentee on database NO LONGER NEEDED HERE !!!
 		axios.get(`/users/authed/${theEmail}`)
 			.then((response) => {
 				//console.log(response.data);
@@ -46,7 +61,7 @@ class MenteeDashboard extends React.Component {
 			});
 	}
 
-	getAuthedUserInfo() {
+	getAuthedUserInfo() { // NO LONGER NEEDED HERE !!!!!!!!
 		const slackCodeRaw = window.location.search;
 		const slackCode = slackCodeRaw.slice(7); // to remove the key of 'slack=' specified on the server side
 		

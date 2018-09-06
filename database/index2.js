@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-var connection = mongoose.connect('mongodb://localhost:27017/users', { // mentees is the name of the database
+var connection = mongoose.connect('mongodb://localhost:27017/users', { // users is the name of the database
     useNewUrlParser: true,
 });
 
@@ -173,22 +173,12 @@ let sampleData2 = {
     sex: 'F', 
     email: 'kphammusic@gmail.com',
     hometown: 'Cali Baby', 
-    school: 'ND', 
     grade: '3',
-    level: 'mentee',
+    level: 'mentor',
     phone_number: '409-454-5188',
-    parent1_name: 'Mario',
-    parent1_email: 'm@gmail.com',
-    parent1_phone: '223-5133',
-    parent2_name: 'Preta',
-    parent2_email: 'g@gmail.com',
-    parent2_phone: '444-4444',
-    my_mentor_email: 'corinnejoachimsanon@gmail.com',
-    checklist: {
-        "GMAT": true,
-        "MIT": false, 
-        "UPENN": true,
-    },
+    majors: 'Music',
+    undergraduate_school: 'University of Notre Dame',
+    graduate_school: 'Baylor University',
     kudos_given: [
         {
             name: "Kony Pham",
@@ -198,7 +188,7 @@ let sampleData2 = {
         },
 
         {
-            name: "Christina Bastion",
+            name: "Christina Bastien",
             date: "09/01/2018",
             message: "helping me design an assignment for my mentee",
             email: "christiti14@gmail.com"
@@ -274,10 +264,65 @@ let sampleData3 = {
     ]
 }
 
+let sampleData4 = {
+    full_name: 'Jean-Luc V.', 
+    sex: 'F', 
+    email: 'jpvertil@hotmail.com',
+    school: 'SLG!', 
+    level: 'admin',
+    phone_number: '469-454-5328',
+    facebook_page: 'https://www.facebook.com/corinne.joachimsanon',
+    twitter_page: 'https://twitter.com/71390cff06894d2',
+    linked_in_page: 'https://www.linkedin.com/in/corinne-js-symietz/',
+    current_city: 'New York',
+    current_state: 'NY',
+    current_country: 'USA',
+    undergraduate_school: 'University of Michigan',
+    graduate_school: 'Stanford GSB',
+    majors: 'EE + Econ + MBA',
+    employer: 'Sigora Group',
+    mentee_emails: ['kphammusic@gmail.com'],
+    checklist: {
+        "MLT": true,
+        "Haiti": false, 
+        "MIT": true,
+    },
+    kudos_given: [
+        {
+            name: "Kony Pham",
+            date: "09/03/2018",
+            message: "helping me review my resume",
+            email: "kphammusic@gmail.com"
+        },
 
-// saveUser(sampleData);
-// saveUser(sampleData2);
-// saveUser(sampleData3);
+        {
+            name: "Christina Bastion",
+            date: "09/01/2018",
+            message: "helping me design an assignment for my mentee",
+            email: "christiti14@gmail.com"
+        } 
+    ],
+    kudos_received: [
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "helping me buy chocolates :)",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        }
+    ]
+}
+
+
+//  saveUser(sampleData);
+//  saveUser(sampleData2);
+//  saveUser(sampleData3);
+//  saveUser(sampleData4);
 
 //  getMentees((err, result) => {
 //      console.log(result);
