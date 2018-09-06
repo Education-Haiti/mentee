@@ -47,7 +47,7 @@ class MentorProfile extends React.Component {
 	render () {
 		return (
 			<div className="page-container row">
-				<Sidebar profilePhoto={'mentor.photo'}/>
+				<Sidebar profilePhoto={this.props.mentorPhoto}/>
 				<ProfileCard title={'My Mentor'} fields={this.state.fields} buttons={[]}/>
 			</div>
 		)

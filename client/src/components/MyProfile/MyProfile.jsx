@@ -80,7 +80,7 @@ class MyProfile extends React.Component {
 	render() {
 		return (
 			<div className="page-container row">
-				<Sidebar profilePhoto={'user.photo'} />
+				<Sidebar profilePhoto={this.props.userPhoto} />
 				<div className="column">
 					<ProfileCard title={'My Profile'} fields={this.state.userFields} buttons={[]} />
 					<ProfileCard title={'Parents Information'} fields={this.state.parentsFields} buttons={[]} />

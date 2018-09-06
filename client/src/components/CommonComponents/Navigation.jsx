@@ -19,6 +19,7 @@ const Navigation = (props) => {
 			<div className="navigation">
 				{rows}
 			</div>
+			<img className="nav-profile-photo" src={props.profilePhoto}/>
 		</div>
 	)
 

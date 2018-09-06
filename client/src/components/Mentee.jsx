@@ -15,9 +15,11 @@ class Mentee extends React.Component {
 		this.state = {
 			currentPage: '',
 			userInfo: {},
+			userPhoto: '',
 			email: '',
 			level: '',
 			my_mentor: {},
+			my_mentor_photo: '',
 			menteeLinks: [
 				{ label: 'Home'},
 				{ label: 'My Info'},
@@ -59,6 +61,7 @@ class Mentee extends React.Component {
 		})
 		.then((response) => {
 			this.setState({ email: response.data.user.email}, () => {
+				this.setState({ userPhoto: response.data.user.image_512 })
 				this.identifyUser(response.data.user.email);
 			});
 			
@@ -72,7 +75,9 @@ class Mentee extends React.Component {
 			.then((response) => {
 				//console.log(response.data);
 				if (type === 2) {
-					this.setState({ my_mentor: response.data[0]});
+					this.setState({ my_mentor: response.data[0]}, () => {
+						this.findUserByEmail_slack(this.state.my_mentor.email); // get the mentor's photo
+					});
 				} else {
 					this.setState({ userInfo: response.data[0] }, () => {
 						if (this.state.userInfo.level === "mentee") {
@@ -97,6 +102,19 @@ class Mentee extends React.Component {
 				console.log('Axios error in getting authed mentee info : ', error);
 			});
 	}
+
+	findUserByEmail_slack(theEmail, option) { // identifying user on slack API . 
+		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
+			.then((response) => {
+				//console.log('User info from SLACK API !! : ', response.data.user.profile);
+                this.setState({ my_mentor_photo : response.data.user.profile.image_512 }, () => { // to retrieve the mentor's profile photo
+                    console.log('new: ', this.state.displayName);
+                });  
+			})
+			.catch((error) => {
+				console.log('Axios error in getting user info from SLACK API : ', error);
+			});
+    }
 
 	handleNavChange(label) {
 		console.log(label);
@@ -124,13 +142,13 @@ class Mentee extends React.Component {
 
 	renderMentorProfile () {
 		return (
-			<MentorProfile mentor={this.state.my_mentor}/>
+			<MentorProfile mentor={this.state.my_mentor} mentorPhoto={this.state.my_mentor_photo}/>
 		)
 	}
 
 	renderMyProfile () {
 		return (
-			<MyProfile user={this.state.userInfo} />
+			<MyProfile user={this.state.userInfo} userPhoto={this.state.userPhoto} />
 		)
     }
     
@@ -167,7 +185,7 @@ class Mentee extends React.Component {
 	renderNav () {
 		if (this.state.level === 'mentee') {
 			return (
-				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.menteeLinks}/>
+				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.menteeLinks} profilePhoto={this.state.userPhoto}/>
 			)
 		} else if (this.state.level === 'admin') {
 			return (
