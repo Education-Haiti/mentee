@@ -18,6 +18,7 @@ class Mentee extends React.Component {
 			userInfo: {},
 			userPhoto: '',
 			email: '',
+			grade: '',
 			level: '',
 			my_mentor: {},
 			my_mentor_photo: '',
@@ -167,7 +168,7 @@ class Mentee extends React.Component {
 
 	renderPeers() {
 		return (
-			<Peers/>
+			<Peers grade={this.state.userInfo.grade}/>
 		)
 	}
 
