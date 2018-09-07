@@ -17,12 +17,17 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
        }
+<<<<<<< HEAD
       },
       {
         test:/\.css$/,
         use:['style-loader','css-loader']
       }
     ],
+=======
+      }
+    ]
+>>>>>>> bdbbdb6b22c57b0e188d24789e2e3b8fb75711e8
   },
   resolve: {
     extensions: ['.js', '.jsx']

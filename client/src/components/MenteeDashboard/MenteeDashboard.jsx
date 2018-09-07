@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import axios from 'axios';
 import SECRETS from '../../client_secrets.js'
 import { Route, Switch } from 'react-router-dom';
@@ -98,3 +99,13 @@ class MenteeDashboard extends React.Component {
 }
 
 export default MenteeDashboard;
+=======
+
+const MenteeDashBoard = (props) => {
+	return (
+		<div> dis is da dashboard</div>
+	)
+}
+
+export default MenteeDashBoard;
+>>>>>>> bdbbdb6b22c57b0e188d24789e2e3b8fb75711e8

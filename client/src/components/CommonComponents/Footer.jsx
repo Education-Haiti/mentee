@@ -28,4 +28,8 @@ const Footer = (props) => {
 	)
 }
 
+<<<<<<< HEAD
 export default Footer;
+=======
+export default Footer;
+>>>>>>> bdbbdb6b22c57b0e188d24789e2e3b8fb75711e8

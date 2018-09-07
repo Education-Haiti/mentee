@@ -25,4 +25,8 @@ ProfileCardField.propType = {
 	value: PropType.string
 }
 
+<<<<<<< HEAD
 export default ProfileCardField
+=======
+export default ProfileCardField
+>>>>>>> bdbbdb6b22c57b0e188d24789e2e3b8fb75711e8

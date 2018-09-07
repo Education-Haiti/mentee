@@ -48,9 +48,9 @@ class EntryForm extends React.Component {
 					<form onSubmit={this.handleSubmit}>
 						<label>
 							First Name:
-							<input type="text" value={th}
-					<div>
-					</div>
+							<input type="text" value={th} />
+						</label>
+					</form>
 				</div>
 			</div>
 
