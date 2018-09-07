@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Navigation from './CommonComponents/Navigation.jsx';
 import MenteeDashboard from './MenteeDashboard/MenteeDashboard.jsx';
+import MentorDashboard from './MentorDashboard/MentorDashboard.jsx';
 import MentorProfile from './MentorProfile/MentorProfile.jsx';
 import MyProfile from  './MyProfile/MyProfile.jsx';
 import AdminPortal from './AdminPortal/AdminPortal.jsx';
@@ -129,7 +130,7 @@ class Mentee extends React.Component {
 		} else if (label === 'My Mentor') {
 			this.setState({ currentPage: 'mentorProfile' });
 		} else if (label === 'Dashboard') {
-			// TO BE DONE!!
+			this.setState({ currentPage: 'dashboard' });
 		} else if (label === 'Profile') {
 			// TO BE DONE!!
 		} else if (label === 'My Mentees') {
@@ -138,7 +139,7 @@ class Mentee extends React.Component {
 			// TO BE DONE!!
 		} else if (label === 'Config') {
 			this.setState({ currentPage: 'adminPortal' })
-		}
+		} 
 
 	}
 
@@ -172,6 +173,12 @@ class Mentee extends React.Component {
 		)
 	}
 
+	renderMentorDashboard() {
+		return (
+			<MentorDashboard/>
+		)
+	}
+
 	renderBody () {
 		if (this.state.currentPage === 'mentorProfile') {
 			return this.renderMentorProfile();
@@ -191,6 +198,10 @@ class Mentee extends React.Component {
 
 		if (this.state.currentPage === 'peers') {
 			return this.renderPeers();
+		}
+
+		if (this.state.currentPage === 'dashboard') {
+			return this.renderMentorDashboard();
 		}
 	}
 
