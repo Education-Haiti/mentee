@@ -1,0 +1,502 @@
+html {
+	width: 100vw;
+	height: 100vh;
+}
+body {
+	font-family: Hevetica, sans-serif;
+	color: #67777f;
+	width: 100%;
+	height: 100%;
+	margin:0px;
+}
+
+button {
+	padding: 5px;
+	margin: 5px;
+	margin-top:2px;
+	min-width: 70px;
+	height: 40px;
+	border: 0px;
+	border-radius: 5px;
+	background-color: white;
+	color: #67777f;
+	text-transform: uppercase;
+	font-size: 10pt;
+}
+
+button:hover {
+	color: #a33030;
+}
+
+.apply {
+	width: 200px;
+	height: 60px;
+	border-radius: 5px;
+	background-color: #a33030;
+	color: white;
+	font-weight: normal;
+	font-size: 1.2em;
+	opacity: 0.95;
+}
+
+.apply:hover{
+	color: #a33030;
+	background-color: #ffdfe7;
+}
+
+.apply-b {
+	border: 1px solid #a33030;
+	border-radius: 5px;
+	background-color: #a33030;
+	color: white;
+	opacity: 0.9;
+}
+
+.apply-b:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
+}
+
+.login {
+	border: 1px solid #234060;
+	border-radius: 5px;
+	background-color: #234060;
+	color: white;
+	opacity: 0.9;
+}
+
+.login:hover {
+	color: #234060;
+	background-color: #d9edfc;
+}
+
+.column {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.row {
+	display:flex;
+	flex-direction: row;
+}
+
+.header {
+	width: 105%;
+	height: 70px;
+	margin: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+  box-shadow: 3px 5px 10px 0px #67777f;
+	position: fixed;
+	background-color: white;
+	opacity: 0.7;
+	z-index: 10;
+}
+
+.header:hover {
+	opacity: 0.97;
+}
+
+.logo {
+	height:70px;
+	width: 200px;
+	font-size: 0.4em;
+}
+
+.carousel {
+	margin: 70px 0px 20px 0px;
+	height: 350px;
+	width: 100%;
+	background-image: url('https://s3.amazonaws.com/educationhaiti/successful_pic.png');
+}
+
+.promo-container {
+	padding: 2% 0% 2% 0%;
+	display: flex;
+	justify-content: space-around;
+	width: 800px;
+}
+
+.promo-card {
+	height: 200px;
+	width: 200px;
+	text-align: center;
+	color: #67777f;
+	font-size: 0.85em;
+	line-height: 1.4;
+	padding: 0px 20px 0px 20px;
+}
+
+.label {
+	text-transform: uppercase;
+	color: #a33030;
+	font-weight: bold;
+	font-size: 1.2em;
+	padding: 10px 0px 5px 0px;
+}
+
+.circle {
+	height: 80px;
+	width:80px;
+	border: 2px solid #a33030;
+	border-radius: 50px;
+}
+
+.wide-panel-container {
+	width: 100%;
+}
+
+.mentors {
+	background-color: #a33030;
+	color: white;
+}
+
+.become-mentor-button {
+	border: 1px solid #a33030;
+	border-radius: 5px;
+	background-color: #a33030;
+	color: white;
+	opacity: 0.9;
+}
+
+.become-mentor-button:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
+}
+
+.about {
+	color: #67777f;
+}
+
+.wide-panel {
+	width: 50%;
+	padding: 5% 0% 5% 0%;
+	text-align: center;
+	line-height: 1.5;
+	font-size: 0.9em;
+}
+
+.wide-panel .heading {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1.4em;
+	padding: 10px;
+	border-bottom: 2px solid ;
+}
+
+.wide-panel button {
+	width: 200px;
+	height: 50px;
+	border: 2px solid;
+}
+
+.footer {
+	border-top: 2px solid #67777f;
+	color: #67777f;
+	width: 100%;
+	font-size: 0.8em;
+	line-height: 1.8;
+	justify-content: center;
+}
+
+.links{
+	align-items: flex-start;
+	padding: 30px 80px 50px 80px;
+}
+
+.links a:link {
+	color: #67777f;
+	text-decoration: none;
+}
+
+.links a:hover {
+	color: #a33030;
+}
+
+.links a:active{
+	color: black;
+}
+
+.icon {
+	height: 25px;
+	width: 25px;
+	margin: 5px;
+	
+}
+
+
+.facebook {
+	background-image: url('https://s3.amazonaws.com/educationhaiti/twitter.png');
+}
+.twitter {
+	background-color: #67777f;
+	border-radius: 5px;
+}
+
+.heading {
+	font-weight: bold;
+}
+
+.successful-container {
+	width: 100 vw;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.succ-title {
+	color:  #a33030;
+	font-weight: bold;
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+
+.succ-title-description {
+	width: 900px;
+	color: #000000;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+.succ-mentee-container {
+	width: 900px;
+	display: flex;
+}
+
+.succ-mentee-photo {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+
+
+.succ-mentee-text-container {
+	display:flex;
+	flex-direction: column;
+	margin-top: 15px;
+}
+
+.succ-mentee-name {
+	font-weight: bold;
+	font-size: 20px;
+	color: #000000;
+	margin-bottom: 3px;
+}
+
+.succ-mentee-bio {
+	width: 650px;
+	font-size: 17px;
+	color: #67777f;
+}
+
+.succ-bottom-section-container {
+	display: flex;
+	width: 100vw;
+	height: 300px;
+	flex-direction: column;
+	align-items: center;
+	background-color: #a33030;
+
+}
+
+.succ-bottom-section-text {
+	font-size: 17px;
+	color: #ffffff;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 70px;
+}
+
+.succ-bottom-section-button {
+	border: 2px solid #ffffff;
+	padding: 10px;
+	margin: 5px;
+	margin-top:2px;
+	min-width: 70px;
+	border-radius: 5px;
+	color: #ffffff;
+	text-transform: uppercase;
+	font-size: 18pt;
+
+}
+
+.succ-bottom-section-button:hover {
+	border: 2px solid #a33030;
+	color: #a33030;
+	background-color: #ffdfe7;
+}
+
+
+.mentors-container {
+	width: 100 vw;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.mentors-title {
+	color: #234060;
+	font-weight: bold;
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+
+.mentors-description {
+	width: 900px;
+	color: #000000;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+.mentors-bottom-section-container {
+	display: flex;
+	width: 100vw;
+	height: 300px;
+	flex-direction: column;
+	align-items: center;
+	background-color: #234060;
+
+}
+
+.mentors-bottom-section-text {
+	font-size: 17px;
+	color: #ffffff;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 70px;
+}
+
+.mentors-bottom-section-button {
+	border: 2px solid #ffffff;
+	padding: 10px;
+	margin: 5px;
+	margin-top:2px;
+	min-width: 70px;
+	border-radius: 5px;
+	color: #ffffff;
+	text-transform: uppercase;
+	font-size: 18pt;
+
+}
+
+.mentors-bottom-section-button:hover {
+	border: 2px solid #d9edfc;
+	color: #234060;
+	background-color: #d9edfc;
+}
+
+.mentors-line-container {
+	display: flex;
+	width: 750px;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.mentor-container {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.mentor-photo {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	margin-right: 20px;
+	margin-bottom: 5px;
+}
+
+.mentor-name {
+	margin-top: 15px;
+	font-weight: bold;
+	font-size: 20px;
+	color: #000000;
+	margin-bottom: 3px;
+	text-align: center;
+
+}
+
+.mentor-description {
+	font-size: 17px;
+	color: #67777f;
+	margin-bottom: 35px;
+	text-align: center;
+}
+
+/*Mentee portal specifics*/
+.mentee-body-container {
+	height: 100vw;
+}
+.top-padding {
+	min-height: 70px;
+}
+
+.page-container {
+	width: 100vw;
+	flex-grow: 1;
+}
+
+.sidebar {
+	width: 360px;
+	padding-top: 150px;
+	justify-content: center;
+	background-color: #234060;
+}
+
+.profile-photo-holder{
+	background-image: url("https://picsum.photos/180/180/");
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	margin: auto;
+}
+
+.profile-page-body {
+	width: 80%;
+	padding-top: 100px;
+	padding-left:100px;
+}
+
+.profile-card-container {
+	width: 500px;
+	border: 1px solid #e5e1e0;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px 0px #d5d9e0;
+	padding: 24px;
+}
+
+.profile-card-entry {
+	justify-content: flex-start;
+	width: 100%;
+}
+
+.profile-card-label,
+.profile-card-field {
+	margin: 4px;
+	padding: 8px;
+}
+
+.profile-card-label {
+	width: 120px;
+	text-align: right;
+}
+
+
+.profile-card-field {
+	background-color: #eaeaea;
+	color: #d1cfcf;
+	width: 300px;
+	font-size: 11pt;
+}
+
+
+
+
+
