@@ -5,19 +5,15 @@ import Navigation from './CommonComponents/Navigation.jsx';
 import MenteeDashboard from './MenteeDashboard/MenteeDashboard.jsx';
 import MentorProfile from './MentorProfile/MentorProfile.jsx';
 import MyProfile from  './MyProfile/MyProfile.jsx';
-<<<<<<< HEAD
 import AdminPortal from './AdminPortal/AdminPortal.jsx';
 import Peers from './MyProfile/Peers.jsx';
 import SECRETS from '../client_secrets.js'
 import axios from 'axios';
-=======
->>>>>>> bdbbdb6b22c57b0e188d24789e2e3b8fb75711e8
 
 class Mentee extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-<<<<<<< HEAD
 			currentPage: '',
 			userInfo: {},
 			userPhoto: '',
@@ -173,27 +169,6 @@ class Mentee extends React.Component {
 	renderPeers() {
 		return (
 			<Peers grade={this.state.userInfo.grade}/>
-=======
-			currentPage: 'myProfile'
-		}
-	}
-
-	renderDashboard () {
-		return (
-			<MenteeDashboard />
-		)
-	}
-
-	renderMentorProfile () {
-		return (
-			<MentorProfile mentor={this.props.mentor} />
-		)
-	}
-
-	renderMyProfile () {
-		return (
-			<MyProfile user={this.props.user} />
->>>>>>> bdbbdb6b22c57b0e188d24789e2e3b8fb75711e8
 		)
 	}
 
@@ -206,7 +181,6 @@ class Mentee extends React.Component {
 			return this.renderMyProfile();
 		}
 
-<<<<<<< HEAD
 		if (this.state.currentPage === 'adminPortal') {
 			return this.renderAdminPortal();
 		}
@@ -230,26 +204,16 @@ class Mentee extends React.Component {
 				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.adminLinks}/>
 			)
 		}
-=======
-		return this.renderMenteeDashboard();
->>>>>>> bdbbdb6b22c57b0e188d24789e2e3b8fb75711e8
 	}
 
 
 	render() {
 		var content = this.renderBody();
-<<<<<<< HEAD
 		var nav = this.renderNav();
 
 		return (
 			<div className="mentee-page">
 				{nav}
-=======
-
-		return (
-			<div className="mentee-page">
-				<Navigation links={this.props.links}/>
->>>>>>> bdbbdb6b22c57b0e188d24789e2e3b8fb75711e8
 				<div className="mentee-body-container column">
 					<div className="top-padding"></div>
 						{content}
