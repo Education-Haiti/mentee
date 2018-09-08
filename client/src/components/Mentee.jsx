@@ -91,7 +91,7 @@ class Mentee extends React.Component {
 							})	
 						} else if (this.state.userInfo.level === "admin") {
 							this.setState({ level: 'admin' }, () => {
-								this.setState({ currentPage: 'adminPortal' });
+								this.setState({ currentPage: 'dashboard' });
 							})
 						}
 
