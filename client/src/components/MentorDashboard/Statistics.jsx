@@ -21,7 +21,7 @@ class Statistics extends React.Component {
     getAllUsers() {
         axios.get('/users')
             .then((response) => {
-                console.log('hhhhhhhhh: ', response);
+                //console.log('All users: ', response);
                 this.setState({ allUsers: response.data }, () => {
                     this.calculateStatistics();
                 });

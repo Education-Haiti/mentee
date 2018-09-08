@@ -34,7 +34,6 @@ class Mentee extends React.Component {
 				{ label: 'Profile'},
 				{ label: 'My Mentees'},
 				{ label: 'Mentors'},
-				{ label: 'Config'}
 			],
 			adminLinks: [
 				{ label: 'Dashboard'},
