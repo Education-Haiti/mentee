@@ -27,7 +27,7 @@ class Statistics extends React.Component {
                 });
             })
             .catch((error) => {
-                console.log('Axios-sise error in retrieving users', error);
+                console.log('Axios error in retrieving users', error);
             })
     }
 

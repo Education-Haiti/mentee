@@ -9,8 +9,23 @@ class MentorDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            topFiveMentors: [],
         }
+    }
+
+    componentDidMount() {
+        this.getTopFiveMentors();
+    }
+
+    getTopFiveMentors () {
+        axios.get('/users/topfive/mentors')
+        .then((response) => {
+            console.log('Top five mentors: ', response.data);
+            this.setState({ topFiveMentors: response.data });
+        })
+        .catch((error) => {
+            console.log('Axios error in getting top 5 mentors');
+        })
     }
 
     render() {
@@ -30,11 +45,13 @@ class MentorDashboard extends React.Component {
                         TOP FIVE MENTORS
                     </div>
                     <div className="mentor-d-top-mentors-row-container">
-                        <MentorProfileCard/>
-                        <MentorProfileCard/>
-                        <MentorProfileCard/>
-                        <MentorProfileCard/>
-                        <MentorProfileCard/>
+                        {
+                            this.state.topFiveMentors.map((theTopMentor, index) => {
+                                return (
+                                    <MentorProfileCard topMentor={theTopMentor}/>
+                                )
+                            })
+                        }
                     </div>
                   
                 </div>
