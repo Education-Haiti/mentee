@@ -126,6 +126,16 @@ app.get('/users/checklist/:email/', (req, res) => {
     })
 })
 
+app.get('/users/topfive/mentors', (req, res) => {
+    queries2.getTopFiveMentors((err, results) => {
+        if (err) {
+            console.log('Server-side error in getting top five mentors : ', err);
+        } else {
+            res.json(results);
+        }
+    })
+})
+
 app.put('/users/checklist/:email/', (req, res) => {
     const theEmail = req.params.email; 
     const newChecklist = req.body.newChecklist;

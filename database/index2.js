@@ -102,7 +102,7 @@ let getTopFiveMentors = (whenGotten) => {
     User.find({ level : 'mentor' }).sort({ number_kudos_received: -1 }).limit(5)
     .exec((err, data) => {
         if (err) {
-            console.log('Database-side error in getting top five : ', err);
+            console.log('Database-side error in getting top five mentors : ', err);
         } else {
             whenGotten(null, data);
         }
@@ -736,9 +736,9 @@ let sampleData11 = {
 //     console.log(result);
 // })
 
-getTopFiveMentors((err, result) => {
-    console.log(result);
-})
+// getTopFiveMentors((err, result) => {
+//     console.log(result);
+// })
 
 //  saveUser(sampleData);
 //  saveUser(sampleData2);
@@ -829,4 +829,5 @@ module.exports = {
     updateKudosGiven,
     updateKudosReceived,
     getMenteesByGrade,
+    getTopFiveMentors
 }
