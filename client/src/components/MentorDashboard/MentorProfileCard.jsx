@@ -1,4 +1,6 @@
 import React from 'react';
+import SECRETS from '../../client_secrets.js';
+import axios from 'axios';
 
 class MentorProfileCard extends React.Component {
     constructor(props) {
@@ -6,8 +8,9 @@ class MentorProfileCard extends React.Component {
         this.state = {
             mentorContactLinks: [],
             mentorContactStatics: [],
-            email: 'jjj@jjj.com',
-            slack: '@jjj',
+            displayPhoto: '',
+            slackHandle: '',
+            email: '',
             showEmail: false,
             showSlack: false,
             //showKudos: '1', // when 0 don't show kudos. when 1, show       
@@ -15,13 +18,19 @@ class MentorProfileCard extends React.Component {
     }
 
     componentDidMount() {
-        this.setupTopMentorObj();
+        this.setState({ email: this.props.topMentor.email }, () => {
+            this.setState({ displayPhoto: this.props.displayPhoto });
+            this.setState({ slackHandle: "@" + this.props.slackHandle });
+            this.setupTopMentorObj();
+        })
+        
     }
- 
+
     setupTopMentorObj () {
         let tempContactLinks = [];
         let tempContactStatics = [];
-        if (this.props.topMentor.email !=="") {
+        console.log('debugging: ', this.props.topMentor);
+        if (this.props.topMentor.email) {
             let staticObj = {
                 value: this.props.topMentor.email,
                 img: "https://s3.amazonaws.com/educationhaiti/gmail.png",
@@ -31,8 +40,18 @@ class MentorProfileCard extends React.Component {
             tempContactStatics.push(staticObj);
         }
 
+        if (this.props.slackHandle) {
+            let staticObj = {
+                value: this.props.slackHandle,
+                img: "https://s3.amazonaws.com/educationhaiti/slack.png",
+                type: "slack",
 
-        if (this.props.topMentor.linked_in_page !== "") {
+            }
+            tempContactStatics.push(staticObj);
+        }
+
+
+        if (this.props.topMentor.linked_in_page) {
             let linkObj = {
                 value: this.props.topMentor.linked_in_page,
                 img: "https://s3.amazonaws.com/educationhaiti/linkedin.png",
@@ -42,7 +61,7 @@ class MentorProfileCard extends React.Component {
             tempContactLinks.push(linkObj);
         }
 
-        if (this.props.topMentor.facebook_page !=="") {
+        if (this.props.topMentor.facebook_page) {
             let linkObj = {
                 value: this.props.topMentor.facebook_page,
                 img: "https://s3.amazonaws.com/educationhaiti/facebook2.png"
@@ -50,7 +69,7 @@ class MentorProfileCard extends React.Component {
             tempContactLinks.push(linkObj);
         }
 
-        if (this.props.topMentor.twitter_page !== "") {
+        if (this.props.topMentor.twitter_page) {
             let linkObj = {
                 value: this.props.topMentor.twitter_page,
                 img: "https://s3.amazonaws.com/educationhaiti/twitter2.png"
@@ -61,6 +80,7 @@ class MentorProfileCard extends React.Component {
         this.setState({ mentorContactLinks: tempContactLinks });
         this.setState({ mentorContactStatics: tempContactStatics });
     }
+
 
     toggleEmail () {
         if (this.state.showEmail === false) {
@@ -101,7 +121,7 @@ class MentorProfileCard extends React.Component {
         if (this.state.showSlack === true) {
             slack = (
                 <div className="static-contact">
-                    {this.state.slack}
+                    {this.state.slackHandle}
                 </div>
             )
         }
@@ -109,7 +129,7 @@ class MentorProfileCard extends React.Component {
         return (
             <div>
               <div className="mentor-d-profile-card-container column">
-                <img className="mentor-d-profile-card-photo" src="https://s3.amazonaws.com/educationhaiti/jp_vertil.png"/>
+                <img className="mentor-d-profile-card-photo" src={this.state.displayPhoto}/>
                 <div className="mentor-d-profile-card-name">
                     {this.props.topMentor.full_name}
                 </div>
@@ -127,18 +147,12 @@ class MentorProfileCard extends React.Component {
                 {email}
                 {slack}
 
-                <div className="mentor-links-container">
-                    {/* <img src="https://s3.amazonaws.com/educationhaiti/gmail.png" className="mentor-links-icon"/>
-                    <img src="https://s3.amazonaws.com/educationhaiti/linkedin.png" className="mentor-links-icon"/>
-                    <img src="https://s3.amazonaws.com/educationhaiti/slack.png" className="mentor-links-icon"/>
-                    <img src="https://s3.amazonaws.com/educationhaiti/facebook2.png" className="mentor-links-icon"/>
-                    <img src="https://s3.amazonaws.com/educationhaiti/twitter2.png" className="mentor-links-icon"/> */}
-                    
+                <div className="mentor-links-container">               
                     {
                         this.state.mentorContactStatics.map((mentorStatic, index) => {
                             return (
                                 <img key={mentorStatic.value} className="mentor-links-icon" src={mentorStatic.img}
-                                onMouseOver={() => this.toggleStatics(mentorStatic.type)}  />
+                                onClick={() => this.toggleStatics(mentorStatic.type)}  />
                             )
                         })
                     }

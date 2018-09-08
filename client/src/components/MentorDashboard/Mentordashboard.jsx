@@ -10,11 +10,15 @@ class MentorDashboard extends React.Component {
         super(props);
         this.state = {
             topFiveMentors: [],
+            allUsers: {},
+            displayPhotos: {},
+            slackHandles: {}
         }
     }
 
     componentDidMount() {
         this.getTopFiveMentors();
+        this.initializeDisplayPhotosAndHandlesObj();
     }
 
     getTopFiveMentors () {
@@ -26,6 +30,44 @@ class MentorDashboard extends React.Component {
         .catch((error) => {
             console.log('Axios error in getting top 5 mentors');
         })
+    }
+
+    initializeDisplayPhotosAndHandlesObj() {
+        axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
+			.then((response) => {
+                console.log('All users from slack !!!! : ', response.data.members);
+                // make an object whose key is the email of all users and value is the url to their photos
+                let tempObj = {};
+                let tempHandles = {};
+                let dataArray = response.data.members;
+                for (let i = 0; i < dataArray.length; i++) {
+                    tempObj[dataArray[i].profile.email] = dataArray[i].profile.image_512; 
+                    tempHandles[dataArray[i].profile.email] = dataArray[i].name;
+                }
+
+                this.setState({ displayPhotos: tempObj }, () => {
+                    this.setState({ slackHandles: tempHandles }, () => {
+                        this.getAllUsers();
+                    });
+                    
+                });
+                
+				
+            })
+            .catch((error) => {
+                console.log('Axios error in getting all users from SLACK API : ', error);
+            })
+    }
+
+    getAllUsers() {
+        axios.get('/users')
+            .then((response) => {
+                //console.log('All users: ', response);
+                this.setState({ allUsers: response.data });
+            })
+            .catch((error) => {
+                console.log('Axios error in retrieving users', error);
+            })
     }
 
     render() {
@@ -48,7 +90,7 @@ class MentorDashboard extends React.Component {
                         {
                             this.state.topFiveMentors.map((theTopMentor, index) => {
                                 return (
-                                    <MentorProfileCard topMentor={theTopMentor}/>
+                                    <MentorProfileCard topMentor={theTopMentor} displayPhoto={ this.state.displayPhotos[theTopMentor.email] } slackHandle = { this.state.slackHandles[theTopMentor.email] }/>
                                 )
                             })
                         }
