@@ -212,7 +212,7 @@ class Mentee extends React.Component {
 			)
 		} else if (this.state.level === 'admin') {
 			return (
-				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.adminLinks}/>
+				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.adminLinks} profilePhoto={this.state.userPhoto}/>
 			)
 		}
 	}
