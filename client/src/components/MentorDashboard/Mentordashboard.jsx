@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import SECRETS from '../../client_secrets.js';
+import MentorProfileCard from './MentorProfileCard.jsx';
 
 
 class MentorDashboard extends React.Component {
@@ -14,7 +15,7 @@ class MentorDashboard extends React.Component {
     render() {
         return (
             <div>
-                This is the mentor dashboard   RENDERING !
+                <MentorProfileCard/>
             </div>
         )
     }

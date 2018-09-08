@@ -7,6 +7,7 @@
  import React from 'react';
  import ReactDOM from 'react-dom';
  import Mentee from './components/Mentee.jsx';
+ import MentorDashboard from './components/MentorDashboard/Mentordashboard.jsx';
  
  const links = [
      { label: 'Home', url: 'www.google.com'},
@@ -43,4 +44,5 @@
      parent2_email: 'BadCop@parents.com',
  }
  
- ReactDOM.render(<Mentee links={links} mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
+ //ReactDOM.render(<Mentee links={links} mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
+ReactDOM.render(<MentorDashboard/>, document.getElementById('mentee'));

@@ -685,3 +685,61 @@ button:hover {
 	margin-bottom: 35px;
 	text-align: center;
 }
+
+/* Mentor Dashboard */
+.mentor-d-profile-card-container {
+	border: .8px solid #f2f2f2	;
+	margin-top: 100px;
+	margin-left: 50px;
+	width: 175px;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 5px 5px 5px 0px #d5d9e0;
+	border-radius: 3px;
+}
+
+.mentor-d-profile-card-photo {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	margin-top: 7px;
+	margin-bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+.mentor-d-profile-card-name {
+	font-size: 10pt;
+	color: #234060;
+	text-align: center;
+	font-weight: bold;
+}
+
+.mentor-d-profile-details {
+	font-size: 8pt;
+	color: #67777f;
+	text-align: center;
+	margin-bottom: 7px;
+}
+
+.mentor-d-profile-kudos {
+	width: 100px;
+	background-color: #a33030;
+	color:white;
+	font-size: 10pt;
+	padding: 5px;
+	margin-bottom: 7px;
+	border-radius: 3px;
+}
+
+.mentor-links-container {
+	display: flex;
+}
+
+.mentor-links-icon {
+	width: 12px;
+	height: 12px;
+	margin: 5px;
+}
