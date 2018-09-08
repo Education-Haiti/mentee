@@ -687,12 +687,66 @@ button:hover {
 }
 
 /* Mentor Dashboard */
+.mentor-d-container {
+	display: flex;
+}
+
+.mentor-d-statistics-container {
+	width: 350px;
+	display: flex;
+	flex-direction: column;
+}
+
+.mentor-d-statistics-title {
+	color: black;
+	font-weight: bold;
+	font-size: 18pt;
+	margin-top: 20px;
+	margin-bottom: 5px;
+	margin-left: 75px;
+}
+
+.statistics-container {
+	display: flex;
+	flex-direction: column;
+	margin-left: 75px;
+
+}
+
+.statistics-element-title {
+	margin-top: 25px;
+	font-weight: bold;
+	color: #234060;
+}
+
+.mentor-d-top-container {
+	margin-left: 10px;
+	margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.mentor-d-title {
+	width: 500px;
+	height: 50px;
+	font-size: 20pt;
+	color: black;
+	font-weight: bold;
+	border-bottom: .8px solid black;
+	margin-top: 20px;
+}
+
+.mentor-d-top-mentors-row-container {
+	display: flex;
+}
+
 .mentor-d-profile-card-container {
 	border: .8px solid #f2f2f2	;
-	margin-top: 100px;
-	margin-left: 50px;
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 20px;
 	width: 175px;
-	height: 200px;
+	height: 220px;
 	display: flex;
 	flex-direction: column;
 	box-shadow: 5px 5px 5px 0px #d5d9e0;
@@ -703,11 +757,10 @@ button:hover {
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
-	margin-top: 7px;
+	margin-top: 15px;
 	margin-bottom: 5px;
 	margin-left: auto;
 	margin-right: auto;
-	
 }
 
 .mentor-d-profile-card-name {

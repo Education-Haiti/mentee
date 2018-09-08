@@ -31,6 +31,7 @@ class MentorProfileCard extends React.Component {
 
                 <div className="mentor-d-profile-details">
                     <div> Notre Dame </div>
+                    <div> Sigora Group</div>
                     <div> Charlottesville, VA </div>
                 </div>
 
