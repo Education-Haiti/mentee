@@ -5,6 +5,11 @@ class MentorProfileCard extends React.Component {
         super(props);
         this.state = {
             mentorContactLinks: [],
+            mentorContactStatics: [],
+            email: 'jjj@jjj.com',
+            slack: '@jjj',
+            showEmail: false,
+            showSlack: false,
             //showKudos: '1', // when 0 don't show kudos. when 1, show       
         }
     }
@@ -15,29 +20,92 @@ class MentorProfileCard extends React.Component {
  
     setupTopMentorObj () {
         let tempContactLinks = [];
+        let tempContactStatics = [];
         if (this.props.topMentor.email !=="") {
-            let linkObj = {
+            let staticObj = {
                 value: this.props.topMentor.email,
                 img: "https://s3.amazonaws.com/educationhaiti/gmail.png",
-                class: "not-active"
+                type: "email",
+
             }
-            tempContactLinks.push(linkObj);
+            tempContactStatics.push(staticObj);
         }
+
 
         if (this.props.topMentor.linked_in_page !== "") {
             let linkObj = {
                 value: this.props.topMentor.linked_in_page,
                 img: "https://s3.amazonaws.com/educationhaiti/linkedin.png",
-                class: "",
+                
                 
             }
             tempContactLinks.push(linkObj);
         }
 
+        if (this.props.topMentor.facebook_page !=="") {
+            let linkObj = {
+                value: this.props.topMentor.facebook_page,
+                img: "https://s3.amazonaws.com/educationhaiti/facebook2.png"
+            }
+            tempContactLinks.push(linkObj);
+        }
+
+        if (this.props.topMentor.twitter_page !== "") {
+            let linkObj = {
+                value: this.props.topMentor.twitter_page,
+                img: "https://s3.amazonaws.com/educationhaiti/twitter2.png"
+            }
+           tempContactLinks.push(linkObj);
+        }
+
         this.setState({ mentorContactLinks: tempContactLinks });
+        this.setState({ mentorContactStatics: tempContactStatics });
+    }
+
+    toggleEmail () {
+        if (this.state.showEmail === false) {
+            this.setState({ showEmail: true });
+        } else {
+            this.setState({ showEmail: false });
+        }
+    }
+
+    toggleSlack () {
+        if (this.state.showSlack === false) {
+            this.setState({ showSlack: true });
+        } else {
+            this.setState({ showSlack: false });
+        }
+    }
+
+    toggleStatics (type) {
+        if (type === "email") {
+            this.toggleEmail();
+        } else if (type === "slack") {
+            this.toggleSlack();
+        }
     }
 
     render () {
+        let email = null; 
+        let slack = null;
+
+        if (this.state.showEmail === true) {
+            email = (
+                <div className="static-contact">
+                    {this.state.email}
+                </div>
+            )
+        }
+
+        if (this.state.showSlack === true) {
+            slack = (
+                <div className="static-contact">
+                    {this.state.slack}
+                </div>
+            )
+        }
+
         return (
             <div>
               <div className="mentor-d-profile-card-container column">
@@ -56,21 +124,35 @@ class MentorProfileCard extends React.Component {
                     {this.props.topMentor.number_kudos_received} Kudos
                 </div>
 
+                {email}
+                {slack}
+
                 <div className="mentor-links-container">
                     {/* <img src="https://s3.amazonaws.com/educationhaiti/gmail.png" className="mentor-links-icon"/>
                     <img src="https://s3.amazonaws.com/educationhaiti/linkedin.png" className="mentor-links-icon"/>
                     <img src="https://s3.amazonaws.com/educationhaiti/slack.png" className="mentor-links-icon"/>
                     <img src="https://s3.amazonaws.com/educationhaiti/facebook2.png" className="mentor-links-icon"/>
                     <img src="https://s3.amazonaws.com/educationhaiti/twitter2.png" className="mentor-links-icon"/> */}
+                    
+                    {
+                        this.state.mentorContactStatics.map((mentorStatic, index) => {
+                            return (
+                                <img key={mentorStatic.value} className="mentor-links-icon" src={mentorStatic.img}
+                                onMouseOver={() => this.toggleStatics(mentorStatic.type)}  />
+                            )
+                        })
+                    }
+                    
                     {
                         this.state.mentorContactLinks.map((mentorContact, index) => {
                             return (
-                                <a href={mentorContact.value} target="_blank" rel="noopener noreferrer" className={mentorContact.class}>
+                                <a key={mentorContact.value} href={mentorContact.value} target="_blank" rel="noopener noreferrer" className={mentorContact.class}>
 					                <img className="mentor-links-icon" src={mentorContact.img}/>
 					            </a>
                             )
                         })
                     }
+                    
 
                 </div>
 

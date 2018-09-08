@@ -746,11 +746,12 @@ button:hover {
 	margin-left: 10px;
 	margin-right: 20px;
 	width: 175px;
-	height: 220px;
+	height: 250px;
 	display: flex;
 	flex-direction: column;
 	box-shadow: 5px 5px 5px 0px #d5d9e0;
 	border-radius: 3px;
+	justify-content: space-between;
 }
 
 .mentor-d-profile-card-photo {
@@ -802,4 +803,13 @@ button:hover {
 	cursor: default;
 	text-decoration: none;
 	color: black;
+  }
+
+  .static-contact {
+	  color: white;
+	  background-color: #234060;
+	  margin-left: 1px;
+	  margin-right: 1px;
+	  padding: 5px;
+	  font-size: 8pt;
   }
