@@ -22,41 +22,55 @@ class GiveKudos extends React.Component {
         }
     }
 
+
     componentDidUpdate(prevProps) {
         
         if (this.props.email !== prevProps.email) { // IT IS EXTREMLY IMPORTANT TO CHECK THE CURRENT AND THE PREVIOUS PROPS. THIS IS REACT DOCUMENTATION. ELSE IT BREAK AND RENDERS TWICE!!
             this.setState({ email: this.props.email }, () => { // must be called-backs to be properly called
-                this.getAllUsers_slack(); 
+                //this.getAllUsers_slack(); 
                 this.findUserByEmail_slack(this.state.email, 1); // update the displayName of the current user
-                this.initializeUsernamesObj();
-            })
+                // this.initializeUsernamesObj();
+            });
+            
         } 
+
+        if (this.props.usernames !== prevProps.usernames) {
+            this.setState({ usernames: this.props.usernames }, () => {
+                console.log('the usernamessss: ', this.state.usernames);
+            });
+        }
+
+        if (this.props.allUsers !== prevProps.allUsers) {
+            this.setState({ allUsers: this.props.allUsers }, () => {
+                //console.log('all the users from db', this.state.allUsers)
+            });
+        }
 
         if (this.props.userInfo !== prevProps.userInfo) {
             this.setState({ kuddosGiven: this.props.userInfo.kudos_given });
         }
     }
 
-    initializeUsernamesObj() {
-        axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
-			.then((response) => {
-                console.log('All users from slack !!!! : ', response.data.members);
-                // make an object whose key is the email of all users and value is the url to their photos
-                let tempObj = {};
-                let dataArray = response.data.members;
-                for (let i = 0; i < dataArray.length; i++) {
-                    tempObj[dataArray[i].profile.email] = dataArray[i].name; 
-                }
+    // initializeUsernamesObj() {
+    //     axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
+	// 		.then((response) => {
+    //             console.log('All users from slack !!!! : ', response.data.members);
+    //             // make an object whose key is the email of all users and value is the url to their photos
+    //             let tempObj = {};
+    //             let dataArray = response.data.members;
+    //             for (let i = 0; i < dataArray.length; i++) {
+    //                 tempObj[dataArray[i].profile.email] = dataArray[i].name; 
+    //             }
 
-                this.setState({ usernames: tempObj }, () => {
-                    console.log('da usernames: ', this.state.usernames);
-                });
+    //             this.setState({ usernames: tempObj }, () => {
+    //                 console.log('da usernames: ', this.state.usernames);
+    //             });
 				
-            })
-            .catch((error) => {
-                console.log('Axios error in getting all users from SLACK API : ', error);
-            })
-    }
+    //         })
+    //         .catch((error) => {
+    //             console.log('Axios error in getting all users from SLACK API : ', error);
+    //         })
+    // }
 
     findUserByEmail_slack(theEmail, option) { // identifying user on slack API . 
 		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
@@ -71,16 +85,16 @@ class GiveKudos extends React.Component {
 			});
     }
     
-    getAllUsers_slack() {
-		axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
-			.then((response) => {
-				console.log('All users from slack !! : ', response.data.members);
-				this.setState({ allUsers: response.data.members })
-            })
-            .catch((error) => {
-                console.log('Axios error in getting all users from SLACK API : ', error);
-            });
-    }
+    // getAllUsers_slack() {
+	// 	axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
+	// 		.then((response) => {
+	// 			console.log('All users from slack !! : ', response.data.members);
+	// 			this.setState({ allUsers: response.data.members })
+    //         })
+    //         .catch((error) => {
+    //             console.log('Axios error in getting all users from SLACK API : ', error);
+    //         });
+    // }
 
     identifyReceiver(theEmail) { // identifying on database
 		axios.get(`/users/authed/${theEmail}`)
@@ -108,7 +122,7 @@ class GiveKudos extends React.Component {
     }
     
     updateReceiver(e) {
-        //console.log(e.target.value);
+        console.log(e.target.value);
         this.setState({ receiverEmail: e.target.value });
 
     }
@@ -209,7 +223,7 @@ class GiveKudos extends React.Component {
             return;
         } else if(this.state.kudosMessage.length > 0 && this.state.kudosMessage.length <= 150){
             axios.post('/users/slack/kudos', {
-                message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.usernames[this.state.receiverEmail]} for ${this.state.kudosMessage} \n\n *** Let's keep helping each other! ***`,
+                message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.usernames[this.state.receiverEmail]} ${this.state.kudosMessage} \n\n *** Let's keep helping each other! ***`,
                 channel: 'websitetesting'
             })
             .then((response) => {
@@ -240,7 +254,7 @@ class GiveKudos extends React.Component {
                     <select onChange={ this.updateReceiver.bind(this) }> 
                         {
                             this.state.allUsers.map((user, index) => {
-                            return <option name="a" value={ user.profile.email } key = { index }> { user.profile.real_name } </option>  
+                            return <option name="a" value={ user.email } key = { index }> { user.full_name } </option>  
                             })     
                         }
                     </select>

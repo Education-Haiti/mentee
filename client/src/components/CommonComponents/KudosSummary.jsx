@@ -24,32 +24,31 @@ class KudosSummary extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.userInfo !== prevProps.userInfo) {
-            this.setState({ menteeInfo: this.props.userInfo }, () => {
-                this.initializeDisplayPhotosObj();
-            });
+            this.setState({ menteeInfo: this.props.userInfo });
             this.setState({ kuddosReceived: this.props.userInfo.kudos_received });
             this.setState({ kuddosGiven: this.props.userInfo.kudos_given });
+            this.setState({ displayPhotos: this.props.displayPhotos });
         }
     }
 
-    initializeDisplayPhotosObj() {
-        axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
-			.then((response) => {
-                console.log('All users from slack !!!! : ', response.data.members);
-                // make an object whose key is the email of all users and value is the url to their photos
-                let tempObj = {};
-                let dataArray = response.data.members;
-                for (let i = 0; i < dataArray.length; i++) {
-                    tempObj[dataArray[i].profile.email] = dataArray[i].profile.image_512; 
-                }
+    // initializeDisplayPhotosObj() {
+    //     axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
+	// 		.then((response) => {
+    //             console.log('All users from slack !!!! : ', response.data.members);
+    //             // make an object whose key is the email of all users and value is the url to their photos
+    //             let tempObj = {};
+    //             let dataArray = response.data.members;
+    //             for (let i = 0; i < dataArray.length; i++) {
+    //                 tempObj[dataArray[i].profile.email] = dataArray[i].profile.image_512; 
+    //             }
 
-                this.setState({ displayPhotos: tempObj });
+    //             this.setState({ displayPhotos: tempObj });
 				
-            })
-            .catch((error) => {
-                console.log('Axios error in getting all users from SLACK API : ', error);
-            })
-    }
+    //         })
+    //         .catch((error) => {
+    //             console.log('Axios error in getting all users from SLACK API : ', error);
+    //         })
+    // }
 
     handleShowKudosGiven() {
         this.setState({ showKudosReceived: false });

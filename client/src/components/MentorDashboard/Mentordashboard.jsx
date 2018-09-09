@@ -12,7 +12,7 @@ class MentorDashboard extends React.Component {
         super(props);
         this.state = {
             topFiveMentors: [],
-            allUsers: {},
+            allUsers: [],
             mentorInfo: {},
             email: '',
             displayPhotos: {},
@@ -71,7 +71,9 @@ class MentorDashboard extends React.Component {
         axios.get('/users')
             .then((response) => {
                 //console.log('All users: ', response);
-                this.setState({ allUsers: response.data });
+                this.setState({ allUsers: response.data }, () => {
+                    console.log('allllluuuseerrrss: ', this.state.allUsers);
+                });
             })
             .catch((error) => {
                 console.log('Axios error in retrieving users', error);
@@ -89,7 +91,7 @@ class MentorDashboard extends React.Component {
 
                     <div className="mentor-d-leftmost-container">
                         <Statistics/>
-                        <GiveKudos className="column" userInfo={this.state.mentorInfo} email={this.state.email}/>
+                        <GiveKudos className="column" userInfo={this.state.mentorInfo} email={this.state.email} usernames={this.state.slackHandles} allUsers={this.state.allUsers}/>
                     </div>
                    
                      
@@ -111,7 +113,7 @@ class MentorDashboard extends React.Component {
                             </div>
 
                             <div className="column">
-                                <KudosSummary userInfo={this.state.mentorInfo}/>
+                                <KudosSummary userInfo={this.state.mentorInfo} displayPhotos={this.state.displayPhotos}/>
                             </div>
                       </div>
                 </div>
