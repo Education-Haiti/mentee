@@ -161,7 +161,8 @@ app.put('/users/givenkudos/:email/', (req, res) => {
 app.put('/users/receivedkudos/:email/', (req, res) => {
     const theEmail = req.params.email;
     const newKudosReceived = req.body.kudosReceived;
-    queries2.updateKudosReceived(theEmail, newKudosReceived, (err, results) => {
+    const newCount = req.body.newCount;
+    queries2.updateKudosReceived(theEmail, newKudosReceived, newCount, (err, results) => {
         if (err) {
             console.log('Server-side error in updating kudos received : ', err);
         }

@@ -129,8 +129,8 @@ let updateKudosGiven = (theEmail, newKuddosGivenObj) => {
     })
 }
 
-let updateKudosReceived = (theEmail, newKudosReceivedObj) => {
-    User.findOneAndUpdate({ email: theEmail }, { kudos_received: newKudosReceivedObj }, { upsert: true }, (err, doc) => {
+let updateKudosReceived = (theEmail, newKudosReceivedObj, newCount) => {
+    User.findOneAndUpdate({ email: theEmail }, { kudos_received: newKudosReceivedObj, number_kudos_received: newCount }, { upsert: true }, (err, doc) => {
         if (err) {
             console.log('Database-side error in updating kudos received : ', err);
         } else {

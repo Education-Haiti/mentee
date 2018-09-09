@@ -176,13 +176,15 @@ class GiveKudos extends React.Component {
         // });
 
         let oldNumberOfKudos = this.state.receiverInfo.number_kudos_received;
+        let theNewCount = oldNumberOfKudos + 1;
 
         console.log("Reveiver updated info: ", tempGivenKudosObj);
         console.log("Number received: ", oldNumberOfKudos);
 
         // now update db
         axios.put(`/users/receivedkudos/${this.state.receiverEmail}`, {
-            kudosReceived: kuddosObj 
+            kudosReceived: kuddosObj,
+            newCount: theNewCount
         })
         .then((response) => {
 
@@ -193,7 +195,7 @@ class GiveKudos extends React.Component {
        
     }
 
-    
+
 
 
 
