@@ -4,6 +4,7 @@ import SECRETS from '../../client_secrets.js';
 import MentorProfileCard from './MentorProfileCard.jsx';
 import Statistics from './Statistics.jsx';
 import GiveKudos from '../CommonComponents/GiveKudos.jsx';
+import KudosSummary from '../CommonComponents/KudosSummary.jsx';
 
 
 class MentorDashboard extends React.Component {
@@ -88,7 +89,7 @@ class MentorDashboard extends React.Component {
 
                     <div className="mentor-d-leftmost-container">
                         <Statistics/>
-                        <GiveKudos userInfo={this.state.mentorInfo} email={this.state.email}/>
+                        <GiveKudos className="column" userInfo={this.state.mentorInfo} email={this.state.email}/>
                     </div>
                    
                      
@@ -98,16 +99,21 @@ class MentorDashboard extends React.Component {
                     <div className="mentor-d-title column">
                         TOP FIVE MENTORS
                     </div>
-                    <div className="mentor-d-top-mentors-row-container">
-                        {
-                            this.state.topFiveMentors.map((theTopMentor, index) => {
-                                return (
-                                    <MentorProfileCard topMentor={theTopMentor} displayPhoto={ this.state.displayPhotos[theTopMentor.email] } slackHandle = { this.state.slackHandles[theTopMentor.email] }/>
-                                )
-                            })
-                        }
-                    </div>
-                  
+                      <div className="mentor-d-rightmost-container"> 
+                            <div className="mentor-d-top-mentors-row-container">
+                                    {
+                                        this.state.topFiveMentors.map((theTopMentor, index) => {
+                                            return (
+                                                <MentorProfileCard topMentor={theTopMentor} displayPhoto={ this.state.displayPhotos[theTopMentor.email] } slackHandle = { this.state.slackHandles[theTopMentor.email] }/>
+                                            )
+                                        })
+                                    }
+                            </div>
+
+                            <div className="column">
+                                <KudosSummary userInfo={this.state.mentorInfo}/>
+                            </div>
+                      </div>
                 </div>
                 
             </div>

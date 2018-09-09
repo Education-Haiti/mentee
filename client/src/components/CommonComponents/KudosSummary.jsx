@@ -7,7 +7,7 @@ class KudosSummary extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            menteeInfo: {},
+            menteeInfo: {}, // not necessary
             kuddosReceived: [],
             kuddosGiven: [], 
             displayPhotos: {},
@@ -23,12 +23,12 @@ class KudosSummary extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.menteeInfo !== prevProps.menteeInfo) {
-            this.setState({ menteeInfo: this.props.menteeInfo }, () => {
+        if (this.props.userInfo !== prevProps.userInfo) {
+            this.setState({ menteeInfo: this.props.userInfo }, () => {
                 this.initializeDisplayPhotosObj();
             });
-            this.setState({ kuddosReceived: this.props.menteeInfo.kudos_received });
-            this.setState({ kuddosGiven: this.props.menteeInfo.kudos_given });
+            this.setState({ kuddosReceived: this.props.userInfo.kudos_received });
+            this.setState({ kuddosGiven: this.props.userInfo.kudos_given });
         }
     }
 
