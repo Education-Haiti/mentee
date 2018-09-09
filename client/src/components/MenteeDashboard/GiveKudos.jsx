@@ -150,10 +150,50 @@ class GiveKudos extends React.Component {
         
     }
 
-    updateReceivedKudos(theEmail, newKuddosReceivedObj) { // for user receiving kudos
+    updateReceivedKudos() { // for user receiving kudos
        // newKudosReceived: this.
-       console.log('I AM REACHED!');
+       let theName = this.props.menteeInfo.full_name;
+        let date = new Date();
+        let formattedDate = date.toLocaleDateString('us-EN', {year: 'numeric', month: 'long', day: 'numeric'});
+        let theMessage = this.state.kudosMessage;
+        let theEmail = this.props.menteeInfo.email;
+
+        let tempGivenKudosObj = {
+            name: theName,
+            date: formattedDate,
+            message: theMessage,
+            email: theEmail
+        }
+
+        let kuddosObj = this.state.kuddosReceived_Receiver;
+
+        kuddosObj.push(tempGivenKudosObj);
+
+        // update state 
+        // this.setState({ kuddosGiven: kuddosObj }, () => {
+        //     this.updateReceivedKudos();
+        //     this.setState({ kudosMessage: '' });
+        // });
+
+        let oldNumberOfKudos = this.state.receiverInfo.number_kudos_received;
+
+        console.log("Reveiver updated info: ", tempGivenKudosObj);
+        console.log("Number received: ", oldNumberOfKudos);
+
+        // now update db
+        axios.put(`/users/receivedkudos/${this.state.receiverEmail}`, {
+            kudosReceived: kuddosObj 
+        })
+        .then((response) => {
+
+        })
+        .catch((error) => {
+            console.log('Axios-side error in updating given kudos')
+        })
+       
     }
+
+    
 
 
 
