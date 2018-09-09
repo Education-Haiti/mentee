@@ -16,6 +16,8 @@ class GiveKudos extends React.Component {
             receiverInfo: {},
             kuddosReceived: Array,
             kuddosGiven: Array,
+            kuddosReceived_Receiver: Array,
+            number_kudos_received_receiver: 0,
             usernames: {}, // object to hold all usernames with email as key
         }
     }
@@ -86,7 +88,13 @@ class GiveKudos extends React.Component {
 				//console.log(response.data);
 				this.setState({ receiverInfo: response.data[0] }, () => {
                     console.log('receiver: ', this.state.receiverInfo);
-                    this.updateGivenKudos();
+                    this.setState({ kuddosReceived_Receiver: response.data[0].kudos_received }, () => {
+                        this.setState({ number_kudos_received_receiver: response.data[0].number_kudos_received }, () => {
+                            this.updateGivenKudos();
+                        })
+                    });
+
+                    
                 });
 			})
 			.catch((error) => {
@@ -125,6 +133,7 @@ class GiveKudos extends React.Component {
 
         // update state 
         this.setState({ kuddosGiven: kuddosObj }, () => {
+            this.updateReceivedKudos();
             this.setState({ kudosMessage: '' });
         });
 
@@ -143,16 +152,19 @@ class GiveKudos extends React.Component {
 
     updateReceivedKudos(theEmail, newKuddosReceivedObj) { // for user receiving kudos
        // newKudosReceived: this.
+       console.log('I AM REACHED!');
     }
 
 
 
     submitKudos() {
         if(this.state.kudosMessage.length === 0) {
-            alert('Please make sure to input a kudos before submitting! :) ')
+            alert('Please make sure to input a kudos before submitting! :) ');
+            return;
         }
         if (this.state.kudosMessage.length > 150) {
             alert('Please make a kudos of less than 150 characters :) ');
+            return;
         } else if(this.state.kudosMessage.length > 0 && this.state.kudosMessage.length <= 150){
             axios.post('/users/slack/kudos', {
                 message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.usernames[this.state.receiverEmail]} for ${this.state.kudosMessage} \n\n *** Let's keep helping each other! ***`,
