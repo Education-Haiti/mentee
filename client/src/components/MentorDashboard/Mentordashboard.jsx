@@ -3,6 +3,7 @@ import axios from 'axios';
 import SECRETS from '../../client_secrets.js';
 import MentorProfileCard from './MentorProfileCard.jsx';
 import Statistics from './Statistics.jsx';
+import GiveKudos from '../CommonComponents/GiveKudos.jsx';
 
 
 class MentorDashboard extends React.Component {
@@ -11,6 +12,8 @@ class MentorDashboard extends React.Component {
         this.state = {
             topFiveMentors: [],
             allUsers: {},
+            mentorInfo: {},
+            email: '',
             displayPhotos: {},
             slackHandles: {}
         }
@@ -19,6 +22,10 @@ class MentorDashboard extends React.Component {
     componentDidMount() {
         this.getTopFiveMentors();
         this.initializeDisplayPhotosAndHandlesObj();
+        this.setState({ mentorInfo: this.props.userInfo }, () => {
+            this.setState({ email: this.props.email });
+        });
+       
     }
 
     getTopFiveMentors () {
@@ -78,8 +85,13 @@ class MentorDashboard extends React.Component {
                         Statistics
                     </div>
 
-                    <Statistics/>
-                    
+
+                    <div className="mentor-d-leftmost-container">
+                        <Statistics/>
+                        <GiveKudos userInfo={this.state.mentorInfo} email={this.state.email}/>
+                    </div>
+                   
+                     
                 </div>
 
                 <div className="mentor-d-top-container column">

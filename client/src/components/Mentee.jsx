@@ -174,7 +174,7 @@ class Mentee extends React.Component {
 
 	renderMentorDashboard() {
 		return (
-			<MentorDashboard/>
+			<MentorDashboard userInfo={this.state.userInfo} email={this.state.email}/>
 		)
 	}
 

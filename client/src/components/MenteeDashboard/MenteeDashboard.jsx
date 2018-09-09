@@ -3,7 +3,7 @@ import axios from 'axios';
 import SECRETS from '../../client_secrets.js'
 import { Route, Switch } from 'react-router-dom';
 import Checklist from './Checklist.jsx';
-import GiveKudos from './GiveKudos.jsx';
+import GiveKudos from '../CommonComponents/GiveKudos.jsx';
 import KudosSummary from './KudosSummary.jsx';
 import '../../../dist/styles.css';
 import CircularProgressbar from 'react-circular-progressbar';
@@ -88,7 +88,7 @@ class MenteeDashboard extends React.Component {
 				<Checklist calcCompleteness={this.calculatePercentCompleteness.bind(this)} email={this.state.email}/>
 				<KudosSummary menteeInfo={this.state.menteeInfo}/>
 				<div className="mentee-rightmost-vertical-container">
-				  <GiveKudos menteeInfo={this.state.menteeInfo} email={this.state.email}/>
+				  <GiveKudos userInfo={this.state.menteeInfo} email={this.state.email}/>
 				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
 				</div>	
 			</div>

@@ -815,3 +815,9 @@ button:hover {
 	  font-size: 8pt;
 	  
   }
+
+  .mentor-d-leftmost-container {
+	  display: flex;
+	  flex-direction: column;
+	  width: 350px;
+  }

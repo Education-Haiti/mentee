@@ -32,8 +32,8 @@ class GiveKudos extends React.Component {
             })
         } 
 
-        if (this.props.menteeInfo !== prevProps.menteeInfo) {
-            this.setState({ kuddosGiven: this.props.menteeInfo.kudos_given });
+        if (this.props.userInfo !== prevProps.userInfo) {
+            this.setState({ kuddosGiven: this.props.userInfo.kudos_given });
         }
     }
 
@@ -152,11 +152,11 @@ class GiveKudos extends React.Component {
 
     updateReceivedKudos() { // for user receiving kudos
        // newKudosReceived: this.
-       let theName = this.props.menteeInfo.full_name;
+       let theName = this.props.userInfo.full_name;
         let date = new Date();
         let formattedDate = date.toLocaleDateString('us-EN', {year: 'numeric', month: 'long', day: 'numeric'});
         let theMessage = this.state.kudosMessage;
-        let theEmail = this.props.menteeInfo.email;
+        let theEmail = this.props.userInfo.email;
 
         let tempGivenKudosObj = {
             name: theName,
