@@ -11,8 +11,10 @@ class MentorProfileCard extends React.Component {
             displayPhoto: '',
             slackHandle: '',
             email: '',
+            phone: '',
             showEmail: false,
             showSlack: false,
+            showPhone: false,
             //showKudos: '1', // when 0 don't show kudos. when 1, show       
         }
     }
@@ -21,6 +23,7 @@ class MentorProfileCard extends React.Component {
         this.setState({ email: this.props.topMentor.email }, () => {
             this.setState({ displayPhoto: this.props.displayPhoto });
             this.setState({ slackHandle: "@" + this.props.slackHandle });
+            this.setState({ phone: this.props.topMentor.phone_number });
             this.setupTopMentorObj();
         })
         
@@ -45,6 +48,16 @@ class MentorProfileCard extends React.Component {
                 value: this.props.slackHandle,
                 img: "https://s3.amazonaws.com/educationhaiti/slack.png",
                 type: "slack",
+
+            }
+            tempContactStatics.push(staticObj);
+        }
+
+        if (this.props.topMentor.phone_number) {
+            let staticObj = {
+                value: this.props.topMentor.phone_number,
+                img: "https://s3.amazonaws.com/educationhaiti/phone.png",
+                type: "phone",
 
             }
             tempContactStatics.push(staticObj);
@@ -98,17 +111,28 @@ class MentorProfileCard extends React.Component {
         }
     }
 
+    togglePhone () {
+        if (this.state.showPhone === false) {
+            this.setState({ showPhone: true });
+        } else {
+            this.setState({ showPhone: false });
+        }
+    }
+
     toggleStatics (type) {
         if (type === "email") {
             this.toggleEmail();
         } else if (type === "slack") {
             this.toggleSlack();
+        } else if (type === "phone") {
+            this.togglePhone();
         }
     }
 
     render () {
         let email = null; 
         let slack = null;
+        let phone = null;
 
         if (this.state.showEmail === true) {
             email = (
@@ -122,6 +146,17 @@ class MentorProfileCard extends React.Component {
             slack = (
                 <div className="static-contact">
                     {this.state.slackHandle}
+                </div>
+            )
+        }
+
+        if (this.state.showPhone === true) {
+            phone = (
+                <div className="not-active static-contact">
+                 <a href="">
+                    {this.state.phone}
+                 </a>
+                    
                 </div>
             )
         }
@@ -146,6 +181,7 @@ class MentorProfileCard extends React.Component {
 
                 {email}
                 {slack}
+                {phone}
 
                 <div className="mentor-links-container">               
                     {

@@ -4,7 +4,6 @@
  *
  * All of the styles in this file are optional and configurable!
  */
-
  .CircularProgressbar {
 	/*
 	 * This fixes an issue where the CircularProgressbar svg has
@@ -746,7 +745,7 @@ button:hover {
 	margin-left: 10px;
 	margin-right: 20px;
 	width: 175px;
-	height: 250px;
+	height: 280px;
 	display: flex;
 	flex-direction: column;
 	box-shadow: 5px 5px 5px 0px #d5d9e0;
@@ -802,7 +801,12 @@ button:hover {
 	pointer-events: none;
 	cursor: default;
 	text-decoration: none;
-	color: black;
+	color: white;
+  }
+
+  a {
+	  text-decoration: none;
+	  color: white;
   }
 
   .static-contact {
