@@ -1,6 +1,7 @@
 import React from 'react';
 import SECRETS from '../../client_secrets.js';
 import axios from 'axios';
+import MenteeProfileCard from '../CommonComponents/MenteeProfileCard.jsx';
 
 class Peers extends React.Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class Peers extends React.Component {
     render () {
         return (
             <div className="peers-line-container">
-                {
+                {/* {
                     this.state.peers.map((peer, index) => {
                         return (
                             <div className="peers-container">
@@ -69,7 +70,15 @@ class Peers extends React.Component {
                             </div>
                         )       
                     })
-                }		          
+                }	
+               */}
+               {
+                   this.state.peers.map((peer, index) => {
+                       return (
+                           <MenteeProfileCard key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                       )
+                   })
+               }
 			</div>
         )
     }
