@@ -57,22 +57,6 @@ class Peers extends React.Component {
     render () {
         return (
             <div className="mentor-d-top-container column">
-                {/* {
-                    this.state.peers.map((peer, index) => {
-                        return (
-                            <div className="peers-container">
-                                <img className="peers-photo" src={this.state.displayPhotos[peer.email]}/>
-                                <div className="peers-name"> {peer.full_name} </div>
-                                <div className="peers-description"> 
-                                      <div> {peer.hometown} </div>
-                                      <div> {peer.school} </div>
-                                      <div> @{this.state.slackHandles[peer.email]} </div>
-                                </div>
-                            </div>
-                        )       
-                    })
-                }	
-               */}
                <div className="mentor-d-title column">
                     MY PEERS 
                </div>
@@ -85,11 +69,7 @@ class Peers extends React.Component {
                             )
                         })
                     }
-               </div>
-
-
-
-              
+               </div>  
 			</div>
         )
     }
