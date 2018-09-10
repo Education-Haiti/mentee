@@ -32,7 +32,7 @@ class MentorDashboard extends React.Component {
     getTopFiveMentors () {
         axios.get('/users/topfive/mentors')
         .then((response) => {
-            console.log('Top five mentors: ', response.data);
+            //console.log('Top five mentors: ', response.data);
             this.setState({ topFiveMentors: response.data });
         })
         .catch((error) => {
@@ -43,7 +43,7 @@ class MentorDashboard extends React.Component {
     initializeDisplayPhotosAndHandlesObj() {
         axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
 			.then((response) => {
-                console.log('All users from slack !!!! : ', response.data.members);
+                //console.log('All users from slack !!!! : ', response.data.members);
                 // make an object whose key is the email of all users and value is the url to their photos
                 let tempObj = {};
                 let tempHandles = {};
