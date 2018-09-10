@@ -13,13 +13,17 @@ class MenteeDashboard extends React.Component {
 		super(props);
 		this.state = {
 			menteeInfo: {},
+			allUsers: [],
 			email: '',
-			percentComplete: 0
+			percentComplete: 0,
+			displayPhotos: {},
+			slackHandles: {},
 		}
 	}
 
 	 componentDidMount() {
 	// 	//this.getAuthedUserInfo();
+		this.initializeDisplayPhotosAndHandlesObj();
 	 	this.setState({ menteeInfo: this.props.userInfo });
 	 	this.setState({ email: this.props.email });
 		
@@ -36,6 +40,46 @@ class MenteeDashboard extends React.Component {
 	// 		this.setState({ menteeInfo: this.props.userInfo });
 	// 	}
 	// }
+
+	initializeDisplayPhotosAndHandlesObj() {
+        axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
+			.then((response) => {
+                console.log('All users from slack !!!! : ', response.data.members);
+                // make an object whose key is the email of all users and value is the url to their photos
+                let tempObj = {};
+                let tempHandles = {};
+                let dataArray = response.data.members;
+                for (let i = 0; i < dataArray.length; i++) {
+                    tempObj[dataArray[i].profile.email] = dataArray[i].profile.image_512; 
+                    tempHandles[dataArray[i].profile.email] = dataArray[i].name;
+                }
+
+                this.setState({ displayPhotos: tempObj }, () => {
+                    this.setState({ slackHandles: tempHandles }, () => {
+                        this.getAllUsers();
+                    });
+                    
+                });
+                
+				
+            })
+            .catch((error) => {
+                console.log('Axios error in getting all users from SLACK API : ', error);
+            })
+    }
+
+    getAllUsers() {
+        axios.get('/users')
+            .then((response) => {
+                //console.log('All users: ', response);
+                this.setState({ allUsers: response.data }, () => {
+                    console.log('allllluuuseerrrss: ', this.state.allUsers);
+                });
+            })
+            .catch((error) => {
+                console.log('Axios error in retrieving users', error);
+            })
+    }
 
 	calculatePercentCompleteness(items) {
         let totalItems = Object.keys(items).length;
@@ -86,9 +130,9 @@ class MenteeDashboard extends React.Component {
 	       <div>
 			<div className="menteeHomeMainContainer">
 				<Checklist calcCompleteness={this.calculatePercentCompleteness.bind(this)} email={this.state.email}/>
-				<KudosSummary userInfo={this.state.menteeInfo}/>
+				<KudosSummary userInfo={this.state.menteeInfo} displayPhotos={this.state.displayPhotos}/>
 				<div className="mentee-rightmost-vertical-container">
-				  <GiveKudos userInfo={this.state.menteeInfo} email={this.state.email}/>
+				  <GiveKudos userInfo={this.state.menteeInfo} email={this.state.email} usernames={this.state.slackHandles} allUsers={this.state.allUsers}/>
 				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
 				</div>	
 			</div>

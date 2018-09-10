@@ -27,6 +27,10 @@ class KudosSummary extends React.Component {
             this.setState({ menteeInfo: this.props.userInfo });
             this.setState({ kuddosReceived: this.props.userInfo.kudos_received });
             this.setState({ kuddosGiven: this.props.userInfo.kudos_given });
+            
+        }
+
+        if (this.props.displayPhotos !== prevProps.displayPhotos) {
             this.setState({ displayPhotos: this.props.displayPhotos });
         }
     }

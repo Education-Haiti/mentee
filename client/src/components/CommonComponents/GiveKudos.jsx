@@ -223,7 +223,7 @@ class GiveKudos extends React.Component {
             return;
         } else if(this.state.kudosMessage.length > 0 && this.state.kudosMessage.length <= 150){
             axios.post('/users/slack/kudos', {
-                message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.usernames[this.state.receiverEmail]} ${this.state.kudosMessage} \n\n *** Let's keep helping each other! ***`,
+                message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.usernames[this.state.receiverEmail]} : " ${this.state.kudosMessage} " \n\n *** Let's keep helping each other! ***`,
                 channel: 'websitetesting'
             })
             .then((response) => {

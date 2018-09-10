@@ -825,5 +825,4 @@ button:hover {
   .mentor-d-rightmost-container {
 	  display: flex;
 	  flex-direction: column;
-	  justify-content: center;
   }
