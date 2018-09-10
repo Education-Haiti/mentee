@@ -122,11 +122,11 @@ class ManageUsers extends React.Component {
             axios.delete('/users', {
                 data: {email: this.state.deleteUserEmail}, // for delete, data MUST BE SPECIFIED FOR THE OBJECT, ELSE IT WILL NOT WORK
               })
-              .then(function (response) {
+              .then( (response) => {
                 this.toggleDeleteUser();
                 alert('User successfully deleted')
               })
-              .catch(function (error) {
+              .catch((error) => {
                 console.log('Axios error in deleting user', error);
               });
         }
