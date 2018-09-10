@@ -56,7 +56,7 @@ class Peers extends React.Component {
 
     render () {
         return (
-            <div className="peers-line-container">
+            <div className="mentor-d-top-container column">
                 {/* {
                     this.state.peers.map((peer, index) => {
                         return (
@@ -73,13 +73,23 @@ class Peers extends React.Component {
                     })
                 }	
                */}
-               {
-                   this.state.peers.map((peer, index) => {
-                       return (
-                           <MenteeProfileCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
-                       )
-                   })
-               }
+               <div className="mentor-d-title column">
+                    MY PEERS 
+               </div>
+
+               <div className="peers-line-container">
+                    {
+                        this.state.peers.map((peer, index) => {
+                            return (
+                                <MenteeProfileCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                            )
+                        })
+                    }
+               </div>
+
+
+
+              
 			</div>
         )
     }

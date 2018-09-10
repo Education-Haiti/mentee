@@ -77,7 +77,7 @@ let getUserByEmail = (theEmail, whenGotten) => {
 }
 
 let getMenteesByGrade = (theGrade, whenGotten) => {
-    User.find({ grade: theGrade })
+    User.find({ grade: theGrade }).sort({ number_kudos_received: -1 })
     .exec((err, data) => {
         if (err) {
             console.log('Database-side error in getting mentees basesed on grade: ', err);
@@ -617,7 +617,7 @@ let sampleData9 = {
     parent2_email: 'g@gmail.com',
     parent2_phone: '444-4444',
     my_mentor_email: 'kphammusic@gmail.com',
-    number_kudos_received: 2,
+    number_kudos_received: 6,
     checklist: {
         "SAT": true,
         "TOEFL": false, 
@@ -650,6 +650,30 @@ let sampleData9 = {
             date: "09/05/2018",
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "gifting me a useful book",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "gifting me a useful book",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
         }
     ]
 }
@@ -670,7 +694,7 @@ let sampleData10 = {
     parent2_email: 'g@gmail.com',
     parent2_phone: '444-4444',
     my_mentor_email: 'kphammusic@gmail.com',
-    number_kudos_received: 2,
+    number_kudos_received: 3,
     checklist: {
         "SAT": true,
         "TOEFL": false, 
@@ -696,6 +720,12 @@ let sampleData10 = {
             name: "Jonathan Marcelin",
             date: "09/02/2018",
             message: "gifting me a useful book",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         },
         {
