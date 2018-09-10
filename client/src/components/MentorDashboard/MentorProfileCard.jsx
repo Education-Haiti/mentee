@@ -20,22 +20,22 @@ class MentorProfileCard extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ email: this.props.topMentor.email }, () => {
+        this.setState({ email: this.props.mentor.email }, () => {
             this.setState({ displayPhoto: this.props.displayPhoto });
             this.setState({ slackHandle: "@" + this.props.slackHandle });
-            this.setState({ phone: this.props.topMentor.phone_number });
-            this.setupTopMentorObj();
+            this.setState({ phone: this.props.mentor.phone_number });
+            this.setupMentorObj();
         })
         
     }
 
-    setupTopMentorObj () {
+    setupMentorObj () {
         let tempContactLinks = [];
         let tempContactStatics = [];
-        console.log('debugging: ', this.props.topMentor);
-        if (this.props.topMentor.email) {
+        console.log('debugging: ', this.props.mentor);
+        if (this.props.mentor.email) {
             let staticObj = {
-                value: this.props.topMentor.email,
+                value: this.props.mentor.email,
                 img: "https://s3.amazonaws.com/educationhaiti/gmail.png",
                 type: "email",
 
@@ -53,9 +53,9 @@ class MentorProfileCard extends React.Component {
             tempContactStatics.push(staticObj);
         }
 
-        if (this.props.topMentor.phone_number) {
+        if (this.props.mentor.phone_number) {
             let staticObj = {
-                value: this.props.topMentor.phone_number,
+                value: this.props.mentor.phone_number,
                 img: "https://s3.amazonaws.com/educationhaiti/phone.png",
                 type: "phone",
 
@@ -64,9 +64,9 @@ class MentorProfileCard extends React.Component {
         }
 
 
-        if (this.props.topMentor.linked_in_page) {
+        if (this.props.mentor.linked_in_page) {
             let linkObj = {
-                value: this.props.topMentor.linked_in_page,
+                value: this.props.mentor.linked_in_page,
                 img: "https://s3.amazonaws.com/educationhaiti/linkedin.png",
                 
                 
@@ -74,17 +74,17 @@ class MentorProfileCard extends React.Component {
             tempContactLinks.push(linkObj);
         }
 
-        if (this.props.topMentor.facebook_page) {
+        if (this.props.mentor.facebook_page) {
             let linkObj = {
-                value: this.props.topMentor.facebook_page,
+                value: this.props.mentor.facebook_page,
                 img: "https://s3.amazonaws.com/educationhaiti/facebook2.png"
             }
             tempContactLinks.push(linkObj);
         }
 
-        if (this.props.topMentor.twitter_page) {
+        if (this.props.mentor.twitter_page) {
             let linkObj = {
-                value: this.props.topMentor.twitter_page,
+                value: this.props.mentor.twitter_page,
                 img: "https://s3.amazonaws.com/educationhaiti/twitter2.png"
             }
            tempContactLinks.push(linkObj);
@@ -166,17 +166,17 @@ class MentorProfileCard extends React.Component {
               <div className="mentor-d-profile-card-container column">
                 <img className="mentor-d-profile-card-photo" src={this.state.displayPhoto}/>
                 <div className="mentor-d-profile-card-name">
-                    {this.props.topMentor.full_name}
+                    {this.props.mentor.full_name}
                 </div>
 
                 <div className="mentor-d-profile-details">
-                    <div> {this.props.topMentor.undergraduate_school} </div>
-                    <div> {this.props.topMentor.employer}</div>
-                    <div> {this.props.topMentor.current_city} {this.props.topMentor.current_state} </div>
+                    <div> {this.props.mentor.undergraduate_school} </div>
+                    <div> {this.props.mentor.employer}</div>
+                    <div> {this.props.mentor.current_city} {this.props.mentor.current_state} </div>
                 </div>
 
                 <div className="mentor-d-profile-kudos column">
-                    {this.props.topMentor.number_kudos_received} Kudos
+                    {this.props.mentor.number_kudos_received} Kudos
                 </div>
 
                 {email}
