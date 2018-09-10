@@ -205,6 +205,15 @@ app.post('/command', function(req, res) {
     res.send('Your ngrok tunnel is up and running!');
 });
 
+app.delete('/users/', (req, res) => {
+    const theEmail = req.body.email;
+    queries2.removeUser(theEmail, (err, result) => {
+        if (err) {
+            console.log('Server-side error in deleting user : ', err);
+        }
+    })
+    res.sendStatus(200);
+})
 
 
 
