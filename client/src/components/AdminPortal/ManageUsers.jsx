@@ -18,7 +18,6 @@ class ManageUsers extends React.Component {
             addMentorLevel: 'Mentor',
             deleteMenteeEmail: '',
             deleteMentorEmail: '',
-
         }
     }
 
@@ -41,6 +40,8 @@ class ManageUsers extends React.Component {
             alert('Please add a name for the new mentee :) ');
         } else if (this.state.addMenteeEmail === '') {
             alert('Please add an email for the new mentee :) ');
+        } else if (this.state.addMenteesMentorEmail === '') {
+            alert('Please add an email for the new mentor :) ');
         } else {
             axios.post('/users/new', {
                 user: {
@@ -57,7 +58,11 @@ class ManageUsers extends React.Component {
                     parent1_email: '',
                     parent2_name: '',
                     parent2_phone: '',
-                    parent2_email: ''
+                    parent2_email: '',
+                    checklist: {},
+                    kudos_received: [],
+                    kudos_given: [],
+                    number_kudos_received: 0,
                 }
             })
             .then((response) => {
@@ -67,6 +72,46 @@ class ManageUsers extends React.Component {
                 console.log('Axios-side error in creating new mentee');
             })
         }  
+    }
+
+    addMentor () {
+        if (this.state.addMentorFullName === '') {
+            alert('Please add a name for the new mentor :) ');
+        } else if (this.state.addMentorEmail === '') {
+            alert('Please add an email for the new mentor :) ');
+        } else {
+            axios.post('/users/new', {
+                user: {
+                    full_name: this.state.addMentorFullName,
+                    email: this.state.addMentorEmail,
+                    level: 'mentor',
+                    grade: this.state.addMentorLevel,
+                    sex: '',
+                    hometown: '',
+                    school: '',
+                    phone_number: '',
+                    number_kudos_received: 0,
+                    kudos_received: [],
+                    kudos_given: [],
+                    facebook_page: '',
+                    twitter_page: '',
+                    linked_in_page: '',
+                    current_city: '',
+                    current_state: '', 
+                    current_country: '',
+                    undergraduate_school: '',
+                    graduate_school: '',
+                    majors: '',
+                    employer: '',
+                }
+            })
+            .then((response) => {
+                this.toggleAddMentor();
+            })
+            .catch((error) => {
+                console.log('Axios-side error in creating new mentor');
+            })
+        }
     }
 
     toggleAddMentee() {
@@ -155,11 +200,11 @@ class ManageUsers extends React.Component {
                     <input name='addMentorEmail' onChange={this.retrieveInfo.bind(this)}/>
                     Level
                     <select className="manage-users-mentor-level" onChange={this.retrieveMentorLevel.bind(this)}>
-                        <option> Mentor </option>
-                        <option> Admin </option>
+                        <option> mentor </option>
+                        <option> admin </option>
                     </select>
                     <div>
-                        <button className="manage-users-add-buttons"> Add </button>
+                        <button className="manage-users-add-buttons" onClick={this.addMentor.bind(this)}> Add </button>
                         <button className="manage-users-add-buttons" onClick={this.toggleAddMentor.bind(this)}> Cancel </button>
                     </div>
                 
