@@ -8,6 +8,7 @@ class Peers extends React.Component {
         super(props);
         this.state = {
             peers: [],
+            completeness: [],
             displayPhotos: {},
             slackHandles: {},
             grade: ''
@@ -75,7 +76,7 @@ class Peers extends React.Component {
                {
                    this.state.peers.map((peer, index) => {
                        return (
-                           <MenteeProfileCard key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                           <MenteeProfileCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
                        )
                    })
                }

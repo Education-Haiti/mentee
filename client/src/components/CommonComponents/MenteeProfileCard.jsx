@@ -19,7 +19,7 @@ class MenteeProfileCard extends React.Component {
               <div className="mentor-d-profile-card-container column">
                 <img className="mentor-d-profile-card-photo" src={this.props.displayPhoto}/>
                 <div className="mentor-d-profile-card-name">
-                    {this.props.name}
+                    {this.props.mentee.full_name}
                 </div>
 
                 <div className="mentor-d-profile-details">
@@ -29,7 +29,7 @@ class MenteeProfileCard extends React.Component {
                 </div>
 
                 <div className="mentor-d-profile-kudos column">
-                    100 Kudos
+                    {this.props.mentee.number_kudos_received} Kudos
                 </div>
 
               </div>
