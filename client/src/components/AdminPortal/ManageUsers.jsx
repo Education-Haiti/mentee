@@ -7,8 +7,7 @@ class ManageUsers extends React.Component {
         this.state = {
             showAddMenteeView: false,
             showAddMentorView: false, 
-            showDeleteMenteeView: false, 
-            showDeleteMentorView: false,
+            showDeleteUserView: false, 
             addMenteeFullName: '',
             addMenteeEmail: '',
             addMenteesMentorEmail: '',
@@ -16,8 +15,7 @@ class ManageUsers extends React.Component {
             addMentorFullName: '',
             addMentorEmail: '',
             addMentorLevel: 'Mentor',
-            deleteMenteeEmail: '',
-            deleteMentorEmail: '',
+            deleteUserEmail: '',
         }
     }
 
@@ -67,6 +65,7 @@ class ManageUsers extends React.Component {
             })
             .then((response) => {
                 this.toggleAddMentee();
+                alert('Mentee successfully created!')
             })
             .catch((error) => {
                 console.log('Axios-side error in creating new mentee');
@@ -107,10 +106,29 @@ class ManageUsers extends React.Component {
             })
             .then((response) => {
                 this.toggleAddMentor();
+                alert('Mentor successfully created!')
             })
             .catch((error) => {
                 console.log('Axios-side error in creating new mentor');
             })
+        }
+    }
+
+    deleteUser () {
+        console.log('email to delete', this.state.deleteUserEmail);
+        if (this.state.deleteUserEmail === '') {
+            console.log(' Please enter the email of the user to be deleted :)  ')
+        } else {
+            axios.delete('/users', {
+                data: {email: this.state.deleteUserEmail}, // for delete, data MUST BE SPECIFIED FOR THE OBJECT, ELSE IT WILL NOT WORK
+              })
+              .then(function (response) {
+                this.toggleDeleteUser();
+                alert('User successfully deleted')
+              })
+              .catch(function (error) {
+                console.log('Axios error in deleting user', error);
+              });
         }
     }
 
@@ -132,34 +150,24 @@ class ManageUsers extends React.Component {
         
     }
 
-    toggleDeleteMentee() {
-        if (this.state.showDeleteMenteeView === false) {
-            this.setState({ showDeleteMenteeView: true });
+    toggleDeleteUser() {
+        if (this.state.showDeleteUserView === false) {
+            this.setState({ showDeleteUserView: true });
         } else {
-            this.setState({ showDeleteMenteeView: false });
+            this.setState({ showDeleteUserView: false });
         }
          
     }
 
-    toggleDeleteMentor() {
-        if (this.state.showDeleteMentorView === false) {
-            this.setState({ showDeleteMentorView: true });
-        } else {
-            this.setState({ showDeleteMentorView: false });
-        }
-        
-    }
 
     render () {
         let addMenteeButton = null;
         let addMentorButton = null; 
-        let deleteMenteeButton = null;
-        let deleteMentorButton = null;
+        let deleteUserButton = null;
 
         let addMenteeView = null;
         let addMentorView = null;
-        let deleteMenteeView = null;
-        let deleteMentorView = null;
+        let deleteUserView = null;
 
         if (this.state.showAddMenteeView === true) {
             addMenteeView = (
@@ -217,43 +225,26 @@ class ManageUsers extends React.Component {
             )
         }
 
-        if (this.state.showDeleteMenteeView === true) {
-            deleteMenteeView = (
+        if (this.state.showDeleteUserView === true) {
+            deleteUserView = (
                 <div className="manage-users-delete-container">
-                    Mentee Email
-                    <input name='deleteMenteeEmail' onChange={this.retrieveInfo.bind(this)}/>
+                    User Email
+                    <input name='deleteUserEmail' onChange={this.retrieveInfo.bind(this)}/>
                     <div>
-                        <button className="manage-users-delete-buttons"> Delete </button>
-                        <button className="manage-users-delete-buttons" onClick={this.toggleDeleteMentee.bind(this)}> Cancel </button>
+                        <button className="manage-users-delete-buttons" onClick={this.deleteUser.bind(this)} > Delete </button>
+                        <button className="manage-users-delete-buttons" onClick={this.toggleDeleteUser.bind(this)}> Cancel </button>
                     </div>
                 
                 </div>
             )
             
         } else {
-            deleteMenteeButton = (
-                <button className="create-assignment-sub-button" onClick={this.toggleDeleteMentee.bind(this)}> Delete Mentee </button>
+            deleteUserButton = (
+                <button className="create-assignment-sub-button" onClick={this.toggleDeleteUser.bind(this)}> Delete User </button>
             )
         }
 
-        if (this.state.showDeleteMentorView === true) {
-            deleteMentorView = (
-            <div className="manage-users-delete-container">
-                Mentor Email
-                <input name='deleteMentorEmail' onChange={this.retrieveInfo.bind(this)}/>
-                <div>
-                    <button className="manage-users-delete-buttons"> Delete </button>
-                    <button className="manage-users-delete-buttons" onClick={this.toggleDeleteMentor.bind(this)}> Cancel </button>
-                </div>
-            
-            </div>
-            )
 
-        } else {
-            deleteMentorButton = (
-                <button className="create-assignment-sub-button" onClick={this.toggleDeleteMentor.bind(this)}> Delete Mentor</button>
-            )
-        }
         return (
             <div>
                 <div className="manage-users-container">
@@ -263,11 +254,9 @@ class ManageUsers extends React.Component {
                     {addMentorButton}
                     {addMentorView}
 
-                    {deleteMenteeButton}
-                    {deleteMenteeView}
+                    {deleteUserButton}
+                    {deleteUserView}
 
-                    {deleteMentorButton}
-                    {deleteMentorView}
                 </div>
             </div>
         )
