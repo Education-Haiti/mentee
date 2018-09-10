@@ -8,6 +8,7 @@ import MentorProfile from './MentorProfile/MentorProfile.jsx';
 import MyProfile from  './MyProfile/MyProfile.jsx';
 import AdminPortal from './AdminPortal/AdminPortal.jsx';
 import Peers from './MyProfile/Peers.jsx';
+import AllMentors from './MentorDashboard/AllMentors.jsx';
 import SECRETS from '../client_secrets.js'
 import axios from 'axios';
 
@@ -135,7 +136,7 @@ class Mentee extends React.Component {
 		} else if (label === 'My Mentees') {
 			// TO BE DONE!!
 		} else if (label === 'Mentors') {
-			// TO BE DONE!!
+			this.setState({ currentPage: 'allMentors' });
 		} else if (label === 'Config') {
 			this.setState({ currentPage: 'adminPortal' })
 		} 
@@ -178,6 +179,12 @@ class Mentee extends React.Component {
 		)
 	}
 
+	renderAllMentors() {
+		return (
+			<AllMentors/>
+		)
+	}
+
 	renderBody () {
 		if (this.state.currentPage === 'mentorProfile') {
 			return this.renderMentorProfile();
@@ -201,6 +208,10 @@ class Mentee extends React.Component {
 
 		if (this.state.currentPage === 'dashboard') {
 			return this.renderMentorDashboard();
+		}
+
+		if (this.state.currentPage === 'allMentors') {
+			return this.renderAllMentors();
 		}
 	}
 
