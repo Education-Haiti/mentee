@@ -150,6 +150,17 @@ let updateKudosReceived = (theEmail, newKudosReceivedObj, newCount) => {
     })
 }
 
+let removeUser = (theEmail) => {
+    User.remove({ email: theEmail })
+    .exec((err, data) => {
+        if (err) {
+            console.log('Database-side error in deleting user : ', err);
+        } else {
+            console.log('Successfully deleted user');
+        }
+    })
+}
+
 
 
 let sampleData = {
@@ -761,6 +772,8 @@ let sampleData11 = {
 //     console.log(result);
 // })
 
+//removeUser('ckdelmy@mit.edu');
+
 //  saveUser(sampleData);
 //  saveUser(sampleData2);
 //  saveUser(sampleData3);
@@ -851,5 +864,6 @@ module.exports = {
     updateKudosReceived,
     getMenteesByGrade,
     getTopFiveMentors,
-    getAllMentors
+    getAllMentors, 
+    removeUser
 }
