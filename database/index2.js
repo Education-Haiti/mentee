@@ -109,6 +109,17 @@ let getTopFiveMentors = (whenGotten) => {
     })
 }
 
+let getAllMentors = (whenGotten) => {
+    User.find({ level : 'mentor' })
+    .exec((err, data) => {
+        if (err) {
+            console.log('Database-side error in getting mentors : ', err);
+        } else {
+            whenGotten(null, data);
+        }
+    })
+}
+
 let updateChecklist = (theEmail, newChecklist) => {
     User.findOneAndUpdate({ email: theEmail }, { checklist: newChecklist }, {upsert: true}, (err, doc) => {
         if (err) {
@@ -199,7 +210,7 @@ let sampleData2 = {
     sex: 'F', 
     email: 'kphammusic@gmail.com',
     hometown: 'Cali Baby', 
-    grade: '3',
+    grade: 'admin',
     school: 'St Anne',
     level: 'mentor',
     phone_number: '409-454-5188',
@@ -244,6 +255,7 @@ let sampleData3 = {
     email: 'corinnejoachimsanon@gmail.com',
     school: 'Sacré Coeur', 
     level: 'mentor',
+    grade: 'regular',
     phone_number: '469-454-5328',
     facebook_page: 'https://www.facebook.com/corinne.joachimsanon',
     twitter_page: 'https://twitter.com/71390cff06894d2',
@@ -293,6 +305,7 @@ let sampleData4 = {
     email: 'jonathan.n.laguerre@gmail.com',
     school: 'Saint-Louis de Gonzague', 
     level: 'mentor',
+    grade: 'regular',
     phone_number: '639-354-5328',
     facebook_page: 'https://www.facebook.com/corinne.joachimsanon',
     twitter_page: 'https://twitter.com/71390cff06894d2',
@@ -355,6 +368,7 @@ let sampleData5 = {
     email: 'lestradejeanmariejunior@yahoo.fr',
     school: 'Saint-Louis de Gonzague', 
     level: 'mentor',
+    grade: 'regular',
     phone_number: '639-654-7828',
     facebook_page: 'https://www.facebook.com/corinne.joachimsanon',
     twitter_page: 'https://twitter.com/71390cff06894d2',
@@ -399,6 +413,7 @@ let sampleData6 = {
     email: 'medoulaf@gmail.com',
     school: 'Saint-Louis de Gonzague', 
     level: 'mentor',
+    grade: 'regular',
     phone_number: '739-654-4228',
     facebook_page: 'https://www.facebook.com/corinne.joachimsanon',
     twitter_page: 'https://twitter.com/71390cff06894d2',
@@ -449,6 +464,7 @@ let sampleData7 = {
     email: 'ednerpaul@gmail.com',
     school: 'Ecole de St. Marc', 
     level: 'mentor',
+    grade: 'regular',
     phone_number: '529-664-1321',
     facebook_page: 'https://www.facebook.com/corinne.joachimsanon',
     twitter_page: 'https://twitter.com/71390cff06894d2',
@@ -524,7 +540,8 @@ let sampleData8 = {
     sex: 'F', 
     email: 'jpvertil@hotmail.com',
     school: 'SLG!', 
-    level: 'admin',
+    level: 'mentor',
+    grade: 'admin',
     phone_number: '469-454-5328',
     facebook_page: 'https://www.facebook.com/corinne.joachimsanon',
     twitter_page: 'https://twitter.com/71390cff06894d2',
@@ -740,6 +757,10 @@ let sampleData11 = {
 //     console.log(result);
 // })
 
+// getAllMentors((err, result) => {
+//     console.log(result);
+// })
+
 //  saveUser(sampleData);
 //  saveUser(sampleData2);
 //  saveUser(sampleData3);
@@ -829,5 +850,6 @@ module.exports = {
     updateKudosGiven,
     updateKudosReceived,
     getMenteesByGrade,
-    getTopFiveMentors
+    getTopFiveMentors,
+    getAllMentors
 }

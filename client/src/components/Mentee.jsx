@@ -88,7 +88,7 @@ class Mentee extends React.Component {
 									this.identifyUser(response.data[0].my_mentor_email, 2);
 								});
 							})	
-						} else if (this.state.userInfo.level === "admin") {
+						} else if (this.state.userInfo.grade === "admin") {
 							this.setState({ level: 'admin' }, () => {
 								this.setState({ currentPage: 'dashboard' });
 							})
