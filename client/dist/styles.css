@@ -611,7 +611,7 @@ button:hover {
 	display: flex;
 	flex-direction: column;
 	width: 320px;
-	height: 220px;
+	height: 240px;
 	color: #234060;
 	justify-content: space-between;
 }

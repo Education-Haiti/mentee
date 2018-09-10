@@ -11,6 +11,7 @@ class ManageUsers extends React.Component {
             showDeleteMentorView: false,
             addMenteeFullName: '',
             addMenteeEmail: '',
+            addMenteesMentorEmail: '',
             addMenteeLevel: '3',
             addMentorFullName: '',
             addMentorEmail: '',
@@ -45,7 +46,8 @@ class ManageUsers extends React.Component {
                 user: {
                     full_name: this.state.addMenteeFullName,
                     email: this.state.addMenteeEmail,
-                    level: this.state.addMenteeLevel,
+                    grade: this.state.addMenteeLevel,
+                    my_mentor_email: this.state.addMenteesMentorEmail,
                     sex: '',
                     hometown: '',
                     school: '',
@@ -121,7 +123,9 @@ class ManageUsers extends React.Component {
                     <input name='addMenteeFullName' onChange={this.retrieveInfo.bind(this)}/>
                     Mentee Email
                     <input name="addMenteeEmail" onChange={this.retrieveInfo.bind(this)}/>
-                    Level
+                    Mentor Email
+                    <input name="addMenteesMentorEmail" onChange={this.retrieveInfo.bind(this)}/>
+                    Grade
                     <select className="manage-users-mentor-level" onChange={this.retrieveMenteeLevel.bind(this)}>
                         <option> 3 </option>
                         <option> 2 </option>

@@ -37,7 +37,7 @@ let userSchema = mongoose.Schema({
     graduate_school: String,
     majors: String,
     employer: String,
-    mentee_emails: Array
+    //mentee_emails: Array
 });
 
 let User = mongoose.model('User', userSchema); // Mentee is the collection
