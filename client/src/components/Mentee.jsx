@@ -188,7 +188,7 @@ class Mentee extends React.Component {
 
 	renderMyMentees() {
 		return (
-			<MyMentees/>
+			<MyMentees email={this.state.email}/>
 		)
 	}
 

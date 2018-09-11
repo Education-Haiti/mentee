@@ -15,12 +15,21 @@ class MyMentees extends React.Component {
             mentorsByEmail: {},
             displayPhotos: {},
             slackHandles: {},
+            mentorEmail: '',
         }
     }
 
     componentDidMount () {
+        this.setState({ mentorEmail: this.props.email }, () => {
+            // get mentees for current mentor
+            console.log('current mentor email is: ', this.state.mentorEmail);
+        })
         this.initializeDisplayPhotosAndHandlesObj();
+        this.getMenteesByGrade('T');
+        this.getMenteesByGrade('1');
+        this.getMenteesByGrade('2');
         this.getMenteesByGrade('3');
+
 
     }
 
@@ -75,13 +84,48 @@ class MyMentees extends React.Component {
                     TERMINALE
                 </div>
 
+                <div className="peers-line-container">
+                    {
+                        this.state.menteesT.map((peer, index) => {
+                            return (
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                            )
+                        })
+                    }
+               </div>
+
+
                 <div className="mentor-d-title column">
                     1ere
                 </div>
 
+                <div className="peers-line-container">
+                    {
+                        this.state.mentees1.map((peer, index) => {
+                            return (
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                            )
+                        })
+                    }
+               </div>
+
+
+
                 <div className="mentor-d-title column">
                     2nd
                 </div>
+
+                <div className="peers-line-container">
+                    {
+                        this.state.mentees2.map((peer, index) => {
+                            return (
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                            )
+                        })
+                    }
+               </div>
+
+
 
                 <div className="mentor-d-title column">
                     3e
