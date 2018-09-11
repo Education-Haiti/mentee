@@ -36,6 +36,11 @@ class DetailedMenteeCard extends React.Component {
                     {this.props.mentee.number_kudos_received} Kudos
                 </div>
 
+                <div className="mentor-links-container">
+                <img  className="mentee-links-icon" src={'https://s3.amazonaws.com/educationhaiti/dashboard.png'}   />
+                <img  className="mentee-links-icon" src={'https://s3.amazonaws.com/educationhaiti/user.png'}   />
+                </div>
+
               </div>
             </div>
         )

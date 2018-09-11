@@ -812,6 +812,12 @@ button:hover {
 	margin: 5px;
 }
 
+.mentee-links-icon {
+	width: 20px;
+	height: 20px;
+	margin: 5px;
+}
+
 .not-active {
 	pointer-events: none;
 	cursor: default;
