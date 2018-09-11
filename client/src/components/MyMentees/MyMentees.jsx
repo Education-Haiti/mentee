@@ -22,6 +22,7 @@ class MyMentees extends React.Component {
     componentDidMount () {
         this.setState({ mentorEmail: this.props.email }, () => {
             // get mentees for current mentor
+            this.identifyMyMentees(this.state.mentorEmail);
             console.log('current mentor email is: ', this.state.mentorEmail);
         })
         this.initializeDisplayPhotosAndHandlesObj();
@@ -29,9 +30,18 @@ class MyMentees extends React.Component {
         this.getMenteesByGrade('1');
         this.getMenteesByGrade('2');
         this.getMenteesByGrade('3');
-
-
     }
+
+    identifyMyMentees(theEmail) { 
+		axios.get(`/users/authed/${theEmail}`)
+			.then((response) => {
+				//console.log(response.data);
+				this.setState({ myMentees: response.data[0] });
+			})
+			.catch((error) => {
+				console.log('Axios error in getting authed mentee info : ', error);
+			});
+	}
 
     initializeDisplayPhotosAndHandlesObj() {
         axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)

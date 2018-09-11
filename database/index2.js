@@ -120,6 +120,17 @@ let getAllMentors = (whenGotten) => {
     })
 }
 
+let getMyMentees = ((mentorEmail, whenGotten) => {
+    User.find({ my_mentor_email: mentorEmail })
+    .exec((err, data) => {
+        if (err) {
+            console.log('Database-side error in retrieving my mentees : ', err);
+        } else {
+            whenGotten(null, data);
+        }
+    })
+})
+
 let updateChecklist = (theEmail, newChecklist) => {
     User.findOneAndUpdate({ email: theEmail }, { checklist: newChecklist }, {upsert: true}, (err, doc) => {
         if (err) {
@@ -752,7 +763,196 @@ let sampleData11 = {
     parent2_name: 'Gina',
     parent2_email: 'g@gmail.com',
     parent2_phone: '444-4444',
+    my_mentor_email: 'jpvertil@hotmail.com',
+    number_kudos_received: 2,
+    checklist: {
+        "SAT": true,
+        "TOEFL": false, 
+        "ND": true,
+    },
+    kudos_given: [
+        {
+            name: "Kony Pham",
+            date: "09/03/2018",
+            message: "helping me review my resume",
+            email: "kphammusic@gmail.com"
+        },
+
+        {
+            name: "Christina Bastion",
+            date: "09/01/2018",
+            message: "helping me design an assignment for my mentee",
+            email: "christiti14@gmail.com"
+        } 
+    ],
+    kudos_received: [
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "gifting me a useful book",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        }
+    ]
+}
+
+let sampleData12 = {
+    full_name: 'Jules Walter', 
+    sex: 'M', 
+    email: 'jules.walter@gmail.com',
+    hometown: 'Gonaives', 
+    school: 'Petit Seminaire', 
+    grade: '1',
+    level: 'mentee',
+    phone_number: '409-454-5188',
+    parent1_name: 'Kesnel',
+    parent1_email: 'k@gmail.com',
+    parent1_phone: '223-5133',
+    parent2_name: 'Gina',
+    parent2_email: 'g@gmail.com',
+    parent2_phone: '444-4444',
     my_mentor_email: 'kphammusic@gmail.com',
+    number_kudos_received: 6,
+    checklist: {
+        "SAT": true,
+        "TOEFL": false, 
+        "ND": true,
+    },
+    kudos_given: [
+        {
+            name: "Kony Pham",
+            date: "09/03/2018",
+            message: "helping me review my resume",
+            email: "kphammusic@gmail.com"
+        },
+
+        {
+            name: "Christina Bastion",
+            date: "09/01/2018",
+            message: "helping me design an assignment for my mentee",
+            email: "christiti14@gmail.com"
+        } 
+    ],
+    kudos_received: [
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "gifting me a useful book",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "gifting me a useful book",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "gifting me a useful book",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        }
+    ]
+}
+
+let sampleData13 = {
+    full_name: 'Olivier Gabriel', 
+    sex: 'M', 
+    email: 'riveliog@gmail.com',
+    hometown: 'Cap Haitian', 
+    school: 'Jn Mary Guilloux', 
+    grade: '2',
+    level: 'mentee',
+    phone_number: '409-454-5188',
+    parent1_name: 'Kesnel',
+    parent1_email: 'k@gmail.com',
+    parent1_phone: '223-5133',
+    parent2_name: 'Gina',
+    parent2_email: 'g@gmail.com',
+    parent2_phone: '444-4444',
+    my_mentor_email: 'kphammusic@gmail.com',
+    number_kudos_received: 3,
+    checklist: {
+        "SAT": true,
+        "TOEFL": false, 
+        "ND": true,
+    },
+    kudos_given: [
+        {
+            name: "Kony Pham",
+            date: "09/03/2018",
+            message: "helping me review my resume",
+            email: "kphammusic@gmail.com"
+        },
+
+        {
+            name: "Christina Bastion",
+            date: "09/01/2018",
+            message: "helping me design an assignment for my mentee",
+            email: "christiti14@gmail.com"
+        } 
+    ],
+    kudos_received: [
+        {
+            name: "Jonathan Marcelin",
+            date: "09/02/2018",
+            message: "gifting me a useful book",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        },
+        {
+            name: "Jeffry Magloire",
+            date: "09/05/2018",
+            message: "helping me with a mock interview",
+            email: "jonathanmarcelin28@gmail.com"
+        }
+    ]
+}
+
+let sampleData14 = {
+    full_name: 'Romie Desrogène', 
+    sex: 'M', 
+    email: 'romied@princeton.edu',
+    hometown: 'Port-de-Paix', 
+    school: 'St Rose', 
+    grade: 'T',
+    level: 'mentee',
+    phone_number: '409-454-5188',
+    parent1_name: 'Kesnel',
+    parent1_email: 'k@gmail.com',
+    parent1_phone: '223-5133',
+    parent2_name: 'Gina',
+    parent2_email: 'g@gmail.com',
+    parent2_phone: '444-4444',
+    my_mentor_email: 'jpvertil@hotmail.com',
     number_kudos_received: 2,
     checklist: {
         "SAT": true,
@@ -804,6 +1004,10 @@ let sampleData11 = {
 
 //removeUser('ckdelmy@mit.edu');
 
+getMyMentees('jpvertil@hotmail.com', (err, result) => {
+    console.log(result);
+})
+
 //  saveUser(sampleData);
 //  saveUser(sampleData2);
 //  saveUser(sampleData3);
@@ -815,6 +1019,9 @@ let sampleData11 = {
 //  saveUser(sampleData9);
 //  saveUser(sampleData10);
 //  saveUser(sampleData11);
+//  saveUser(sampleData12);
+//  saveUser(sampleData13);
+//  saveUser(sampleData14);
 
 //  getMentees((err, result) => {
 //      console.log(result);
@@ -895,5 +1102,6 @@ module.exports = {
     getMenteesByGrade,
     getTopFiveMentors,
     getAllMentors, 
-    removeUser
+    removeUser,
+    getMyMentees,
 }

@@ -20,7 +20,7 @@ class MenteeDashboard extends React.Component {
 			slackHandles: {},
 		}
 	}
-
+	
 	 componentDidMount() {
 	// 	//this.getAuthedUserInfo();
 		this.initializeDisplayPhotosAndHandlesObj();
