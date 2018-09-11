@@ -146,6 +146,17 @@ app.get('/users/allmentors/', (req, res) => {
     })
 })
 
+app.get('/users/mymentees/:mentoremail', (req, res) => {
+    const theEmail = req.params.mentoremail;
+    queries2.getMyMentees(theEmail, (err, results) => {
+        if (err) {
+            console.log('Server-side error in getting my mentees : ', err);
+        } else {
+            res.json(results);
+        }
+    })
+})
+
 app.put('/users/checklist/:email/', (req, res) => {
     const theEmail = req.params.email; 
     const newChecklist = req.body.newChecklist;

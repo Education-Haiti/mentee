@@ -1004,9 +1004,9 @@ let sampleData14 = {
 
 //removeUser('ckdelmy@mit.edu');
 
-getMyMentees('jpvertil@hotmail.com', (err, result) => {
-    console.log(result);
-})
+// getMyMentees('jpvertil@hotmail.com', (err, result) => {
+//     console.log(result);
+// })
 
 //  saveUser(sampleData);
 //  saveUser(sampleData2);
