@@ -22,6 +22,10 @@ class DetailedMenteeCard extends React.Component {
                     {this.props.mentee.full_name}
                 </div>
 
+                <div className="mentee-d-profile-mentor-name">
+                    Mentor: {this.props.myMentor}
+                </div>
+
                 <div className="mentor-d-profile-details">
                     <div> {this.props.mentee.hometown} </div>
                     <div> {this.props.mentee.school}</div>

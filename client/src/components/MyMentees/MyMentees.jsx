@@ -8,6 +8,7 @@ class MyMentees extends React.Component {
         super(props);
         this.state = {
             myMentees : [],
+            allMentors: [],
             menteesT: [],
             mentees1: [],
             mentees2: [],
@@ -30,13 +31,32 @@ class MyMentees extends React.Component {
         this.getMenteesByGrade('1');
         this.getMenteesByGrade('2');
         this.getMenteesByGrade('3');
+        this.getAllMentors();
+    }
+
+    getAllMentors () {
+        axios.get('/users/allmentors')
+        .then((response) => {
+            //console.log('all mentors: ', response.data);
+            let tempObj = {};
+            let dataArray = response.data;
+
+            for (let i = 0; i < dataArray.length; i++) {
+                tempObj[dataArray[i].email] = dataArray[i].full_name;
+            }
+
+            this.setState({ mentorsByEmail: tempObj })
+        })
+        .catch((error) => {
+            console.log('Axios error in getting all mentors');
+        })
     }
 
     identifyMyMentees(theEmail) { 
-		axios.get(`/users/authed/${theEmail}`)
+		axios.get(`/users/mymentees/${theEmail}`)
 			.then((response) => {
-				//console.log(response.data);
-				this.setState({ myMentees: response.data[0] });
+				//console.log('testingdo', response.data);
+				this.setState({ myMentees: response.data });
 			})
 			.catch((error) => {
 				console.log('Axios error in getting authed mentee info : ', error);
@@ -65,6 +85,10 @@ class MyMentees extends React.Component {
             })
     }
 
+    getMentorsByEmail() {
+
+    }
+
     getMenteesByGrade (theGrade) {
         axios.get(`/users/mentees/grade/${theGrade}`)
             .then((response) => {
@@ -85,10 +109,20 @@ class MyMentees extends React.Component {
 
     render () {
         return (
-            <div className="mentor-d-top-container column">
+            <div className="mymentees-container column">
                 <div className="mentor-d-title column">
                     MY MENTEES 
                 </div>
+
+                <div className="peers-line-container">
+                    {
+                        this.state.myMentees.map((peer, index) => {
+                            return (
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
+                            )
+                        })
+                    }
+               </div>
 
                 <div className="mentor-d-title column">
                     TERMINALE
@@ -98,7 +132,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.menteesT.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
                             )
                         })
                     }
@@ -113,7 +147,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.mentees1.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
                             )
                         })
                     }
@@ -129,7 +163,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.mentees2.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
                             )
                         })
                     }
@@ -145,7 +179,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.mentees3.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
                             )
                         })
                     }

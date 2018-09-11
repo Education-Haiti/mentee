@@ -51,27 +51,6 @@ class GiveKudos extends React.Component {
         }
     }
 
-    // initializeUsernamesObj() {
-    //     axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
-	// 		.then((response) => {
-    //             console.log('All users from slack !!!! : ', response.data.members);
-    //             // make an object whose key is the email of all users and value is the url to their photos
-    //             let tempObj = {};
-    //             let dataArray = response.data.members;
-    //             for (let i = 0; i < dataArray.length; i++) {
-    //                 tempObj[dataArray[i].profile.email] = dataArray[i].name; 
-    //             }
-
-    //             this.setState({ usernames: tempObj }, () => {
-    //                 console.log('da usernames: ', this.state.usernames);
-    //             });
-				
-    //         })
-    //         .catch((error) => {
-    //             console.log('Axios error in getting all users from SLACK API : ', error);
-    //         })
-    // }
-
     findUserByEmail_slack(theEmail, option) { // identifying user on slack API . 
 		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
 			.then((response) => {
@@ -84,17 +63,6 @@ class GiveKudos extends React.Component {
 				console.log('Axios error in getting user info from SLACK API : ', error);
 			});
     }
-    
-    // getAllUsers_slack() {
-	// 	axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
-	// 		.then((response) => {
-	// 			console.log('All users from slack !! : ', response.data.members);
-	// 			this.setState({ allUsers: response.data.members })
-    //         })
-    //         .catch((error) => {
-    //             console.log('Axios error in getting all users from SLACK API : ', error);
-    //         });
-    // }
 
     identifyReceiver(theEmail) { // identifying on database
 		axios.get(`/users/authed/${theEmail}`)

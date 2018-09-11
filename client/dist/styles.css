@@ -62,12 +62,17 @@
   .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
 	stroke: transparent;
   }
+  html {
+	width: 100vw;
+	height: 100vh;
+}
 
 body {
 	font-family: Hevetica, sans-serif;
 	color: green;
 	width: 100%;
 	height: 100%;
+	min-height: 100%;
 	margin:0px;
 }
 .welcome-text {
@@ -726,13 +731,16 @@ button:hover {
 }
 
 .mentor-d-title {
-	width: 500px;
+	display: flex;
+	/* width: 500px; */
 	height: 50px;
 	font-size: 20pt;
 	color: black;
 	font-weight: bold;
 	border-bottom: .8px solid black;
 	margin-top: 20px;
+	justify-content: space-around;
+	flex-flow: row wrap;
 }
 
 .mentor-d-top-mentors-row-container {
@@ -742,6 +750,7 @@ button:hover {
 .mentor-d-profile-card-container {
 	border: .8px solid #f2f2f2	;
 	margin-top: 20px;
+	margin-bottom: 5px;
 	margin-left: 10px;
 	margin-right: 20px;
 	width: 175px;
@@ -768,6 +777,12 @@ button:hover {
 	color: #234060;
 	text-align: center;
 	font-weight: bold;
+}
+
+.mentee-d-profile-mentor-name {
+	font-size: 8pt;
+	color: #234060;
+	text-align: center;
 }
 
 .mentor-d-profile-details {
@@ -836,4 +851,15 @@ button:hover {
 	width: 1100px;
 	flex-flow: row wrap;
 	justify-content: space-around;
+  }
+
+  .mymentees-container {
+	  display: flex;
+	  display: inline-block;
+	  flex-direction: column;
+	  justify-content: space-between;
+  }
+
+  .expander {
+	  height: 5000px;
   }
