@@ -16,8 +16,27 @@ class MyMentees extends React.Component {
 
     render () {
         return (
-            <div>
-                THIS IS THE MY MENTEES COMPONENT RENDERING !!!
+            <div className="mentor-d-top-container column">
+                <div className="mentor-d-title column">
+                    MY MENTEES 
+                </div>
+
+                <div className="mentor-d-title column">
+                    TERMINALE
+                </div>
+
+                <div className="mentor-d-title column">
+                    1ere
+                </div>
+
+                <div className="mentor-d-title column">
+                    2nd
+                </div>
+
+                <div className="mentor-d-title column">
+                    3e
+                </div>
+
             </div>
         )
     }

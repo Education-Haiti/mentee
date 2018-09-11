@@ -34,13 +34,13 @@ class Mentee extends React.Component {
 			mentorLinks: [
 				{ label: 'Dashboard'},
 				{ label: 'Profile'},
-				{ label: 'My Mentees'},
+				{ label: 'Mentees'},
 				{ label: 'Mentors'},
 			],
 			adminLinks: [
 				{ label: 'Dashboard'},
 				{ label: 'Profile'},
-				{ label: 'My Mentees'},
+				{ label: 'Mentees'},
 				{ label: 'Mentors'},
 				{ label: 'Config'}
 			], 
@@ -134,7 +134,7 @@ class Mentee extends React.Component {
 			this.setState({ currentPage: 'dashboard' });
 		} else if (label === 'Profile') {
 			// TO BE DONE!!
-		} else if (label === 'My Mentees') {
+		} else if (label === 'Mentees') {
 			this.setState({ currentPage: 'myMentees' });
 		} else if (label === 'Mentors') {
 			this.setState({ currentPage: 'allMentors' });
