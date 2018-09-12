@@ -139,7 +139,7 @@ class MenteeDashboard extends React.Component {
 				<div className="mentee-rightmost-vertical-container">
 				  {giveKuddos}
 				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
-				  <WarningsSummary/>
+				  <WarningsSummary warnings={this.state.menteeInfo.warnings_received}/>
 				</div>	
 			</div>
 	      </div>

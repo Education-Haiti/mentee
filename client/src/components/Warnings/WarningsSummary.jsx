@@ -4,25 +4,16 @@ class WarningsSummary extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            warnings: [
-                {
-                    "issuer": "Koneyy Phamm",
-                    "date": "9/11/2018",
-                    "warning": "For consistently missing deadlines and showing no interest in the program"
-                },
-                {
-                    "issuer": "JP Vertil",
-                    "date": "9/11/2018",
-                    "warning": "For not being engaged"
-                },
-                {
-                    "issuer": "Jules Walter",
-                    "date": "9/11/2018",
-                    "warning": "For not responding to my emails"
-                }
-            ]
+            warnings: []
 
         }
+    }
+
+    componentDidUpdate (prevProps) {
+        if (this.props.warnings !== prevProps.warnings) {
+            this.setState({ warnings: this.props.warnings });
+        }
+        
     }
 
     render () {
