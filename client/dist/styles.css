@@ -895,7 +895,7 @@ button:hover {
 	  display: inline-block;
 	  flex-direction: column;
 	  justify-content: space-between;
-	  width: 300px;
+	  width: 280px;
 	  height: 200px;
 	  margin: 15px;
 	  padding: 10px;
@@ -908,7 +908,7 @@ button:hover {
 	display: flex;
 	flex-direction: column;
 	height: 100px;
-	width: 280px;
+	width: 260px;
 	margin-bottom: 15px;
 	padding: 10px;
   }
@@ -922,6 +922,13 @@ button:hover {
   .warnings-summary-issuer-and-date {
 	  color: black;
 	  font-size: 8pt;
+  }
+
+  .warnings-summary-title {
+	  font-size: 12pt;
+	  color: #a33030;
+	  margin-bottom: 5px;
+	  font-weight: bold;
   }
 
   .warnings-summary-text {

@@ -7,6 +7,7 @@ import GiveKudos from '../CommonComponents/GiveKudos.jsx';
 import KudosSummary from '../CommonComponents/KudosSummary.jsx';
 import '../../../dist/styles.css';
 import CircularProgressbar from 'react-circular-progressbar';
+import WarningsSummary from '../Warnings/WarningsSummary.jsx';
 
 class MenteeDashboard extends React.Component {
 	constructor(props) {
@@ -138,6 +139,7 @@ class MenteeDashboard extends React.Component {
 				<div className="mentee-rightmost-vertical-container">
 				  {giveKuddos}
 				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
+				  <WarningsSummary/>
 				</div>	
 			</div>
 	      </div>

@@ -28,6 +28,9 @@ class WarningsSummary extends React.Component {
     render () {
         return (
             <div className="warnings-summary-container column">
+                <div className="warnings-summary-title">
+                    Warnings
+                </div>
                 {
                     this.state.warnings.map((warning) => {
                         return (

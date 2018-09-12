@@ -39,6 +39,6 @@
      parent2_email: 'BadCop@parents.com',
  }
  
- //ReactDOM.render(<Mentee links={links} mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
+ReactDOM.render(<Mentee links={links} mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
 //ReactDOM.render(<MentorDashboard/>, document.getElementById('mentee'));
-ReactDOM.render(<WarningsSummary/>, document.getElementById('mentee'));
+//ReactDOM.render(<WarningsSummary/>, document.getElementById('mentee'));
