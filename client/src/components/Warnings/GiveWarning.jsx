@@ -5,6 +5,7 @@ class GiveWarning extends React.Component {
         super(props);
         this.state = {
             showGiveWarningButton: true,
+            warningMessage: '',
         }
     }
 
@@ -14,6 +15,17 @@ class GiveWarning extends React.Component {
         } else {
             this.setState({ showGiveWarningButton: true });
         }
+    }
+
+    retrieveWarning (e) {
+        //console.log(e.target.value);
+        this.setState({ warningMessage: e.target.value });
+    }
+
+    submitWarning () {
+        console.log('the warning is: ', this.state.warningMessage);
+        this.toggleWarning();
+        alert('Warning submitted.');
     }
 
     render () {
@@ -29,9 +41,9 @@ class GiveWarning extends React.Component {
         } else if (this.state.showGiveWarningButton === false) {
             giveWarningBody = (
                 <div>
-                    <input className="give-warning-input"/>
+                    <input className="give-warning-input" onChange={this.retrieveWarning.bind(this)}/>
                     <div>
-                        <button className="give-warning-button"> Submit </button>
+                        <button className="give-warning-button" onClick={this.submitWarning.bind(this)}> Submit </button>
                         <button className="give-warning-button" onClick={this.toggleWarning.bind(this)}> Cancel </button>
                     </div>
                 </div>
