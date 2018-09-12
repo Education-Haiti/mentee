@@ -20,7 +20,7 @@ class WarningsSummary extends React.Component {
         return (
             <div className="warnings-summary-container column">
                 <div className="warnings-summary-title">
-                    Warnings
+                  {this.state.warnings.length}  Warnings
                 </div>
                 {
                     this.state.warnings.map((warning) => {
