@@ -191,6 +191,18 @@ app.put('/users/receivedkudos/:email/', (req, res) => {
     res.sendStatus(200);
 })
 
+app.put('/users/receivedwarnings/:email/', (req, res) => {
+    const theEmail = req.params.email;
+    const newWarningsReceived = req.body.warningsReceived;
+    const newCount = req.body.newCount; 
+    queries2.updateWarningsReceived(theEmail, newWarningsReceived, newCount, (err, results) => {
+        if (err) {
+            console.log('Server-side error in updating warnings received : ', err);
+        }
+    })
+    res.sendStatus(200);
+})
+
 // Posting to Slack
 app.post('/users/slack/kudos', (req, res) => {
         const theMessage = req.body.message;
