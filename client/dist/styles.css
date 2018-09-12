@@ -935,3 +935,29 @@ button:hover {
 	  font-size: 8pt;
 	  color: #234060;
   }
+
+  .give-warning-container {
+	  border: .8px solid #f2f2f2;
+	  height: 100px;
+	  width: 260px;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  margin-top: 15px; 
+	  margin-left: 50px;
+	  padding: 10px;
+  }
+
+  .give-warning-button {
+	  background-color: #a33030;
+	  color: white;
+  }
+
+  .give-warning-button:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
+  }
+
+  .give-warning-input {
+	  width: 240px;
+  }
