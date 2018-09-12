@@ -938,7 +938,7 @@ button:hover {
   .give-warning-container {
 	  border: .8px solid #f2f2f2;
 	  height: 100px;
-	  width: 260px;
+	  width: 280px;
 	  display: flex;
 	  flex-direction: column;
 	  justify-content: center;
@@ -957,5 +957,5 @@ button:hover {
   }
 
   .give-warning-input {
-	  width: 240px;
+	  width: 260px;
   }

@@ -158,7 +158,17 @@ let updateKudosReceived = (theEmail, newKudosReceivedObj, newCount) => {
         if (err) {
             console.log('Database-side error in updating kudos received : ', err);
         } else {
-            console.log('Successfully updated kudos received')
+            console.log('Successfully updated kudos received');
+        }
+    })
+}
+
+let updateWarningsReceived = (theEmail, newWarningsReceivedObj, newCount) => {
+    User.findOneAndUpdate({ email: theEmail }, { warnings_received: newWarningsReceivedObj, number_warnings_received: newCount }, { upsert: true }, (err, doc) => {
+        if (err) {
+            console.log('Database-side error in updating warnings received: ', err);
+        } else {
+            console.log('Successfully updated warnings received');
         }
     })
 }
@@ -1129,6 +1139,22 @@ let sampleData14 = {
 
 //updateKudosReceived('jvertil@nd.edu', newKuddosReceived);
 
+// var newWarningReceived = 
+// [
+//     {
+//         issuer: 'Koneyy Phamm',
+//         date: '9/11/2018',
+//         warning: 'For consistently missing deadlines and showing no interest in the program'
+//     },
+//     {
+//         issuer: 'Jeffry Magloire',
+//         date: '9/11/2018',
+//         warning: 'For not submitting a practice SAT test on time'
+//     }
+// ];
+
+// updateWarningsReceived('jvertil@nd.edu', newWarningReceived, 2);
+
 module.exports = {
     saveUser, 
     getUsers,
@@ -1142,4 +1168,5 @@ module.exports = {
     getAllMentors, 
     removeUser,
     getMyMentees,
+    updateWarningsReceived,
 }
