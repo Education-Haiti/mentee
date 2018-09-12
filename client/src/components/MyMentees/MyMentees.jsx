@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import SECRETS from '../../client_secrets.js';
 import DetailedMenteeCard from './DetailedMenteeCard.jsx';
+import MyProfile from '../MyProfile/MyProfile.jsx';
+
 
 class MyMentees extends React.Component {
     constructor(props) {
@@ -17,6 +19,10 @@ class MyMentees extends React.Component {
             displayPhotos: {},
             slackHandles: {},
             mentorEmail: '',
+            showMenteeProfile: false,
+            showMenteeDashboard: false,
+            selectedMentee: {},
+            selectedMenteePhoto: {}
         }
     }
 
@@ -61,7 +67,23 @@ class MyMentees extends React.Component {
 			.catch((error) => {
 				console.log('Axios error in getting authed mentee info : ', error);
 			});
-	}
+    }
+    
+    toggleMenteeInfo(type, userInfo, userPhoto) { // type 1 --> mentee personal info  | type 2 --> mentee dashboard
+        if (type === 1) {
+            if (this.state.showMenteeProfile === false) {
+                this.setState({selectedMentee: userInfo}, () => {
+                    this.setState({selectedMenteePhoto: userPhoto}, () => {
+                        this.setState({showMenteeProfile: true});
+                    })
+                })
+                
+            } else {
+                this.setState({showMenteeProfile: false});
+            }
+        }
+
+    }
 
     initializeDisplayPhotosAndHandlesObj() {
         axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
@@ -85,9 +107,6 @@ class MyMentees extends React.Component {
             })
     }
 
-    getMentorsByEmail() {
-
-    }
 
     getMenteesByGrade (theGrade) {
         axios.get(`/users/mentees/grade/${theGrade}`)
@@ -107,9 +126,10 @@ class MyMentees extends React.Component {
             })
     }
 
-    render () {
-        return (
-            <div className="mymentees-container column">
+    renderBody () {
+        if (this.state.showMenteeProfile === false && this.state.showMenteeDashboard === false) {
+            return (
+                <div className="mymentees-container column">
                 <div className="mentor-d-title column">
                     MY MENTEES 
                 </div>
@@ -118,7 +138,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.myMentees.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]} onClick={this.toggleMenteeInfo.bind(this)}/>
                             )
                         })
                     }
@@ -132,7 +152,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.menteesT.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]} onClick={this.toggleMenteeInfo.bind(this)}/>
                             )
                         })
                     }
@@ -147,7 +167,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.mentees1.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]} onClick={this.toggleMenteeInfo.bind(this)}/>
                             )
                         })
                     }
@@ -163,7 +183,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.mentees2.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]} onClick={this.toggleMenteeInfo.bind(this)}/>
                             )
                         })
                     }
@@ -179,7 +199,7 @@ class MyMentees extends React.Component {
                     {
                         this.state.mentees3.map((peer, index) => {
                             return (
-                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]}/>
+                                <DetailedMenteeCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]} myMentor={this.state.mentorsByEmail[peer.my_mentor_email]} onClick={this.toggleMenteeInfo.bind(this)}/>
                             )
                         })
                     }
@@ -188,6 +208,20 @@ class MyMentees extends React.Component {
 
 
             </div>
+            )
+        } else if (this.state.showMenteeProfile === true) {
+            return (
+                <MyProfile user={this.state.selectedMentee} userPhoto={this.state.selectedMenteePhoto}/>
+            )
+        }
+    }
+
+    render () {
+        var content = this.renderBody();
+        return (
+           <div>
+               {content}
+           </div>
         )
     }
 }
