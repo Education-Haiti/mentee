@@ -24,8 +24,13 @@ class GiveWarning extends React.Component {
 
     submitWarning () {
         console.log('the warning is: ', this.state.warningMessage);
-        this.toggleWarning();
-        alert('Warning submitted.');
+        if (this.state.warningMessage === '') {
+            alert('Please enter a warning.');
+        } else {
+            this.toggleWarning();
+            alert('Warning submitted.');
+        }
+        
     }
 
     render () {

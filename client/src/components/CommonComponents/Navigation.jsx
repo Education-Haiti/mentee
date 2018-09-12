@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const Navigation = (props) => {
 	const {links, handleNavClick} = props;
 
-	let rows = links.map (({label}) => (
-		<button 
+	let rows = links.map (({label}, index) => (
+		<button key={index}
 			className={"nav-button "} 
 			onClick={() => handleNavClick(label)}
 		>

@@ -8,6 +8,7 @@ import KudosSummary from '../CommonComponents/KudosSummary.jsx';
 import '../../../dist/styles.css';
 import CircularProgressbar from 'react-circular-progressbar';
 import WarningsSummary from '../Warnings/WarningsSummary.jsx';
+import GiveWarning from '../Warnings/GiveWarning.jsx';
 
 class MenteeDashboard extends React.Component {
 	constructor(props) {
@@ -19,7 +20,8 @@ class MenteeDashboard extends React.Component {
 			percentComplete: 0,
 			displayPhotos: {},
 			slackHandles: {},
-			showGiveKuddos: false
+			showGiveKuddos: false,
+			showGiveWarning: false,
 		}
 	}
 
@@ -30,7 +32,8 @@ class MenteeDashboard extends React.Component {
 		this.setState({ email: this.props.email }, () => {
 			console.log('here di emailll', this.props.email);
 		});
-		this.setState({ showGiveKuddos: this.props.showKuddosSummary })
+		this.setState({ showGiveKuddos: this.props.showGiveKudos });
+		this.setState({ showGiveWarning:  !this.props.showGiveKudos});
 		
 	 }
 
@@ -121,11 +124,18 @@ class MenteeDashboard extends React.Component {
 
 	render() {
 		let giveKuddos = null;
+		let giveWarning = null;
 		if (this.state.showGiveKuddos === true) {
 			giveKuddos = (
 				<GiveKudos userInfo={this.state.menteeInfo} email={this.state.email} usernames={this.state.slackHandles} allUsers={this.state.allUsers}/>
 			)
 		}
+
+		if (this.state.showGiveWarning === true) {
+			giveWarning = <GiveWarning/>
+		}
+
+		
 	    return (
 	       <div>
 			<div className="menteeHomeMainContainer">
@@ -136,9 +146,10 @@ class MenteeDashboard extends React.Component {
 					</div>
 					<KudosSummary userInfo={this.state.menteeInfo} displayPhotos={this.state.displayPhotos}/>
 				</div>
-				<div className="mentee-rightmost-vertical-container">
+				<div className="mentee-rightmost-vertical-container column">
 				  {giveKuddos}
 				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
+				  {giveWarning}
 				  <WarningsSummary warnings={this.state.menteeInfo.warnings_received}/>
 				</div>	
 			</div>

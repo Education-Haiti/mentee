@@ -106,7 +106,7 @@ class MentorDashboard extends React.Component {
                                     {
                                         this.state.topFiveMentors.map((theTopMentor, index) => {
                                             return (
-                                                <MentorProfileCard mentor={theTopMentor} displayPhoto={ this.state.displayPhotos[theTopMentor.email] } slackHandle = { this.state.slackHandles[theTopMentor.email] }/>
+                                                <MentorProfileCard key={index} mentor={theTopMentor} displayPhoto={ this.state.displayPhotos[theTopMentor.email] } slackHandle = { this.state.slackHandles[theTopMentor.email] }/>
                                             )
                                         })
                                     }

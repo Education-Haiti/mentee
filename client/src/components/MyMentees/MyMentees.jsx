@@ -224,7 +224,7 @@ class MyMentees extends React.Component {
             )
         } else if (this.state.showMenteeDashboard === true) {
             return (
-                <MenteeDashboard userInfo={this.state.selectedMentee} email={this.state.selectedMentee.email} showKuddosSummary={false}/>
+                <MenteeDashboard userInfo={this.state.selectedMentee} email={this.state.selectedMentee.email} showGiveKudos={false}/>
             )
         }
     }
