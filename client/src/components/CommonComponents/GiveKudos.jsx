@@ -22,14 +22,28 @@ class GiveKudos extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({ email: this.props.email }, () => { // must be called-backs to be properly called
+            this.findUserByEmail_slack(this.state.email); // update the displayName of the current user
+        });
+
+        this.setState({ usernames: this.props.usernames }, () => {
+            console.log('the usernamessss: ', this.state.usernames);
+        });
+
+        this.setState({ allUsers: this.props.allUsers }, () => {
+            //console.log('all the users from db', this.state.allUsers)
+        });
+
+        this.setState({ kuddosGiven: this.props.userInfo.kudos_given });
+    }
+
 
     componentDidUpdate(prevProps) {
         
         if (this.props.email !== prevProps.email) { // IT IS EXTREMLY IMPORTANT TO CHECK THE CURRENT AND THE PREVIOUS PROPS. THIS IS REACT DOCUMENTATION. ELSE IT BREAK AND RENDERS TWICE!!
             this.setState({ email: this.props.email }, () => { // must be called-backs to be properly called
-                //this.getAllUsers_slack(); 
-                this.findUserByEmail_slack(this.state.email, 1); // update the displayName of the current user
-                // this.initializeUsernamesObj();
+                this.findUserByEmail_slack(this.state.email); // update the displayName of the current user
             });
             
         } 
@@ -51,7 +65,7 @@ class GiveKudos extends React.Component {
         }
     }
 
-    findUserByEmail_slack(theEmail, option) { // identifying user on slack API . 
+    findUserByEmail_slack(theEmail) { // identifying user on slack API . 
 		axios.get(`https://slack.com/api/users.lookupByEmail?token=${SECRETS.BOT_TOKEN}&email=${theEmail}`)
 			.then((response) => {
                 //console.log('User info from SLACK API !! : ', response.data.user.profile);
@@ -110,7 +124,7 @@ class GiveKudos extends React.Component {
         }
 
         let kuddosObj = this.state.kuddosGiven;
-
+        
         kuddosObj.push(tempGivenKudosObj);
 
         // update state 
@@ -191,7 +205,7 @@ class GiveKudos extends React.Component {
             return;
         } else if(this.state.kudosMessage.length > 0 && this.state.kudosMessage.length <= 150){
             axios.post('/users/slack/kudos', {
-                message: `NEW KUDOS! @${this.state.displayName} sent a kudos to @${this.state.usernames[this.state.receiverEmail]} : " ${this.state.kudosMessage} " \n\n *** Let's keep helping each other! ***`,
+                message: `NEW KUDOS! @${this.state.displayName} gave a kudos to @${this.state.usernames[this.state.receiverEmail]} : " ${this.state.kudosMessage} " \n\n *** Let's keep helping each other! ***`,
                 channel: 'websitetesting'
             })
             .then((response) => {

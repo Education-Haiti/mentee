@@ -26,6 +26,8 @@ let userSchema = mongoose.Schema({
     number_kudos_received: Number,
     kudos_received: Array,
     kudos_given: Array,
+    number_warnings_received: Number,
+    warnings_received: Array,
     // the following are only for mentors
     facebook_page: String,
     twitter_page: String,
@@ -205,7 +207,7 @@ let sampleData = {
         },
 
         {
-            name: "Christina Bastion",
+            name: "Christina Bastien",
             date: "09/01/2018",
             message: "helping me design an assignment for my mentee",
             email: "christiti14@gmail.com"
@@ -224,7 +226,13 @@ let sampleData = {
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         }
-    ]
+    ], 
+    number_warnings_received: 1,
+    warnings_received: [{
+        issuer: 'Koneyy Phamm',
+        date: '9/11/2018',
+        warning: 'For consistently missing deadlines and showing no interest in the program'
+    }]
 }
 
 let sampleData2 = {
@@ -268,7 +276,13 @@ let sampleData2 = {
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         }
-    ]
+    ],
+    number_warnings_received: 1,
+    warnings_received: [{
+        issuer: 'Koneyy Phamm',
+        date: '9/11/2018',
+        warning: 'For consistently missing deadlines and showing no interest in the program'
+    }]
 }
 
 let sampleData3 = {
@@ -798,7 +812,13 @@ let sampleData11 = {
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         }
-    ]
+    ], 
+    number_warnings_received: 1,
+    warnings_received: [{
+        issuer: 'Koneyy Phamm',
+        date: '9/11/2018',
+        warning: 'For consistently missing deadlines and showing no interest in the program'
+    }]
 }
 
 let sampleData12 = {
@@ -875,7 +895,13 @@ let sampleData12 = {
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         }
-    ]
+    ],
+    number_warnings_received: 1,
+    warnings_received: [{
+        issuer: 'Koneyy Phamm',
+        date: '9/11/2018',
+        warning: 'For consistently missing deadlines and showing no interest in the program'
+    }]
 }
 
 let sampleData13 = {
@@ -934,7 +960,13 @@ let sampleData13 = {
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         }
-    ]
+    ],
+    number_warnings_received: 1,
+    warnings_received: [{
+        issuer: 'Koneyy Phamm',
+        date: '9/11/2018',
+        warning: 'For consistently missing deadlines and showing no interest in the program'
+    }]
 }
 
 let sampleData14 = {
@@ -987,7 +1019,13 @@ let sampleData14 = {
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         }
-    ]
+    ],
+    number_warnings_received: 1,
+    warnings_received: [{
+        issuer: 'Koneyy Phamm',
+        date: '9/11/2018',
+        warning: 'For consistently missing deadlines and showing no interest in the program'
+    }]
 }
 
 // getMenteesByGrade('3', (err, result) => {

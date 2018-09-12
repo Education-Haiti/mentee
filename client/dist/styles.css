@@ -811,6 +811,16 @@ button:hover {
 	border-radius: 3px;
 }
 
+.mentor-d-profile-warnings {
+	width: 100px;
+	background-color: #234060;
+	color:white;
+	font-size: 10pt;
+	padding: 5px;
+	margin-bottom: 7px;
+	border-radius: 3px;
+}
+
 .mentor-links-container {
 	display: flex;
 }

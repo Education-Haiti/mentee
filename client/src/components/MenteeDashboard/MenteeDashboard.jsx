@@ -26,7 +26,9 @@ class MenteeDashboard extends React.Component {
 	// 	//this.getAuthedUserInfo();
 		this.initializeDisplayPhotosAndHandlesObj();
 	 	this.setState({ menteeInfo: this.props.userInfo });
-		this.setState({ email: this.props.email });
+		this.setState({ email: this.props.email }, () => {
+			console.log('here di emailll', this.props.email);
+		});
 		this.setState({ showGiveKuddos: this.props.showKuddosSummary })
 		
 	 }
