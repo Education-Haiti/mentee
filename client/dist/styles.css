@@ -11,7 +11,7 @@
 	 *
 	 * If you're not using "display: flex", you can remove this style.
 	 */
-	margin-top:75px;
+	margin-top:90px;
 	width: 200px;
 	height: 200px;
 	padding: 50px;
@@ -143,8 +143,16 @@ button {
 	justify-content: space-between;
 }
 
+.mentee-dashboard-name {
+	font-size: 35px;
+	color:  #a33030;
+	font-weight: bold;
+	margin-top: 30px;
+	margin-bottom: 0px;
+}
+
 .checklist {
-	margin-top: 75px;
+	margin-top: 90px;
 	width: 360px;
 	overflow: scroll;
 	background-color:  #f2f2f2	
@@ -277,7 +285,7 @@ input {
 	width: 520px;
 	height: 500px;
 	margin: 15px;
-	margin-top:75px;
+	margin-top:20px;
 	padding: 10px;
 	overflow: scroll;
 }

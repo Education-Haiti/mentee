@@ -127,7 +127,12 @@ class MenteeDashboard extends React.Component {
 	       <div>
 			<div className="menteeHomeMainContainer">
 				<Checklist calcCompleteness={this.calculatePercentCompleteness.bind(this)} email={this.state.email}/>
-				<KudosSummary userInfo={this.state.menteeInfo} displayPhotos={this.state.displayPhotos}/>
+				<div>
+					<div className="mentee-dashboard-name column"> 
+						{this.state.menteeInfo.full_name}
+					</div>
+					<KudosSummary userInfo={this.state.menteeInfo} displayPhotos={this.state.displayPhotos}/>
+				</div>
 				<div className="mentee-rightmost-vertical-container">
 				  {giveKuddos}
 				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
