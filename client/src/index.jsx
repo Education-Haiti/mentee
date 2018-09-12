@@ -1,13 +1,8 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import MenteeDashboard from './components/MenteeDashboard/MenteeDashboard.jsx';
-
-//  ReactDOM.render(<MenteeDashboard/>, document.getElementById('mentee'));
-
  import React from 'react';
  import ReactDOM from 'react-dom';
  import Mentee from './components/Mentee.jsx';
  import MentorDashboard from './components/MentorDashboard/Mentordashboard.jsx';
+ import WarningsSummary from './components/Warnings/WarningsSummary.jsx';
  
  const links = [
      { label: 'Home', url: 'www.google.com'},
@@ -44,5 +39,6 @@
      parent2_email: 'BadCop@parents.com',
  }
  
- ReactDOM.render(<Mentee links={links} mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
-//eactDOM.render(<MentorDashboard/>, document.getElementById('mentee'));
+ //ReactDOM.render(<Mentee links={links} mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
+//ReactDOM.render(<MentorDashboard/>, document.getElementById('mentee'));
+ReactDOM.render(<WarningsSummary/>, document.getElementById('mentee'));
