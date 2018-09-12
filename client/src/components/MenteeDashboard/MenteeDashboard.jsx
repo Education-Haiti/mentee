@@ -18,14 +18,16 @@ class MenteeDashboard extends React.Component {
 			percentComplete: 0,
 			displayPhotos: {},
 			slackHandles: {},
+			showGiveKuddos: false
 		}
 	}
-	
+
 	 componentDidMount() {
 	// 	//this.getAuthedUserInfo();
 		this.initializeDisplayPhotosAndHandlesObj();
 	 	this.setState({ menteeInfo: this.props.userInfo });
-	 	this.setState({ email: this.props.email });
+		this.setState({ email: this.props.email });
+		this.setState({ showGiveKuddos: this.props.showKuddosSummary })
 		
 	 }
 
@@ -126,13 +128,19 @@ class MenteeDashboard extends React.Component {
 	}
 
 	render() {
+		let giveKuddos = null;
+		if (this.state.showGiveKuddos === true) {
+			giveKuddos = (
+				<GiveKudos userInfo={this.state.menteeInfo} email={this.state.email} usernames={this.state.slackHandles} allUsers={this.state.allUsers}/>
+			)
+		}
 	    return (
 	       <div>
 			<div className="menteeHomeMainContainer">
 				<Checklist calcCompleteness={this.calculatePercentCompleteness.bind(this)} email={this.state.email}/>
 				<KudosSummary userInfo={this.state.menteeInfo} displayPhotos={this.state.displayPhotos}/>
 				<div className="mentee-rightmost-vertical-container">
-				  <GiveKudos userInfo={this.state.menteeInfo} email={this.state.email} usernames={this.state.slackHandles} allUsers={this.state.allUsers}/>
+				  {giveKuddos}
 				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
 				</div>	
 			</div>

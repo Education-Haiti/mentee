@@ -152,13 +152,13 @@ class Mentee extends React.Component {
 
 	renderMyProfile () {
 		return (
-			<MyProfile user={this.state.userInfo} userPhoto={this.state.userPhoto} />
+			<MyProfile user={this.state.userInfo} userPhoto={this.state.userPhoto}/>
 		)
     }
     
     renderMenteeDashboard() {
         return (
-            <MenteeDashboard userInfo={this.state.userInfo} email={this.state.email}/>
+            <MenteeDashboard userInfo={this.state.userInfo} email={this.state.email} showKuddosSummary={true}/>
         )
 	}
 	
