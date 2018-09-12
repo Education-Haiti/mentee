@@ -1,11 +1,41 @@
 import React from 'react';
+import axios from 'axios';
 
 class GiveWarning extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            issuer: '',
             showGiveWarningButton: true,
             warningMessage: '',
+            warningsReceived: [],
+            numberOfWarnings: 0,
+            menteeEmail: '',
+        }
+    }
+
+    componentDidMount() {
+        this.setState({ issuer: this.props.issuer });
+        this.setState({ warningsReceived: this.props.warningsReceived });
+        this.setState({ numberOfWarnings: this.props.numberOfWarnings })
+        this.setState({ menteeEmail: this.props.menteeEmail });
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.issuer !== prevProps.issuer) {
+            this.setState({ issuer: this.props.issuer });
+        }
+
+        if (this.props.warningsReceived !== prevProps.warningsReceived) {
+            this.setState({ warningsReceived: this.props.warningsReceived });
+        }
+
+        if (this.props.numberOfWarnings !== prevProps.numberOfWarnings) {
+            this.setState({ numberOfWarnings: this.props.numberOfWarnings });
+        }
+
+        if (this.props.menteeEmail !== prevProps.menteeEmail) {
+            this.setState({ menteeEmail: this.props.menteeEmail });
         }
     }
 
@@ -23,12 +53,55 @@ class GiveWarning extends React.Component {
     }
 
     submitWarning () {
-        console.log('the warning is: ', this.state.warningMessage);
+        console.log('here they are');
+        console.log(this.state.issuer);
+        console.log(this.state.menteeEmail);
+        console.log(this.state.warningsReceived);
+        console.log(this.state.numberOfWarnings);
         if (this.state.warningMessage === '') {
             alert('Please enter a warning.');
         } else {
             this.toggleWarning();
             alert('Warning submitted.');
+
+            let date = new Date();
+            let formattedDate = date.toLocaleDateString('us-EN', {year: 'numeric', month: 'long', day: 'numeric'});
+
+            let theIssuer = this.state.issuer;
+            let theEmail = this.state.menteeEmail;
+            let theWarning = this.state.warningMessage;
+
+            let tempGivenWarningsObj = {
+                issuer: theIssuer,
+                date: formattedDate,
+                warning: theWarning
+            }
+
+            let warningObj = this.state.warningsReceived;
+            let theNewCount = this.state.numberOfWarnings + 1;
+
+            warningObj.push(tempGivenWarningsObj);
+
+            // update state
+            this.setState({ warningsReceived: warningObj }, () => {
+                this.setState({ warningMessage: '' });
+            });
+
+            this.setState({ numberOfWarnings: theNewCount });
+
+            // now update db
+            axios.put(`/users/receivedwarnings/${theEmail}/`, {
+                warningsReceived: warningObj,
+                newCount: theNewCount
+
+            })
+            .then((response) => {
+
+            })
+            .catch((error) => {
+                console.log('Axios error in updating given warnings');
+            })
+
         }
         
     }

@@ -710,7 +710,13 @@ let sampleData9 = {
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         }
-    ]
+    ],
+    number_warnings_received: 1,
+    warnings_received: [{
+        issuer: 'Koneyy Phamm',
+        date: '9/11/2018',
+        warning: 'For consistently missing deadlines and showing no interest in the program'
+    }]
 }
 
 let sampleData10 = {
@@ -769,7 +775,13 @@ let sampleData10 = {
             message: "helping me with a mock interview",
             email: "jonathanmarcelin28@gmail.com"
         }
-    ]
+    ],
+    number_warnings_received: 1,
+    warnings_received: [{
+        issuer: 'Koneyy Phamm',
+        date: '9/11/2018',
+        warning: 'For consistently missing deadlines and showing no interest in the program'
+    }]
 }
 
 let sampleData11 = {

@@ -22,15 +22,16 @@ class MenteeDashboard extends React.Component {
 			slackHandles: {},
 			showGiveKuddos: false,
 			showGiveWarning: false,
+			mentorInfo: {},
 		}
 	}
 
 	 componentDidMount() {
-	// 	//this.getAuthedUserInfo();
 		this.initializeDisplayPhotosAndHandlesObj();
 	 	this.setState({ menteeInfo: this.props.userInfo });
 		this.setState({ email: this.props.email }, () => {
 			console.log('here di emailll', this.props.email);
+			this.identifyMentor(this.props.mentorEmail);
 		});
 		this.setState({ showGiveKuddos: this.props.showGiveKudos });
 		this.setState({ showGiveWarning:  !this.props.showGiveKudos});
@@ -91,36 +92,19 @@ class MenteeDashboard extends React.Component {
 		this.setState({ percentComplete: percentComp});
     }
 
-	identifyMentee(theEmail) { // identifying mentee on database NO LONGER NEEDED HERE !!!
+	identifyMentor(theEmail) { // identifying mentee on database NO LONGER NEEDED HERE !!!
 		axios.get(`/users/authed/${theEmail}`)
 			.then((response) => {
-				//console.log(response.data);
-				this.setState({ menteeInfo: response.data[0] });
+				console.log('The mentorrrrrr', response.data);
+				this.setState({ mentorInfo : response.data[0] });
 			})
 			.catch((error) => {
 				console.log('Axios error in getting authed mentee info : ', error);
 			});
 	}
 
-	getAuthedUserInfo() { // NO LONGER NEEDED HERE !!!!!!!!
-		const slackCodeRaw = window.location.search;
-		const slackCode = slackCodeRaw.slice(7); // to remove the key of 'slack=' specified on the server side
-		
-		axios.get('https://slack.com/api/oauth.access', {
-			params: {
-				code: slackCode,
-				client_id: SECRETS.CLIENT_ID,
-				client_secret: SECRETS.CLIENT_SECRET,
-			}
-		})
-		.then((response) => {
-			console.log('Email is ... : ', response.data.user.email);
-			this.setState({ email: response.data.user.email});
-			this.identifyMentee(response.data.user.email);
-		})
-		.catch((error)=> {
-			console.log('Axios error in getting authed user info !! : ', error); });
-	}
+
+
 
 	render() {
 		let giveKuddos = null;
@@ -132,7 +116,7 @@ class MenteeDashboard extends React.Component {
 		}
 
 		if (this.state.showGiveWarning === true) {
-			giveWarning = <GiveWarning/>
+			giveWarning = <GiveWarning issuer={this.state.mentorInfo.full_name} warningsReceived={this.state.menteeInfo.warnings_received} numberOfWarnings={this.state.menteeInfo.number_warnings_received} menteeEmail={this.state.menteeInfo.email}/>
 		}
 
 		

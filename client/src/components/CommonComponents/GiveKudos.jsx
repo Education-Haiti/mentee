@@ -186,7 +186,7 @@ class GiveKudos extends React.Component {
 
         })
         .catch((error) => {
-            console.log('Axios-side error in updating given kudos')
+            console.log('Axios error in updating given kudos')
         })
        
     }
