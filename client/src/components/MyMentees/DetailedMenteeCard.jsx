@@ -37,7 +37,7 @@ class DetailedMenteeCard extends React.Component {
                 </div>
 
                 <div className="mentor-links-container">
-                <img  className="mentee-links-icon" src={'https://s3.amazonaws.com/educationhaiti/dashboard.png'}   />
+                <img  className="mentee-links-icon" src={'https://s3.amazonaws.com/educationhaiti/dashboard.png'} onClick={() => this.props.onClick(2, this.props.mentee, this.props.displayPhoto)}  />
                 <img  className="mentee-links-icon" src={'https://s3.amazonaws.com/educationhaiti/user.png'} onClick={() => this.props.onClick(1, this.props.mentee, this.props.displayPhoto)} />
                 </div>
 

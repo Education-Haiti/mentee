@@ -31,17 +31,6 @@ class MenteeDashboard extends React.Component {
 		
 	 }
 
-	// componentWillReceiveProps(prevProps) {
-	// 	if (this.props.email !== prevProps.email) {
-	// 		this.setState({ email: this.props.email });
-	// 		console.log('hhh', this.state.email);
-	// 		console.log('aaa', this.state.menteeInfo);
-	// 	}
-
-	// 	if (this.props.menteeInfo !== prevProps.menteeInfo) {
-	// 		this.setState({ menteeInfo: this.props.userInfo });
-	// 	}
-	// }
 
 	initializeDisplayPhotosAndHandlesObj() {
         axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)

@@ -3,6 +3,7 @@ import axios from 'axios';
 import SECRETS from '../../client_secrets.js';
 import DetailedMenteeCard from './DetailedMenteeCard.jsx';
 import MyProfile from '../MyProfile/MyProfile.jsx';
+import MenteeDashboard from '../MenteeDashboard/MenteeDashboard.jsx';
 
 
 class MyMentees extends React.Component {
@@ -72,14 +73,22 @@ class MyMentees extends React.Component {
     toggleMenteeInfo(type, userInfo, userPhoto) { // type 1 --> mentee personal info  | type 2 --> mentee dashboard
         if (type === 1) {
             if (this.state.showMenteeProfile === false) {
-                this.setState({selectedMentee: userInfo}, () => {
-                    this.setState({selectedMenteePhoto: userPhoto}, () => {
-                        this.setState({showMenteeProfile: true});
+                this.setState({ selectedMentee: userInfo }, () => {
+                    this.setState({ selectedMenteePhoto: userPhoto }, () => {
+                        this.setState({ showMenteeProfile: true });
                     })
                 })
                 
             } else {
                 this.setState({showMenteeProfile: false});
+            }
+        } else if (type === 2) {
+            if (this.state.showMenteeDashboard === false) {
+                this.setState({ selectedMentee: userInfo }, () => {
+                    this.setState({ showMenteeDashboard: true })
+                });
+            } else {
+                this.setState({ showMenteeDashboard: false });
             }
         }
 
@@ -212,6 +221,10 @@ class MyMentees extends React.Component {
         } else if (this.state.showMenteeProfile === true) {
             return (
                 <MyProfile user={this.state.selectedMentee} userPhoto={this.state.selectedMenteePhoto}/>
+            )
+        } else if (this.state.showMenteeDashboard === true) {
+            return (
+                <MenteeDashboard userInfo={this.state.selectedMentee} email={this.state.selectedMentee.email} showKuddosSummary={false}/>
             )
         }
     }
