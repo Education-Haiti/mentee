@@ -7,6 +7,7 @@ const EntryFormField = (props) => {
 		field,
 		label, 
 		value,
+		placeholder,
 		changeHandler
 	} = props;
 
@@ -19,6 +20,7 @@ const EntryFormField = (props) => {
 				className="profile-card-field" 
 				onChange={(e) => changeHandler(field, e.target.value)}
 				value={value}
+				placeholder={placeholder}
 			/>
 		</div>
 	)
