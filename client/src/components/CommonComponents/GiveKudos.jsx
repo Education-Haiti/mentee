@@ -86,7 +86,21 @@ class GiveKudos extends React.Component {
                     console.log('receiver: ', this.state.receiverInfo);
                     this.setState({ kuddosReceived_Receiver: response.data[0].kudos_received }, () => {
                         this.setState({ number_kudos_received_receiver: response.data[0].number_kudos_received }, () => {
+                            //console.log('the level is : ', this.state.receiverInfo.level);
                             this.updateGivenKudos();
+                            // update slack channels
+                            console.log('the grade...', this.state.receiverInfo.grade);
+                            if (this.state.receiverInfo.level === 'mentor') {
+                                this.updateSlackChannels('mentors');
+                            } else if (this.state.receiverInfo.grade === 'T') {
+                                this.updateSlackChannels('mentees-t-18-19');
+                            } else if (this.state.receiverInfo.grade === '1') {
+                                this.updateSlackChannels('mentees-1-18-19');
+                            } else if (this.state.receiverInfo.grade === '2') {
+                                this.updateSlackChannels('mentees-2-18-19');
+                            } else if (this.state.receiverInfo.grade === '3') {
+                                this.updateSlackChannels('mentees-3-18-19');
+                            }
                         })
                     });
 
@@ -192,9 +206,6 @@ class GiveKudos extends React.Component {
     }
 
 
-
-
-
     submitKudos() {
         if(this.state.kudosMessage.length === 0) {
             alert('Please make sure to input a kudos before submitting! :) ');
@@ -204,21 +215,24 @@ class GiveKudos extends React.Component {
             alert('Please make a kudos of less than 150 characters :) ');
             return;
         } else if(this.state.kudosMessage.length > 0 && this.state.kudosMessage.length <= 150){
+            this.identifyReceiver(this.state.receiverEmail);
+        }  
+    }
+
+    updateSlackChannels(theChannel) {
             axios.post('/users/slack/kudos', {
                 message: `NEW KUDOS! @${this.state.displayName} gave a kudos to @${this.state.usernames[this.state.receiverEmail]} : " ${this.state.kudosMessage} " \n\n *** Let's keep helping each other! ***`,
-                channel: 'websitetesting'
+                channel: theChannel
             })
             .then((response) => {
                 // update the database for user giving kudos
-                this.identifyReceiver(this.state.receiverEmail);
+                // this.identifyReceiver(this.state.receiverEmail);
                 
-                // udpate the database for user receiving kudos
-
             })
             .catch((error) => {
                 console.log('Axios error in making post to slack');
-            });      
-        }  
+            }); 
+
     }
 
     cancelKudos() {
