@@ -31,14 +31,9 @@ class MyProfile extends React.Component {
 		let userFields =  
 		[
 			{
-				key: 'first_name',
-				label: 'First Name',
-				value: user.first_name
-			},
-			{
-				key: 'last_name',
-				label: 'Last Name',
-				value: user.last_name
+				key: 'full_name',
+				label: 'Name',
+				value: user.full_name
 			},
 			{
 				key: 'sex',
