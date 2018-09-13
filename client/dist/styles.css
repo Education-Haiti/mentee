@@ -430,6 +430,17 @@ input {
 	font-size: 11pt;
 }
 
+.profile-card-button {
+	background-color: #a33030 ;
+	color: white;
+	margin-left: 380px;
+}
+
+.profile-card-button:hover {
+	color: #a33030;
+	background-color: #ffdfe7;
+}
+
 /*shared with visit portal*/
 html {
 	width: 100vw;

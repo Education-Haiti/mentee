@@ -15,7 +15,7 @@ const ProfileCardField = (props) => {
 			</label>
 			<div className="profile-card-field">
 					{ value }
-				</div>
+			</div>
 		</div>
 	)
 }
