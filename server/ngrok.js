@@ -219,6 +219,16 @@ app.post('/users/slack/kudos', (req, res) => {
         console.log('Message sent: ', res.ts);
         })
         .catch(console.error);
+
+        // always post in general as well
+        web.chat.postMessage({ channel: 'general', text: theMessage })
+        .then((res) => {
+        // `res` contains information about the posted message
+        console.log('Message sent: ', res.ts);
+        })
+        .catch(console.error);
+
+        
         
     res.sendStatus(201);
 })
