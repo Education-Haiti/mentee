@@ -41,6 +41,66 @@ class ManageUsers extends React.Component {
         } else if (this.state.addMenteesMentorEmail === '') {
             alert('Please add an email for the new mentor :) ');
         } else {
+            let theChecklist = {};
+            if (this.state.addMenteeLevel === '3') {
+                theChecklist = {
+                    "Introduced self to mentor": false,
+                    "Mentor talked to parents": false,
+                    "Read Education Haiti manual": false,
+                    "Mentor approved extra-curricular plans": false,
+                }
+            } else if (this.state.addMenteeLevel === '2') {
+                theChecklist = {
+                    "Introduced self to mentor": false,
+                    "Mentor talked to parents": false,
+                    "Read Education Haiti manual": false,
+                    "Mentor approved extra-curricular plans": false,
+                    "Purchased TOEFL book": false,
+                    "Picked major": false,
+                    "Picked universities": false,
+                    "Listed universities requirements": false,
+                }
+            } else if (this.state.addMenteeLevel === '1') {
+                theChecklist = {
+                    "Introduced self to mentor": false,
+                    "Mentor talked to parents": false,
+                    "Read Education Haiti manual": false,
+                    "Mentor approved extra-curricular plans": false,
+                    "Purchased TOEFL book": false,
+                    "Picked major": false,
+                    "Picked universities": false,
+                    "Listed universities requirements": false,
+                    "Passed the TOEFL": false,
+                    "Scheduled SAT 1": false,
+                    "Passed SAT 1": false,
+                    "Picked subjects for SAT 2": false,
+                    "Purchased SAT 2 books": false
+                }
+            } else if (this.state.addMenteeLevel === 'T') {
+                theChecklist = {
+                    "Introduced self to mentor": false,
+                    "Mentor talked to parents": false,
+                    "Read Education Haiti manual:": false,
+                    "Mentor approved extra-curricular plans": false,
+                    "Purchased TOEFL book": false,
+                    "Picked major": false,
+                    "Picked universities": false,
+                    "Listed universities requirements": false,
+                    "Passed the TOEFL": false,
+                    "Scheduled SAT 1": false,
+                    "Passed SAT 1": false,
+                    "Picked subjects for SAT 2": false,
+                    "Purchased SAT 2 books": false,
+                    "Created a Common Application account": false,
+                    "Passed SAT 2": false,
+                    "Identified references": false,
+                    "Submitted reference letters": false,
+                    "Made outline for essays": false,
+                    "Completed essays": false,
+                    "Submitted all applications": false
+                }
+            }
+            
             axios.post('/users/new', {
                 user: {
                     full_name: this.state.addMenteeFullName,
@@ -57,10 +117,12 @@ class ManageUsers extends React.Component {
                     parent2_name: '',
                     parent2_phone: '',
                     parent2_email: '',
-                    checklist: {},
+                    checklist: theChecklist,
                     kudos_received: [],
                     kudos_given: [],
                     number_kudos_received: 0,
+                    number_warnings_received: 0,
+                    warnings_received: [],
                 }
             })
             .then((response) => {

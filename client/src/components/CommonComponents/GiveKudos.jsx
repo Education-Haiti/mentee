@@ -103,8 +103,6 @@ class GiveKudos extends React.Component {
                             }
                         })
                     });
-
-                    
                 });
 			})
 			.catch((error) => {
