@@ -153,7 +153,7 @@ class MyMentees extends React.Component {
                     }
                </div>
 
-                <div className="mentor-d-title column">
+                <div className="mentor-d-title mentor-d-title-2 column">
                     TERMINALE
                 </div>
 
@@ -168,7 +168,7 @@ class MyMentees extends React.Component {
                </div>
 
 
-                <div className="mentor-d-title column">
+                <div className="mentor-d-title mentor-d-title-2 column">
                     1ere
                 </div>
 
@@ -184,7 +184,7 @@ class MyMentees extends React.Component {
 
 
 
-                <div className="mentor-d-title column">
+                <div className="mentor-d-title mentor-d-title-2 column">
                     2nd
                 </div>
 
@@ -200,7 +200,7 @@ class MyMentees extends React.Component {
 
 
 
-                <div className="mentor-d-title column">
+                <div className="mentor-d-title mentor-d-title-2 column">
                     3e
                 </div>
 

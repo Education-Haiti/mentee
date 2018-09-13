@@ -753,16 +753,18 @@ button:hover {
 }
 
 .mentor-d-title {
-	display: flex;
 	/* width: 500px; */
+	min-width: 250px;
 	height: 50px;
 	font-size: 20pt;
 	color: black;
 	font-weight: bold;
 	border-bottom: .8px solid black;
 	margin-top: 20px;
-	justify-content: space-around;
-	flex-flow: row wrap;
+}
+
+.mentor-d-title-2 {
+	margin-top: 50px;
 }
 
 .mentor-d-top-mentors-row-container {
@@ -893,7 +895,7 @@ button:hover {
 
   .mymentees-container {
 	  display: flex;
-	  display: inline-block;
+	  /* display: inline-block; */
 	  flex-direction: column;
 	  justify-content: space-between;
   }

@@ -94,6 +94,10 @@ class Mentee extends React.Component {
 							this.setState({ level: 'admin' }, () => {
 								this.setState({ currentPage: 'dashboard' });
 							})
+						} else if (this.state.userInfo.level === 'mentor') {
+							this.setState({ level: 'mentor' }, () => {
+								this.setState({ currentPage: 'dashboard' });
+							})
 						}
 
 					});
@@ -235,10 +239,15 @@ class Mentee extends React.Component {
 			return (
 				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.adminLinks} profilePhoto={this.state.userPhoto}/>
 			)
+		} else if (this.state.level === 'mentor') {
+			return (
+				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.mentorLinks} profilePhoto={this.state.userPhoto}/>
+			)
+			
 		}
 	}
 
-
+	
 	render() {
 		var content = this.renderBody();
 		var nav = this.renderNav();
