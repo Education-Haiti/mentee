@@ -303,6 +303,9 @@ input {
 	overflow: scroll;
 }
 
+.spacer-before-kudos-summary {
+	margin-bottom: 90px;
+}
 .kudos-summary-top-container {
 	display: flex;
 	justify-content: space-between;
@@ -392,7 +395,8 @@ input {
 
 /*Mentee portal specifics*/
 .mentee-body-container {
-	height: 100vw;
+	height: 100%;
+	overflow: scroll;
 }
 .top-padding {
 	min-height: 70px;

@@ -112,6 +112,10 @@ class MentorDashboard extends React.Component {
                                     }
                             </div>
 
+                            <div className="spacer-before-kudos-summary">
+
+                            </div>
+
                             <div className="column">
                                 <KudosSummary userInfo={this.state.mentorInfo} displayPhotos={this.state.displayPhotos}/>
                             </div>
