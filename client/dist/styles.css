@@ -174,13 +174,25 @@ button {
 	
 }
 
+.checklist-content-container {
+	width: 100vw;
+	display: flex;
+	justify-content: space-between;
+}
+
 .checklist-item-name {
 	color:  #67777f;
 	margin-top: 10px;
 	margin-bottom: 15px;
 	margin-left: 30px;
 	margin-right: 10px;
+}
 
+.checklist-x-symbol {
+	margin-right: 15px;
+	margin-top: 10px;
+	width: 10px;
+	height: 10px;
 }
 
 .checkbox {

@@ -117,14 +117,20 @@ class Checklist extends React.Component {
                     {
                         Object.keys(this.state.items).map((keyName, keyIndex) => {
                             return <div className="checklist-item-container" key = { keyIndex }>
-                                    <input className="checkbox" type="checkbox" 
-                                        checked={this.state.items[`${keyName}`]} 
-                                        name={keyName} 
-                                        onChange={this.handleCheckedItem.bind(this)}/>
-                                <div className="checklist-item-name">
-                                        {keyName}
-                                </div>
-                                </div>
+                                        <input className="checkbox" type="checkbox" 
+                                            checked={this.state.items[`${keyName}`]} 
+                                            name={keyName} 
+                                            onChange={this.handleCheckedItem.bind(this)}/>
+                                        
+                                        <div className="checklist-content-container">
+                                            <div className="checklist-item-name">
+                                                    {keyName}
+                                            </div>
+                                            
+                                            <img className="checklist-x-symbol" src="https://s3.amazonaws.com/educationhaiti/x.png"/>
+                                        </div>
+                                
+                                    </div>
                         })
                     }
                 
