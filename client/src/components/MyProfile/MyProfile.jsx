@@ -10,9 +10,11 @@ class MyProfile extends React.Component {
 		this.state = {
 			userFields: [],
 			parentsFields: [],
+			currentView: 'profile'
 		}
 
 		this.parseFields = this.parseFields.bind(this);
+		this.handleViewChange = this.handleViewChange.bind(this);
 		this.renderProfileCards = this.renderProfileCards.bind(this);
 		this.renderEntryForms = this.renderEntryForms.bind(this);
 	}
@@ -29,9 +31,14 @@ class MyProfile extends React.Component {
 		let userFields =  
 		[
 			{
-				key: 'full_name',
-				label: 'Full Name',
-				value: user.full_name
+				key: 'first_name',
+				label: 'First Name',
+				value: user.first_name
+			},
+			{
+				key: 'last_name',
+				label: 'Last Name',
+				value: user.last_name
 			},
 			{
 				key: 'sex',
@@ -102,45 +109,65 @@ class MyProfile extends React.Component {
 		return { user: userFields, parents: parentsFields }
 	}
 
+	handleViewChange (view) {
+		this.setState({
+			currentView: view
+		})
+	}
 
 	renderProfileCards () {
+		let buttons = 
+		[
+			{
+				label: 'Edit',
+				handler: () => this.handleViewChange('edit')
+			}
+		]
+
 		return (
 			<div className="column">
 				<ProfileCard 
 					title={'My Profile'} 
 					fields={this.state.userFields} 
-					buttons={[]}
+					buttons={buttons}
 				/>
 				<ProfileCard 
 					title={'Parents Information'} 
 					fields={this.state.parentsFields} 
-					buttons={[]}
+					buttons={buttons}
 				/>
 			</div>
 		)
 	}
 
 	renderEntryForms () {
+		let buttons =
+		[
+			{
+				label: 'Save',
+				handler: () => this.handleViewChange('profile')
+			}
+		]
+
 		return (
 			<div className="column">
 				<EntryForm
 					title={'Edit My Information'}
 					fields={this.state.userFields}
-					changeHandler={''}
-					buttons={[]}
+					buttons={buttons}
 				/>
 				<EntryForm
 					title={'Edit Parents Information'}
 					fields={this.state.parentsFields}
 					changeHandler={''}
-					buttons={[]}
+					buttons={buttons}
 				/>
 			</div>
 		)
 	}
 
 	render() {
-		let $cards = this.renderEntryForms();
+		let $cards = this.state.currentView === 'profile'? this.renderProfileCards():this.renderEntryForms();
 
 		return (
 			<div className="page-container row">
