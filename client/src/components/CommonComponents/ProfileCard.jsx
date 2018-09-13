@@ -14,7 +14,12 @@ const ProfileCard = (props) => {
 	);
 
 	let $buttons = buttons.map(({label, handler}) => (
-			<button onClick={handler}>{label}</button>
+			<button 
+				className="profile-card-button"
+				onClick={handler}
+			>
+				{label}
+			</button>
 		)
 	);
 
@@ -27,9 +32,9 @@ const ProfileCard = (props) => {
 				<div className="profile-card-content column">
 					{$fields}
 				</div>
-			</div>
-			<div className="row">
-				{$buttons}
+				<div className="row">
+					{$buttons}
+				</div>
 			</div>
 		</div>
 	)

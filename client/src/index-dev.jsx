@@ -1,11 +1,10 @@
- import React from 'react';
+import React from 'react';
  import ReactDOM from 'react-dom';
- import Mentee from './components/Mentee.jsx';
- import MentorDashboard from './components/MentorDashboard/Mentordashboard.jsx';
- import WarningsSummary from './components/Warnings/WarningsSummary.jsx';
- import GiveWarning from './components/Warnings/GiveWarning.jsx';
+ // import Mentee from './components/Mentee.jsx';
+ import MyProfile from './components/MyProfile/MyProfile.jsx';
 
- const links = [
+
+const links = [
      { label: 'Home', url: 'www.google.com'},
      { label: 'My Info', url: 'www.google.com'},
      { label: 'Peers', url: 'www.google.com'},
@@ -40,7 +39,7 @@
      parent2_email: 'BadCop@parents.com',
  }
  
-ReactDOM.render(<Mentee links={links} mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
-//ReactDOM.render(<MentorDashboard/>, document.getElementById('mentee'));
-//ReactDOM.render(<WarningsSummary/>, document.getElementById('mentee'));
-//ReactDOM.render(<GiveWarning/>, document.getElementById('mentee'));
+ ReactDOM.render(<MyProfile user={demoMentee} />, document.getElementById('mentee'));
+
+
+
