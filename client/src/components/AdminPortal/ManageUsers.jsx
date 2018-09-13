@@ -80,7 +80,7 @@ class ManageUsers extends React.Component {
                 theChecklist = {
                     "Introduced self to mentor": false,
                     "Mentor talked to parents": false,
-                    "Read Education Haiti manual:": false,
+                    "Read Education Haiti manual": false,
                     "Mentor approved extra-curricular plans": false,
                     "Purchased TOEFL book": false,
                     "Picked major": false,
