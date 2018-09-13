@@ -184,15 +184,17 @@ button {
 	color:  #67777f;
 	margin-top: 10px;
 	margin-bottom: 15px;
-	margin-left: 30px;
+	margin-left: 10px;
 	margin-right: 10px;
 }
 
 .checklist-x-symbol {
 	margin-right: 15px;
 	margin-top: 10px;
+	margin-left: 5px;
 	width: 10px;
 	height: 10px;
+	flex-shrink: 0;
 }
 
 .checkbox {
