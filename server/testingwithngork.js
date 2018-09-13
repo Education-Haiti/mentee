@@ -126,6 +126,37 @@ app.get('/users/checklist/:email/', (req, res) => {
     })
 })
 
+app.get('/users/topfive/mentors', (req, res) => {
+    queries2.getTopFiveMentors((err, results) => {
+        if (err) {
+            console.log('Server-side error in getting top five mentors : ', err);
+        } else {
+            res.json(results);
+        }
+    })
+})
+
+app.get('/users/allmentors/', (req, res) => {
+    queries2.getAllMentors((err, results) => {
+        if (err) {
+            console.log('Server-side error in getting all mentors: ', err);
+        } else {
+            res.json(results);
+        }
+    })
+})
+
+app.get('/users/mymentees/:mentoremail', (req, res) => {
+    const theEmail = req.params.mentoremail;
+    queries2.getMyMentees(theEmail, (err, results) => {
+        if (err) {
+            console.log('Server-side error in getting my mentees : ', err);
+        } else {
+            res.json(results);
+        }
+    })
+})
+
 app.put('/users/checklist/:email/', (req, res) => {
     const theEmail = req.params.email; 
     const newChecklist = req.body.newChecklist;
@@ -151,9 +182,22 @@ app.put('/users/givenkudos/:email/', (req, res) => {
 app.put('/users/receivedkudos/:email/', (req, res) => {
     const theEmail = req.params.email;
     const newKudosReceived = req.body.kudosReceived;
-    queries2.updateKudosReceived(theEmail, newKudosReceived, (err, results) => {
+    const newCount = req.body.newCount;
+    queries2.updateKudosReceived(theEmail, newKudosReceived, newCount, (err, results) => {
         if (err) {
             console.log('Server-side error in updating kudos received : ', err);
+        }
+    })
+    res.sendStatus(200);
+})
+
+app.put('/users/receivedwarnings/:email/', (req, res) => {
+    const theEmail = req.params.email;
+    const newWarningsReceived = req.body.warningsReceived;
+    const newCount = req.body.newCount; 
+    queries2.updateWarningsReceived(theEmail, newWarningsReceived, newCount, (err, results) => {
+        if (err) {
+            console.log('Server-side error in updating warnings received : ', err);
         }
     })
     res.sendStatus(200);
@@ -175,6 +219,16 @@ app.post('/users/slack/kudos', (req, res) => {
         console.log('Message sent: ', res.ts);
         })
         .catch(console.error);
+
+        // always post in general as well
+        web.chat.postMessage({ channel: 'general', text: theMessage })
+        .then((res) => {
+        // `res` contains information about the posted message
+        console.log('Message sent: ', res.ts);
+        })
+        .catch(console.error);
+
+        
         
     res.sendStatus(201);
 })
@@ -184,29 +238,15 @@ app.post('/command', function(req, res) {
     res.send('Your ngrok tunnel is up and running!');
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.delete('/users/', (req, res) => {
+    const theEmail = req.body.email;
+    queries2.removeUser(theEmail, (err, result) => {
+        if (err) {
+            console.log('Server-side error in deleting user : ', err);
+        }
+    })
+    res.sendStatus(200);
+})
 
 
 

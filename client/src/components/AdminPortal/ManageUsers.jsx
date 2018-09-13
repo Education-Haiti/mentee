@@ -7,17 +7,15 @@ class ManageUsers extends React.Component {
         this.state = {
             showAddMenteeView: false,
             showAddMentorView: false, 
-            showDeleteMenteeView: false, 
-            showDeleteMentorView: false,
+            showDeleteUserView: false, 
             addMenteeFullName: '',
             addMenteeEmail: '',
+            addMenteesMentorEmail: '',
             addMenteeLevel: '3',
             addMentorFullName: '',
             addMentorEmail: '',
             addMentorLevel: 'Mentor',
-            deleteMenteeEmail: '',
-            deleteMentorEmail: '',
-
+            deleteUserEmail: '',
         }
     }
 
@@ -40,12 +38,75 @@ class ManageUsers extends React.Component {
             alert('Please add a name for the new mentee :) ');
         } else if (this.state.addMenteeEmail === '') {
             alert('Please add an email for the new mentee :) ');
+        } else if (this.state.addMenteesMentorEmail === '') {
+            alert('Please add an email for the new mentor :) ');
         } else {
+            let theChecklist = {};
+            if (this.state.addMenteeLevel === '3') {
+                theChecklist = {
+                    "Introduced self to mentor": false,
+                    "Mentor talked to parents": false,
+                    "Read Education Haiti manual": false,
+                    "Mentor approved extra-curricular plans": false,
+                }
+            } else if (this.state.addMenteeLevel === '2') {
+                theChecklist = {
+                    "Introduced self to mentor": false,
+                    "Mentor talked to parents": false,
+                    "Read Education Haiti manual": false,
+                    "Mentor approved extra-curricular plans": false,
+                    "Purchased TOEFL book": false,
+                    "Picked major": false,
+                    "Picked universities": false,
+                    "Listed universities requirements": false,
+                }
+            } else if (this.state.addMenteeLevel === '1') {
+                theChecklist = {
+                    "Introduced self to mentor": false,
+                    "Mentor talked to parents": false,
+                    "Read Education Haiti manual": false,
+                    "Mentor approved extra-curricular plans": false,
+                    "Purchased TOEFL book": false,
+                    "Picked major": false,
+                    "Picked universities": false,
+                    "Listed universities requirements": false,
+                    "Passed the TOEFL": false,
+                    "Scheduled SAT 1": false,
+                    "Passed SAT 1": false,
+                    "Picked subjects for SAT 2": false,
+                    "Purchased SAT 2 books": false
+                }
+            } else if (this.state.addMenteeLevel === 'T') {
+                theChecklist = {
+                    "Introduced self to mentor": false,
+                    "Mentor talked to parents": false,
+                    "Read Education Haiti manual": false,
+                    "Mentor approved extra-curricular plans": false,
+                    "Purchased TOEFL book": false,
+                    "Picked major": false,
+                    "Picked universities": false,
+                    "Listed universities requirements": false,
+                    "Passed the TOEFL": false,
+                    "Scheduled SAT 1": false,
+                    "Passed SAT 1": false,
+                    "Picked subjects for SAT 2": false,
+                    "Purchased SAT 2 books": false,
+                    "Created a Common Application account": false,
+                    "Passed SAT 2": false,
+                    "Identified references": false,
+                    "Submitted reference letters": false,
+                    "Made outline for essays": false,
+                    "Completed essays": false,
+                    "Submitted all applications": false
+                }
+            }
+            
             axios.post('/users/new', {
                 user: {
                     full_name: this.state.addMenteeFullName,
                     email: this.state.addMenteeEmail,
-                    level: this.state.addMenteeLevel,
+                    grade: this.state.addMenteeLevel,
+                    my_mentor_email: this.state.addMenteesMentorEmail,
                     sex: '',
                     hometown: '',
                     school: '',
@@ -55,16 +116,82 @@ class ManageUsers extends React.Component {
                     parent1_email: '',
                     parent2_name: '',
                     parent2_phone: '',
-                    parent2_email: ''
+                    parent2_email: '',
+                    checklist: theChecklist,
+                    kudos_received: [],
+                    kudos_given: [],
+                    number_kudos_received: 0,
+                    number_warnings_received: 0,
+                    warnings_received: [],
                 }
             })
             .then((response) => {
                 this.toggleAddMentee();
+                alert('Mentee successfully created!')
             })
             .catch((error) => {
                 console.log('Axios-side error in creating new mentee');
             })
         }  
+    }
+
+    addMentor () {
+        if (this.state.addMentorFullName === '') {
+            alert('Please add a name for the new mentor :) ');
+        } else if (this.state.addMentorEmail === '') {
+            alert('Please add an email for the new mentor :) ');
+        } else {
+            axios.post('/users/new', {
+                user: {
+                    full_name: this.state.addMentorFullName,
+                    email: this.state.addMentorEmail,
+                    level: 'mentor',
+                    grade: this.state.addMentorLevel,
+                    sex: '',
+                    hometown: '',
+                    school: '',
+                    phone_number: '',
+                    number_kudos_received: 0,
+                    kudos_received: [],
+                    kudos_given: [],
+                    facebook_page: '',
+                    twitter_page: '',
+                    linked_in_page: '',
+                    current_city: '',
+                    current_state: '', 
+                    current_country: '',
+                    undergraduate_school: '',
+                    graduate_school: '',
+                    majors: '',
+                    employer: '',
+                }
+            })
+            .then((response) => {
+                this.toggleAddMentor();
+                alert('Mentor successfully created!')
+            })
+            .catch((error) => {
+                console.log('Axios-side error in creating new mentor');
+            })
+        }
+    }
+
+    deleteUser () {
+        console.log('email to delete', this.state.deleteUserEmail);
+        if (this.state.deleteUserEmail === '') {
+            console.log(' Please enter the email of the user to be deleted :)  ')
+        } else {
+            axios.delete('/users', {
+                data: {email: this.state.deleteUserEmail}, // for delete, data MUST BE SPECIFIED FOR THE OBJECT, ELSE IT WILL NOT WORK
+              })
+              .then( (response) => {
+                this.toggleDeleteUser();
+                alert('User successfully deleted')
+              })
+              .catch((error) => {
+                console.log('Axios error in deleting user', error);
+              });
+        }
     }
 
     toggleAddMentee() {
@@ -85,34 +212,24 @@ class ManageUsers extends React.Component {
         
     }
 
-    toggleDeleteMentee() {
-        if (this.state.showDeleteMenteeView === false) {
-            this.setState({ showDeleteMenteeView: true });
+    toggleDeleteUser() {
+        if (this.state.showDeleteUserView === false) {
+            this.setState({ showDeleteUserView: true });
         } else {
-            this.setState({ showDeleteMenteeView: false });
+            this.setState({ showDeleteUserView: false });
         }
          
     }
 
-    toggleDeleteMentor() {
-        if (this.state.showDeleteMentorView === false) {
-            this.setState({ showDeleteMentorView: true });
-        } else {
-            this.setState({ showDeleteMentorView: false });
-        }
-        
-    }
 
     render () {
         let addMenteeButton = null;
         let addMentorButton = null; 
-        let deleteMenteeButton = null;
-        let deleteMentorButton = null;
+        let deleteUserButton = null;
 
         let addMenteeView = null;
         let addMentorView = null;
-        let deleteMenteeView = null;
-        let deleteMentorView = null;
+        let deleteUserView = null;
 
         if (this.state.showAddMenteeView === true) {
             addMenteeView = (
@@ -121,7 +238,9 @@ class ManageUsers extends React.Component {
                     <input name='addMenteeFullName' onChange={this.retrieveInfo.bind(this)}/>
                     Mentee Email
                     <input name="addMenteeEmail" onChange={this.retrieveInfo.bind(this)}/>
-                    Level
+                    Mentor Email
+                    <input name="addMenteesMentorEmail" onChange={this.retrieveInfo.bind(this)}/>
+                    Grade
                     <select className="manage-users-mentor-level" onChange={this.retrieveMenteeLevel.bind(this)}>
                         <option> 3 </option>
                         <option> 2 </option>
@@ -151,11 +270,11 @@ class ManageUsers extends React.Component {
                     <input name='addMentorEmail' onChange={this.retrieveInfo.bind(this)}/>
                     Level
                     <select className="manage-users-mentor-level" onChange={this.retrieveMentorLevel.bind(this)}>
-                        <option> Mentor </option>
-                        <option> Admin </option>
+                        <option> mentor </option>
+                        <option> admin </option>
                     </select>
                     <div>
-                        <button className="manage-users-add-buttons"> Add </button>
+                        <button className="manage-users-add-buttons" onClick={this.addMentor.bind(this)}> Add </button>
                         <button className="manage-users-add-buttons" onClick={this.toggleAddMentor.bind(this)}> Cancel </button>
                     </div>
                 
@@ -168,43 +287,26 @@ class ManageUsers extends React.Component {
             )
         }
 
-        if (this.state.showDeleteMenteeView === true) {
-            deleteMenteeView = (
+        if (this.state.showDeleteUserView === true) {
+            deleteUserView = (
                 <div className="manage-users-delete-container">
-                    Mentee Email
-                    <input name='deleteMenteeEmail' onChange={this.retrieveInfo.bind(this)}/>
+                    User Email
+                    <input name='deleteUserEmail' onChange={this.retrieveInfo.bind(this)}/>
                     <div>
-                        <button className="manage-users-delete-buttons"> Delete </button>
-                        <button className="manage-users-delete-buttons" onClick={this.toggleDeleteMentee.bind(this)}> Cancel </button>
+                        <button className="manage-users-delete-buttons" onClick={this.deleteUser.bind(this)} > Delete </button>
+                        <button className="manage-users-delete-buttons" onClick={this.toggleDeleteUser.bind(this)}> Cancel </button>
                     </div>
                 
                 </div>
             )
             
         } else {
-            deleteMenteeButton = (
-                <button className="create-assignment-sub-button" onClick={this.toggleDeleteMentee.bind(this)}> Delete Mentee </button>
+            deleteUserButton = (
+                <button className="create-assignment-sub-button" onClick={this.toggleDeleteUser.bind(this)}> Delete User </button>
             )
         }
 
-        if (this.state.showDeleteMentorView === true) {
-            deleteMentorView = (
-            <div className="manage-users-delete-container">
-                Mentor Email
-                <input name='deleteMentorEmail' onChange={this.retrieveInfo.bind(this)}/>
-                <div>
-                    <button className="manage-users-delete-buttons"> Delete </button>
-                    <button className="manage-users-delete-buttons" onClick={this.toggleDeleteMentor.bind(this)}> Cancel </button>
-                </div>
-            
-            </div>
-            )
 
-        } else {
-            deleteMentorButton = (
-                <button className="create-assignment-sub-button" onClick={this.toggleDeleteMentor.bind(this)}> Delete Mentor</button>
-            )
-        }
         return (
             <div>
                 <div className="manage-users-container">
@@ -214,11 +316,9 @@ class ManageUsers extends React.Component {
                     {addMentorButton}
                     {addMentorView}
 
-                    {deleteMenteeButton}
-                    {deleteMenteeView}
+                    {deleteUserButton}
+                    {deleteUserView}
 
-                    {deleteMentorButton}
-                    {deleteMentorView}
                 </div>
             </div>
         )

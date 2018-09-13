@@ -1,12 +1,14 @@
 import React from 'react';
 import SECRETS from '../../client_secrets.js';
 import axios from 'axios';
+import MenteeProfileCard from '../CommonComponents/MenteeProfileCard.jsx';
 
 class Peers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             peers: [],
+            completeness: [],
             displayPhotos: {},
             slackHandles: {},
             grade: ''
@@ -54,22 +56,20 @@ class Peers extends React.Component {
 
     render () {
         return (
-            <div className="peers-line-container">
-                {
-                    this.state.peers.map((peer, index) => {
-                        return (
-                            <div className="peers-container">
-                                <img className="peers-photo" src={this.state.displayPhotos[peer.email]}/>
-                                <div className="peers-name"> {peer.full_name} </div>
-                                <div className="peers-description"> 
-                                      <div> {peer.hometown} </div>
-                                      <div> {peer.school} </div>
-                                      <div> @{this.state.slackHandles[peer.email]} </div>
-                                </div>
-                            </div>
-                        )       
-                    })
-                }		          
+            <div className="mentor-d-top-container column">
+               <div className="mentor-d-title column">
+                    MY PEERS 
+               </div>
+
+               <div className="peers-line-container">
+                    {
+                        this.state.peers.map((peer, index) => {
+                            return (
+                                <MenteeProfileCard className="all-mentors-line-container" key={index} mentee={peer} displayPhoto={this.state.displayPhotos[peer.email]} slackHandle={this.state.slackHandles[peer.email]}/>
+                            )
+                        })
+                    }
+               </div>  
 			</div>
         )
     }
