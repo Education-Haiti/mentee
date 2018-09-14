@@ -242,7 +242,7 @@ class MyProfile extends React.Component {
 				newMenteeInfo: newUserInfo
 			})
 			.then((response) => {
-				this.getNewData(newMenteeInfo.email);
+				this.getNewData(newUserInfo.email);
 			})
 			.catch((error) => {
 				console.log('Axios error in updating mentee info: ', error);
