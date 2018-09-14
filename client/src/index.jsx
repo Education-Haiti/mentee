@@ -9,10 +9,11 @@
  
  const demoMentor = {
      full_name: 'Successful Mentor',
-     field_of_study: 'Underwater basket weaving',
-     university: 'University of Notre Dame', 
+     majors: 'Underwater basket weaving',
+     undergraduate_school: 'University of Notre Dame',
+     graduate_school: 'Harharharvard University', 
      email: 'dopeEmail@gmail.com',
-     phone: '123-456-7890',
+     phone_number: '123-456-7890',
      photo: 'https://picsum.photos/200/200'
  }
  
