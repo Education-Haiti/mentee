@@ -26,120 +26,156 @@ class MenteeDashboard extends React.Component {
 		}
 	}
 
-	 componentDidMount() {
-		this.initializeDisplayPhotosAndHandlesObj();
-	 	this.setState({ menteeInfo: this.props.userInfo });
-		this.setState({ email: this.props.email }, () => {
-			console.log('here di emailll', this.props.email);
-			this.identifyMentor(this.props.mentorEmail);
-		});
-		this.setState({ showGiveKuddos: this.props.showGiveKudos });
-		this.setState({ showGiveWarning:  !this.props.showGiveKudos});
+	 componentWillMount() {
+	 	this.initializeDisplayPhotosAndHandlesObj();
+	 	this.identifyMentor(this.props.mentorEmail);
+	 	this.setState({
+	 		menteeInfo: this.props.userInfo,
+	 		email: this.props.email,
+	 		showGiveKuddos: this.props.showGiveKudos,
+	 		showGiveWarning: !this.props.showGiveKudos
+	 	})
+
+	 	//>>>>>>>PRE-REFACTOR: DELETE ME AFTER REVIEW!!!<<<<<<<<
+		// this.initializeDisplayPhotosAndHandlesObj();
+	 // 	this.setState({ menteeInfo: this.props.userInfo });
+		// this.setState({ email: this.props.email }, () => {
+		// 	console.log('here di emailll', this.props.email);
+		// 	this.identifyMentor(this.props.mentorEmail);
+		// });
+		// this.setState({ showGiveKuddos: this.props.showGiveKudos });
+		// this.setState({ showGiveWarning:  !this.props.showGiveKudos});
 		
 	 }
 
 
 	initializeDisplayPhotosAndHandlesObj() {
-        axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
-			.then((response) => {
-                console.log('All users from slack !!!! : ', response.data.members);
-                // make an object whose key is the email of all users and value is the url to their photos
-                let tempObj = {};
-                let tempHandles = {};
-                let dataArray = response.data.members;
-                for (let i = 0; i < dataArray.length; i++) {
-                    tempObj[dataArray[i].profile.email] = dataArray[i].profile.image_512; 
-                    tempHandles[dataArray[i].profile.email] = dataArray[i].name;
-                }
+    axios.get(`https://slack.com/api/users.list?token=${SECRETS.BOT_TOKEN}`)
+		.then((response) => {
+      console.log('All users from slack !!!! : ', response.data.members);
+      // make an object whose key is the email of all users and value is the url to their photos
+      let tempObj = {};
+      let tempHandles = {};
+      let dataArray = response.data.members;
+      for (let i = 0; i < dataArray.length; i++) {
+          tempObj[dataArray[i].profile.email] = dataArray[i].profile.image_512; 
+          tempHandles[dataArray[i].profile.email] = dataArray[i].name;
+      }
 
-                this.setState({ displayPhotos: tempObj }, () => {
-                    this.setState({ slackHandles: tempHandles }, () => {
-                        this.getAllUsers();
-                    });
-                    
-                });
-                
-				
-            })
-            .catch((error) => {
-                console.log('Axios error in getting all users from SLACK API : ', error);
-            })
-    }
+      this.setState({ 
+      	displayPhotos: tempObj,
+      	slackHandles: tempHandles 
+      }, this.getAllUsers);
+    })
+    .catch((error) => {
+      console.log('Axios error in getting all users from SLACK API : ', error);
+    })
+  }
 
-    getAllUsers() {
-        axios.get('/users')
-            .then((response) => {
-                //console.log('All users: ', response);
-                this.setState({ allUsers: response.data }, () => {
-                    console.log('allllluuuseerrrss: ', this.state.allUsers);
-                });
-            })
-            .catch((error) => {
-                console.log('Axios error in retrieving users', error);
-            })
-    }
+  getAllUsers() {
+    axios.get('/users')
+    .then((response) => {
+        //console.log('All users: ', response);
+        this.setState({ allUsers: response.data }, () => {
+            console.log('allllluuuseerrrss: ', this.state.allUsers);
+        });
+    })
+    .catch((error) => {
+        console.log('Axios error in retrieving users', error);
+    })
+  }
 
 	calculatePercentCompleteness(items) {
-        let totalItems = Object.keys(items).length;
-        let amountCompleted = 0; 
+    let totalItems = Object.keys(items).length;
+    let amountCompleted = 0; 
 
-        for (var key in items) {
-            if (items[key] === true) {
-                amountCompleted++;
-            }
+    for (var key in items) {
+      if (items[key] === true) {
+          amountCompleted++;
+      }
 		}
 		let percentComp = Math.floor((amountCompleted/totalItems)*100);
 		this.setState({ percentComplete: percentComp});
-    }
+  }
 
 	identifyMentor(theEmail) { // identifying mentee on database NO LONGER NEEDED HERE !!!
 		axios.get(`/users/authed/${theEmail}`)
-			.then((response) => {
-				console.log('The mentorrrrrr', response.data);
-				this.setState({ mentorInfo : response.data[0] });
-			})
-			.catch((error) => {
-				console.log('Axios error in getting authed mentee info : ', error);
-			});
+		.then((response) => {
+			console.log('The mentorrrrrr', response.data);
+			this.setState({ mentorInfo : response.data[0] });
+		})
+		.catch((error) => {
+			console.log('Axios error in getting authed mentee info : ', error);
+		});
 	}
 
-
-
-
 	render() {
-		let giveKuddos = null;
-		let giveWarning = null;
-		if (this.state.showGiveKuddos === true) {
-			giveKuddos = (
-				<GiveKudos userInfo={this.state.menteeInfo} email={this.state.email} usernames={this.state.slackHandles} allUsers={this.state.allUsers}/>
-			)
-		}
+		let { 
+			menteeInfo, 
+			mentorInfo,
+			email, 
+			slackHandles, 
+			allUsers, 
+			displayPhotos, 
+			showGiveKuddos, 
+			showGiveWarning, 
+			percentComplete 
+		} = this.state;
 
-		if (this.state.showGiveWarning === true) {
-			giveWarning = <GiveWarning issuer={this.state.mentorInfo.full_name} warningsReceived={this.state.menteeInfo.warnings_received} numberOfWarnings={this.state.menteeInfo.number_warnings_received} menteeEmail={this.state.menteeInfo.email}/>
-		}
+		let giveKuddos = !showGiveKuddos? null: (
+			<GiveKudos 
+				userInfo={menteeInfo} 
+				email={email} 
+				usernames={slackHandles} 
+				allUsers={allUsers}
+			/>
+		)
 
+		let giveWarning = !showGiveWarning? null: (
+			<GiveWarning 
+				issuer={mentorInfo.full_name} 
+				warningsReceived={menteeInfo.warnings_received} 
+				numberOfWarnings={menteeInfo.number_warnings_received} 
+				menteeEmail={menteeInfo.email}
+			/>
+		)
 		
-	    return (
-	       <div>
-			<div className="menteeHomeMainContainer">
-				<Checklist calcCompleteness={this.calculatePercentCompleteness.bind(this)} email={this.state.email}/>
-				<div>
-					<div className="mentee-dashboard-name column"> 
-						{this.state.menteeInfo.full_name}
+	  return (
+	    <div>
+				<div 
+					className="menteeHomeMainContainer"
+				>
+					<Checklist 
+						calcCompleteness={this.calculatePercentCompleteness.bind(this)} 
+						email={email}
+					/>
+					<div>
+						<div 
+							className="mentee-dashboard-name column"
+						> 
+							{menteeInfo.full_name}
+						</div>
+						<KudosSummary 
+							userInfo={menteeInfo} 
+							displayPhotos={displayPhotos}/>
 					</div>
-					<KudosSummary userInfo={this.state.menteeInfo} displayPhotos={this.state.displayPhotos}/>
+					<div 
+						className="mentee-rightmost-vertical-container column"
+					>
+					  {giveKuddos}
+					  <CircularProgressbar 
+					  	percentage={percentComplete} 
+					  	text={`${percentComplete}%`}
+					  />
+					  {giveWarning}
+					  <WarningsSummary 
+					  	warnings={menteeInfo.warnings_received}
+					  />
+					</div>	
 				</div>
-				<div className="mentee-rightmost-vertical-container column">
-				  {giveKuddos}
-				  <CircularProgressbar percentage={this.state.percentComplete} text={`${this.state.percentComplete}%`} />
-				  {giveWarning}
-				  <WarningsSummary warnings={this.state.menteeInfo.warnings_received}/>
-				</div>	
-			</div>
-	      </div>
-	    );
-  	  }
+	    </div>
+	  )
+	}
 }
 
 export default MenteeDashboard;

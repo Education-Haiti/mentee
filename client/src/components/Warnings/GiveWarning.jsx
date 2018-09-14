@@ -5,46 +5,53 @@ class GiveWarning extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            issuer: '',
+            issuer: this.props.issuer || '',
             showGiveWarningButton: true,
             warningMessage: '',
-            warningsReceived: [],
-            numberOfWarnings: 0,
-            menteeEmail: '',
+            warningsReceived: this.props.warningsReceived || [],
+            numberOfWarnings: this.props.numberOfWarnings || 0,
+            menteeEmail: this.props.menteeEmail || '',
         }
     }
 
-    componentDidMount() {
-        this.setState({ issuer: this.props.issuer });
-        this.setState({ warningsReceived: this.props.warningsReceived });
-        this.setState({ numberOfWarnings: this.props.numberOfWarnings })
-        this.setState({ menteeEmail: this.props.menteeEmail });
-    }
+    //>>>>>>PRE-REFACTOR: DELETE ME AFTER REVIEW!!!<<<<<<<<
+    // componentDidMount() {
+    //     this.setState({ issuer: this.props.issuer });
+    //     this.setState({ warningsReceived: this.props.warningsReceived });
+    //     this.setState({ numberOfWarnings: this.props.numberOfWarnings })
+    //     this.setState({ menteeEmail: this.props.menteeEmail });
+    // }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.issuer !== prevProps.issuer) {
-            this.setState({ issuer: this.props.issuer });
-        }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.issuer !== prevProps.issuer) {
+    //         this.setState({ issuer: this.props.issuer });
+    //     }
 
-        if (this.props.warningsReceived !== prevProps.warningsReceived) {
-            this.setState({ warningsReceived: this.props.warningsReceived });
-        }
+    //     if (this.props.warningsReceived !== prevProps.warningsReceived) {
+    //         this.setState({ warningsReceived: this.props.warningsReceived });
+    //     }
 
-        if (this.props.numberOfWarnings !== prevProps.numberOfWarnings) {
-            this.setState({ numberOfWarnings: this.props.numberOfWarnings });
-        }
+    //     if (this.props.numberOfWarnings !== prevProps.numberOfWarnings) {
+    //         this.setState({ numberOfWarnings: this.props.numberOfWarnings });
+    //     }
 
-        if (this.props.menteeEmail !== prevProps.menteeEmail) {
-            this.setState({ menteeEmail: this.props.menteeEmail });
-        }
-    }
+    //     if (this.props.menteeEmail !== prevProps.menteeEmail) {
+    //         this.setState({ menteeEmail: this.props.menteeEmail });
+    //     }
+    // }
 
     toggleWarning () {
-        if (this.state.showGiveWarningButton === true) {
-            this.setState({ showGiveWarningButton: false });
-        } else {
-            this.setState({ showGiveWarningButton: true });
-        }
+
+        this.setState({
+            showGiveWarningButton: !this.state.showGiveWarningButton
+        })
+
+        //>>>>>>>>PRE-REFACTOR: DELETE ME AFTER REVIEW!!!<<<<<<
+        // if (this.state.showGiveWarningButton === true) {
+        //     this.setState({ showGiveWarningButton: false });
+        // } else {
+        //     this.setState({ showGiveWarningButton: true });
+        // }
     }
 
     retrieveWarning (e) {
@@ -53,11 +60,8 @@ class GiveWarning extends React.Component {
     }
 
     submitWarning () {
-        console.log('here they are');
-        console.log(this.state.issuer);
-        console.log(this.state.menteeEmail);
-        console.log(this.state.warningsReceived);
-        console.log(this.state.numberOfWarnings);
+        // console.log('here they are');
+        // console.log(this.state);
         if (this.state.warningMessage === '') {
             alert('Please enter a warning.');
         } else {
@@ -66,37 +70,28 @@ class GiveWarning extends React.Component {
 
             let date = new Date();
             let formattedDate = date.toLocaleDateString('us-EN', {year: 'numeric', month: 'long', day: 'numeric'});
-
-            let theIssuer = this.state.issuer;
-            let theEmail = this.state.menteeEmail;
-            let theWarning = this.state.warningMessage;
-
             let tempGivenWarningsObj = {
-                issuer: theIssuer,
+                issuer: this.state.issuer,
                 date: formattedDate,
-                warning: theWarning
+                warning: this.state.warningMessage
             }
-
-            let warningObj = this.state.warningsReceived;
+            let theEmail = this.state.menteeEmail;
             let theNewCount = this.state.numberOfWarnings + 1;
-
+            let warningObj = this.state.warningsReceived;
             warningObj.push(tempGivenWarningsObj);
-
-            // update state
-            this.setState({ warningsReceived: warningObj }, () => {
-                this.setState({ warningMessage: '' });
-            });
-
-            this.setState({ numberOfWarnings: theNewCount });
 
             // now update db
             axios.put(`/users/receivedwarnings/${theEmail}/`, {
                 warningsReceived: warningObj,
                 newCount: theNewCount
-
             })
             .then((response) => {
-
+                // update state
+                this.setState({ 
+                    warningsReceived: warningObj,
+                    warningMessage: '',
+                    numberOfWarnings: theNewCount
+                });
             })
             .catch((error) => {
                 console.log('Axios error in updating given warnings');
@@ -107,18 +102,16 @@ class GiveWarning extends React.Component {
     }
 
     render () {
-        let giveWarningButton = null; 
-        let giveWarningBody = null;
-
-        if (this.state.showGiveWarningButton === true) {
-            giveWarningButton = (
-                <button className="give-warning-button" onClick={this.toggleWarning.bind(this)}>
-                    GIVE WARNING
-                </button>
+        if (this.state.showGiveWarningButton) {
+            return (
+                <div className="give-warning-container">
+                    {giveWarningButton}
+                    {giveWarningBody}
+                </div>
             )
-        } else if (this.state.showGiveWarningButton === false) {
-            giveWarningBody = (
-                <div>
+        } else {
+            return (
+                <div className="give-warning-container">
                     <input className="give-warning-input" onChange={this.retrieveWarning.bind(this)}/>
                     <div>
                         <button className="give-warning-button" onClick={this.submitWarning.bind(this)}> Submit </button>
@@ -127,13 +120,38 @@ class GiveWarning extends React.Component {
                 </div>
             )
         }
-        return (
-            <div className="give-warning-container">
-                {giveWarningButton}
-                {giveWarningBody}
-            </div>
-        )
     }
+
+
+    //>>>>>>>PRE-REFACTOR: DELETE ME AFTER REVIEW<<<<<<<<
+    // render () {
+    //     let giveWarningButton = null; 
+    //     let giveWarningBody = null;
+
+    //     if (this.state.showGiveWarningButton === true) {
+    //         giveWarningButton = (
+    //             <button className="give-warning-button" onClick={this.toggleWarning.bind(this)}>
+    //                 GIVE WARNING
+    //             </button>
+    //         )
+    //     } else if (this.state.showGiveWarningButton === false) {
+    //         giveWarningBody = (
+    //             <div>
+    //                 <input className="give-warning-input" onChange={this.retrieveWarning.bind(this)}/>
+    //                 <div>
+    //                     <button className="give-warning-button" onClick={this.submitWarning.bind(this)}> Submit </button>
+    //                     <button className="give-warning-button" onClick={this.toggleWarning.bind(this)}> Cancel </button>
+    //                 </div>
+    //             </div>
+    //         )
+    //     }
+    //     return (
+    //         <div className="give-warning-container">
+    //             {giveWarningButton}
+    //             {giveWarningBody}
+    //         </div>
+    //     )
+    // }
 }
 
 export default GiveWarning;
