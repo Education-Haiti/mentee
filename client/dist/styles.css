@@ -409,9 +409,11 @@ input {
 
 .sidebar {
 	width: 360px;
+	height: 100vh;
 	padding-top: 150px;
 	justify-content: center;
 	background-color: #234060;
+	position: fixed;
 }
 
 .profile-photo-holder{
@@ -423,9 +425,11 @@ input {
 }
 
 .profile-page-body {
-	width: 80%;
+	width: 60%;
 	padding-top: 100px;
+	padding-bottom: 100px;
 	padding-left:100px;
+	margin-left: 520px;
 }
 
 .profile-card-container {
