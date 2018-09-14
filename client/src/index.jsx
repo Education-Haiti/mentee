@@ -8,25 +8,23 @@
 
  
  const demoMentor = {
-     first_name: 'SuperSuccessful',
-     last_name: 'Mentor',
+     full_name: 'Successful Mentor',
      field_of_study: 'Underwater basket weaving',
      university: 'University of Notre Dame', 
      email: 'dopeEmail@gmail.com',
      phone: '123-456-7890',
-     photo: 'https://picsum.com.photos/200/200'
+     photo: 'https://picsum.photos/200/200'
  }
  
  const demoMentee ={
-     first_name: 'Hardworking',
-     last_name: 'Haitian-Student',
+     full_name: 'Hardworking Mentee',
      sex: 'Female',
      email: 'dopeStudent@gmail.com',
      phone_number:'123-456-7890',
      hometown: 'Site Soley',
      school: 'Vertil International School',
      grade: '12',
-     photo: 'https://picsum.com.photos/200/200',
+     photo: 'https://picsum.photos/200/200',
      parent1_name: 'JayPee Vertil',
      parent1_phone:'000-000-0000',
      parent1_email: 'GoodCop@parents.com',
