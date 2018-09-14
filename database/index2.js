@@ -173,6 +173,32 @@ let updateWarningsReceived = (theEmail, newWarningsReceivedObj, newCount) => {
     })
 }
 
+let updateMenteeInfo = (theEmail, newMenteeInfo) => {
+    User.findOneAndUpdate({ email: theEmail }, 
+        {   full_name: newMenteeInfo.full_name,
+            sex: newMenteeInfo.sex,
+            hometown: newMenteeInfo.hometown,
+            school: newMenteeInfo.school,
+            grade: newMenteeInfo.grade,
+            email: newMenteeInfo.email,
+            phone_number: newMenteeInfo.phone_number,
+            parent1_name: newMenteeInfo.parent1_name,
+            parent1_phone: newMenteeInfo.parent1_phone,
+            parent1_email: newMenteeInfo.parent1_email,
+            parent2_name: newMenteeInfo.parent2_name,
+            parent2_phone: newMenteeInfo.parent2_phone,
+            parent2_email: newMenteeInfo.parent2_email, 
+        },
+        { upsert: true},
+        (err, doc) => {
+            if (err) {
+                console.log('Database-side error in updating mentee info: ', err);
+            } else {
+                console.log('Successfully updated mentee info');
+            }
+        })
+}
+
 let removeUser = (theEmail) => {
     User.remove({ email: theEmail })
     .exec((err, data) => {
@@ -1166,6 +1192,24 @@ let sampleData14 = {
 // ];
 
 // updateWarningsReceived('jvertil@nd.edu', newWarningReceived, 2);
+
+let newMenteeInfo = {
+    full_name: 'Juwan Bepo',
+    sex: 'W',
+    hometown: 'Texas',
+    school: 'James Boy',
+    grade: '3',
+    email: 'jlbepo@gmail.com',
+    phone_number: '222',
+    parent1_name: 'Lurit Bepo',
+    parent1_phone: '332',
+    parent1_email: '@yahoo.bepo',
+    parent2_name: 'Kenny',
+    parent2_phone: '111',
+    parent2_email: '@fr',
+}
+
+updateMenteeInfo('romied@princeton.edu', newMenteeInfo);
 
 module.exports = {
     saveUser, 

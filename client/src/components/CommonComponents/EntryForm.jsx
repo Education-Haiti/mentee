@@ -67,7 +67,7 @@ class EntryForm extends React.Component {
 		let $buttons = buttons.map(({label, handler}) => (
 			<button 
 				className="profile-card-button"
-				onClick={()=>handler(this.state)}
+				onClick={()=>handler('profile', this.state)}
 			>
 				{label}
 			</button>

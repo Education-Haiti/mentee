@@ -105,13 +105,20 @@ class MyProfile extends React.Component {
 		return { user: userFields, parents: parentsFields }
 	}
 
-	handleViewChange (view) {
+	handleViewChange (view, updatedDataObj) {
 
 		if (view === 'profile') {
+			// do database call 
+			 console.log('the uppp', updatedDataObj);
 		}
 		this.setState({
 			currentView: view
 		})
+	}
+
+	sendToDb (updatedInfo) {
+		console.log('here is the updated info', updatedInfo);
+
 	}
 
 	renderProfileCards () {
@@ -144,7 +151,8 @@ class MyProfile extends React.Component {
 		[
 			{
 				label: 'Save',
-				handler: () => this.handleViewChange('profile')
+				//handler: () => this.handleViewChange('profile')
+				handler: this.handleViewChange
 			}
 		]
 
