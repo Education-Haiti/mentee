@@ -1193,23 +1193,23 @@ let sampleData14 = {
 
 // updateWarningsReceived('jvertil@nd.edu', newWarningReceived, 2);
 
-let newMenteeInfo = {
-    full_name: 'Juwan Bepo',
-    sex: 'W',
-    hometown: 'Texas',
-    school: 'James Boy',
-    grade: '3',
-    email: 'jlbepo@gmail.com',
-    phone_number: '222',
-    parent1_name: 'Lurit Bepo',
-    parent1_phone: '332',
-    parent1_email: '@yahoo.bepo',
-    parent2_name: 'Kenny',
-    parent2_phone: '111',
-    parent2_email: '@fr',
-}
+// let newMenteeInfo = {
+//     full_name: 'Juwan Bepo',
+//     sex: 'W',
+//     hometown: 'Texas',
+//     school: 'James Boy',
+//     grade: '3',
+//     email: 'jlbepo@gmail.com',
+//     phone_number: '222',
+//     parent1_name: 'Lurit Bepo',
+//     parent1_phone: '332',
+//     parent1_email: '@yahoo.bepo',
+//     parent2_name: 'Kenny',
+//     parent2_phone: '111',
+//     parent2_email: '@fr',
+// }
 
-updateMenteeInfo('romied@princeton.edu', newMenteeInfo);
+// updateMenteeInfo('romied@princeton.edu', newMenteeInfo);
 
 module.exports = {
     saveUser, 
@@ -1225,4 +1225,5 @@ module.exports = {
     removeUser,
     getMyMentees,
     updateWarningsReceived,
+    updateMenteeInfo
 }
