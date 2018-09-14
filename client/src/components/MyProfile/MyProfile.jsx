@@ -10,7 +10,8 @@ class MyProfile extends React.Component {
 		this.state = {
 			userFields: [],
 			parentsFields: [],
-			currentView: 'profile'
+			currentView: 'profile',
+			user: this.props.user,
 		}
 
 		this.parseFields = this.parseFields.bind(this);
@@ -105,6 +106,9 @@ class MyProfile extends React.Component {
 	}
 
 	handleViewChange (view) {
+
+		if (view === 'profile') {
+		}
 		this.setState({
 			currentView: view
 		})
@@ -122,7 +126,7 @@ class MyProfile extends React.Component {
 		return (
 			<div className="column">
 				<ProfileCard 
-					title={'My Profile'} 
+					title={'Profile'} 
 					fields={this.state.userFields} 
 					buttons={buttons}
 				/>
@@ -147,15 +151,17 @@ class MyProfile extends React.Component {
 		return (
 			<div className="column">
 				<EntryForm
-					title={'Edit My Information'}
+					title={'Edit Information'}
 					fields={this.state.userFields}
 					buttons={buttons}
+					user={this.state.user}
 				/>
 				<EntryForm
 					title={'Edit Parents Information'}
 					fields={this.state.parentsFields}
 					changeHandler={''}
 					buttons={buttons}
+					user={this.state.user}
 				/>
 			</div>
 		)

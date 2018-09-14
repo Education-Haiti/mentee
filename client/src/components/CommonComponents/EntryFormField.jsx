@@ -12,7 +12,7 @@ const EntryFormField = (props) => {
 	} = props;
 
 	return (
-		<div className="profile-card-entry row">
+		<div className="profile-card-entry row ">
 			<label className="profile-card-label">
 				{ label }
 			</label>

@@ -460,9 +460,10 @@ input {
 
 .profile-card-field {
 	background-color: whitesmoke;
-	color: hsl(0, 6%, 42%);
+	color: #234060;
 	width: 300px;
 	font-size: 11pt;
+	text-decoration: none;
 }
 
 .profile-card-button {
@@ -877,6 +878,7 @@ button:hover {
 	text-decoration: none;
 	color: white;
   }
+
 
   a {
 	  text-decoration: none;
