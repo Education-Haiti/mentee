@@ -50,6 +50,16 @@ class Mentee extends React.Component {
 
 	componentDidMount() {
 		this.getAuthedUserInfo();
+		
+		//Kony's dev states
+		// this.setState({
+		// 	my_mentor: this.props.mentor,
+		// 	my_mentor_photo: this.props.mentor.photo,
+		// 	userInfo: this.props.user,
+		// 	userPhoto: this.props.user.photo,
+		// 	currentPage: 'myProfile',
+		// 	level: 'mentee'
+		// })
 	}
 
 	getAuthedUserInfo() {

@@ -4,13 +4,8 @@
  import MentorDashboard from './components/MentorDashboard/Mentordashboard.jsx';
  import WarningsSummary from './components/Warnings/WarningsSummary.jsx';
  import GiveWarning from './components/Warnings/GiveWarning.jsx';
+ import MyProfile from './components/MyProfile/MyProfile.jsx';
 
- const links = [
-     { label: 'Home', url: 'www.google.com'},
-     { label: 'My Info', url: 'www.google.com'},
-     { label: 'Peers', url: 'www.google.com'},
-     { label: 'My Mentor', url: 'www.google.com'},
- ]
  
  const demoMentor = {
      first_name: 'SuperSuccessful',
@@ -40,7 +35,7 @@
      parent2_email: 'BadCop@parents.com',
  }
  
-ReactDOM.render(<Mentee links={links} mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
+ReactDOM.render(<Mentee mentor={demoMentor} user={demoMentee}/>, document.getElementById('mentee'));
 //ReactDOM.render(<MentorDashboard/>, document.getElementById('mentee'));
 //ReactDOM.render(<WarningsSummary/>, document.getElementById('mentee'));
 //ReactDOM.render(<GiveWarning/>, document.getElementById('mentee'));
