@@ -220,7 +220,7 @@ class MyMentees extends React.Component {
             )
         } else if (this.state.showMenteeProfile === true) {
             return (
-                <MyProfile user={this.state.selectedMentee} userPhoto={this.state.selectedMenteePhoto}/>
+                <MyProfile user={this.state.selectedMentee} userPhoto={this.state.selectedMenteePhoto} level="mentee"/>
             )
         } else if (this.state.showMenteeDashboard === true) {
             return (

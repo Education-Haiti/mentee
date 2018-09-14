@@ -198,6 +198,28 @@ app.put('/users/receivedwarnings/:email/', (req, res) => {
     res.sendStatus(200);
 })
 
+app.put('/users/menteeinfo/:email/', (req, res) => {
+    const theEmail = req.params.email;
+    const newMenteeInfo = req.body.newMenteeInfo;
+    queries2.updateMenteeInfo(theEmail, newMenteeInfo, (err, result) => {
+        if (err) {
+            console.log('Server-side eroor in updating mentee info: ', err);
+        }
+    })
+    res.sendStatus(200);
+})
+
+app.put('/users/mentorinfo/:email/', (req, res) => {
+    const theEmail = req.params.email;
+    const newMentorInfo = req.body.newMentorInfo;
+    queries2.updateMentorInfo(theEmail, newMentorInfo, (err, result) => {
+        if (err) {
+            console.log('Server-side eroor in updating mentor info: ', err);
+        }
+    })
+    res.sendStatus(200);
+})
+
 // Posting to Slack
 app.post('/users/slack/kudos', (req, res) => {
         const theMessage = req.body.message;

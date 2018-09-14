@@ -82,6 +82,11 @@ class Mentee extends React.Component {
 					this.setState({ my_mentor: response.data[0]}, () => {
 						this.findUserByEmail_slack(this.state.my_mentor.email); // get the mentor's photo
 					});
+				} else if (type === 3) {
+					this.setState({ userInfo: response.data[0] }, () => {
+						this.setState({ currentPage: 'myProfile' });
+					}); // to get update after updating user info
+
 				} else {
 					this.setState({ userInfo: response.data[0] }, () => {
 						if (this.state.userInfo.level === "mentee") {
@@ -129,7 +134,8 @@ class Mentee extends React.Component {
 		if (label === 'Home') {
 			this.setState({ currentPage: 'menteeDashboard'});
 		} else if (label === 'My Info') {
-			this.setState({ currentPage: 'myProfile' });
+			this.identifyUser(this.state.email, 3);
+			// this.setState({ currentPage: 'myProfile' });
 		} else if (label === 'Peers') {
 			this.setState({ currentPage: 'peers' });
 		} else if (label === 'My Mentor') {
@@ -138,6 +144,7 @@ class Mentee extends React.Component {
 			this.setState({ currentPage: 'dashboard' });
 		} else if (label === 'Profile') {
 			// TO BE DONE!!
+			this.identifyUser(this.state.email, 3);
 		} else if (label === 'Mentees') {
 			this.setState({ currentPage: 'myMentees' });
 		} else if (label === 'Mentors') {
@@ -156,7 +163,7 @@ class Mentee extends React.Component {
 
 	renderMyProfile () {
 		return (
-			<MyProfile user={this.state.userInfo} userPhoto={this.state.userPhoto}/>
+			<MyProfile user={this.state.userInfo} userPhoto={this.state.userPhoto} level={this.state.userInfo.level}/>
 		)
     }
     

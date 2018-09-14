@@ -199,6 +199,34 @@ let updateMenteeInfo = (theEmail, newMenteeInfo) => {
         })
 }
 
+let updateMentorInfo = (theEmail, newMentorInfo) => {
+    User.findOneAndUpdate({ email: theEmail }, 
+        {   
+            full_name: newMentorInfo.full_name,
+            sex: newMentorInfo.sex,
+            current_city: newMentorInfo.hometown,
+            school: newMentorInfo.school,
+            email: newMentorInfo.email,
+            phone_number: newMentorInfo.phone_number,
+            current_state: newMentorInfo.current_state,
+            current_country: newMentorInfo.current_country,
+            undergraduate_school: newMentorInfo.undergraduate_school,
+            graduate_school: newMentorInfo.graduate_school,
+            majors: newMentorInfo.majors,
+            linked_in_page: newMentorInfo.linked_in_page,
+            facebook_page: newMentorInfo.facebook_page,
+            twitter_page: newMentorInfo.twitter_page    
+        },
+        { upsert: true},
+        (err, doc) => {
+            if (err) {
+                console.log('Database-side error in updating mentor info: ', err);
+            } else {
+                console.log('Successfully updated mentor info');
+            }
+        })
+}
+
 let removeUser = (theEmail) => {
     User.remove({ email: theEmail })
     .exec((err, data) => {
@@ -1225,5 +1253,6 @@ module.exports = {
     removeUser,
     getMyMentees,
     updateWarningsReceived,
-    updateMenteeInfo
+    updateMenteeInfo, 
+    updateMentorInfo
 }
