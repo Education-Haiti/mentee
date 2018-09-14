@@ -3,55 +3,57 @@ import PropTypes from 'prop-types';
 import Sidebar from '../CommonComponents/Sidebar.jsx';
 import ProfileCard from '../CommonComponents/ProfileCard.jsx';
 
-class MentorProfile extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			fields : []
+const MentorProfile = (props) => {
+	let { mentor, mentorPhoto } = props;
+
+	let mentorFields = 
+	[
+		{
+			key: 'full_name',
+			label: 'Name',
+			value: mentor.full_name
+		},		
+		{
+			key: 'undergraduate_school',
+			label: 'Undergrad',
+			value: mentor.undergraduate_school
+		},
+		{
+			key: 'graduate_school',
+			label: 'Grad School',
+			value: mentor.graduate_school
+		},
+		{
+			key: 'majors',
+			label: 'Majors',
+			value: mentor.majors
+		},
+		{
+			key: 'email',
+			label: 'Email',
+			value: mentor.email
+		},
+		{
+			key: 'phone_number',
+			label: 'Phone',
+			value: mentor.phone_number
 		}
-	}
+	]
 
-	componentDidMount() {
-		console.log('DA MENTOR: ', this.props.mentor);
-		this.setState({ fields: 
-		[
-			{
-				label: 'Name',
-				value: this.props.mentor.full_name
-			},		
-			{
-				label: 'Undergrad',
-				value: this.props.mentor.undergraduate_school
-			},
-			{
-				label: 'Grad School',
-				value: this.props.mentor.graduate_school
-			},
-			{
-				label: 'Majors',
-				value: this.props.mentor.majors
-			},
-			{
-				label: 'Email',
-				value: this.props.mentor.email
-			},
-			{
-				label: 'Phone',
-				value: this.props.mentor.phone_number
-			}
-		] })
-	}
-	
-	 
-
-	render () {
-		return (
-			<div className="page-container row">
-				<Sidebar profilePhoto={this.props.mentorPhoto}/>
-				<ProfileCard title={'My Mentor'} fields={this.state.fields} buttons={[]}/>
+	return (
+		<div className="page-container row">
+			<Sidebar 
+				profilePhoto={mentorPhoto}
+			/>
+			<div className="column">
+				<ProfileCard 
+					title={'My Mentor'} 
+					fields={mentorFields} 
+					buttons={[]}
+				/>
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
 // MentorProfile.propTypes = {

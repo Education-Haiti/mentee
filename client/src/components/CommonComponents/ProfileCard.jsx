@@ -5,16 +5,18 @@ import PropTypes from 'prop-types';
 const ProfileCard = (props) => {
 	let { title, fields, buttons } = props;
 
-	let $fields = fields.map(({label, value}) => (
+	let $fields = fields.map(({label, value}, i) => (
 			<ProfileCardField
+				key={'profileCard' + i}
 				label={label} 
 				value={value || ''} 
 			/>
 		)
 	);
 
-	let $buttons = buttons.map(({label, handler}) => (
+	let $buttons = buttons.map(({label, handler}, i) => (
 			<button 
+				key={'profileCardButton' + i}
 				className="profile-card-button"
 				onClick={handler}
 			>

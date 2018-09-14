@@ -48,8 +48,18 @@ class Mentee extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-		this.getAuthedUserInfo();
+	componentWillMount() {
+		//this.getAuthedUserInfo();
+
+		//Kony's dev states
+		this.setState({
+			my_mentor: this.props.mentor,
+			my_mentor_photo: this.props.mentor.photo,
+			userInfo: this.props.user,
+			userPhoto: this.props.user.photo,
+			currentPage: 'My Info',
+			level: 'mentee'
+		})
 	}
 
 	getAuthedUserInfo() {
@@ -125,45 +135,37 @@ class Mentee extends React.Component {
     }
 
 	handleNavChange(label) {
-		console.log(label);
-		if (label === 'Home') {
-			this.setState({ currentPage: 'menteeDashboard'});
-		} else if (label === 'My Info') {
-			this.setState({ currentPage: 'myProfile' });
-		} else if (label === 'Peers') {
-			this.setState({ currentPage: 'peers' });
-		} else if (label === 'My Mentor') {
-			this.setState({ currentPage: 'mentorProfile' });
-		} else if (label === 'Dashboard') {
-			this.setState({ currentPage: 'dashboard' });
-		} else if (label === 'Profile') {
-			// TO BE DONE!!
-		} else if (label === 'Mentees') {
-			this.setState({ currentPage: 'myMentees' });
-		} else if (label === 'Mentors') {
-			this.setState({ currentPage: 'allMentors' });
-		} else if (label === 'Config') {
-			this.setState({ currentPage: 'adminPortal' })
-		} 
-
+		this.setState({
+			currentPage: label
+		})
 	}
 
 	renderMentorProfile () {
 		return (
-			<MentorProfile mentor={this.state.my_mentor} mentorPhoto={this.state.my_mentor_photo}/>
+			<MentorProfile 
+				mentor={this.state.my_mentor} 
+				mentorPhoto={this.state.my_mentor_photo}
+			/>
 		)
 	}
 
 	renderMyProfile () {
 		return (
-			<MyProfile user={this.state.userInfo} userPhoto={this.state.userPhoto}/>
+			<MyProfile 
+				user={this.state.userInfo} 
+				userPhoto={this.state.userPhoto}
+			/>
 		)
-    }
+  }
     
-    renderMenteeDashboard() {
-        return (
-            <MenteeDashboard userInfo={this.state.userInfo} email={this.state.email} showGiveKudos={true}/>
-        )
+  renderMenteeDashboard() {
+    return (
+      <MenteeDashboard 
+      	userInfo={this.state.userInfo} 
+      	email={this.state.email} 
+      	showGiveKudos={true}
+      />
+    )
 	}
 	
 	renderAdminPortal() {
@@ -174,13 +176,18 @@ class Mentee extends React.Component {
 
 	renderPeers() {
 		return (
-			<Peers grade={this.state.userInfo.grade}/>
+			<Peers 
+				grade={this.state.userInfo.grade}
+			/>
 		)
 	}
 
 	renderMentorDashboard() {
 		return (
-			<MentorDashboard userInfo={this.state.userInfo} email={this.state.email}/>
+			<MentorDashboard 
+				userInfo={this.state.userInfo} 
+				email={this.state.email}
+			/>
 		)
 	}
 
@@ -192,62 +199,52 @@ class Mentee extends React.Component {
 
 	renderMyMentees() {
 		return (
-			<MyMentees email={this.state.email}/>
+			<MyMentees 
+				email={this.state.email}
+			/>
 		)
 	}
 
 	renderBody () {
-		if (this.state.currentPage === 'mentorProfile') {
-			return this.renderMentorProfile();
-		}
+		let { currentPage } = this.state;
+		let method = 'renderMenteeDashboard';
 
-		if (this.state.currentPage === 'myProfile') {
-			return this.renderMyProfile();
-		}
-
-		if (this.state.currentPage === 'adminPortal') {
-			return this.renderAdminPortal();
-		}
-
-		if (this.state.currentPage === 'menteeDashboard') {
-			return this.renderMenteeDashboard();
-		}	
-
-		if (this.state.currentPage === 'peers') {
-			return this.renderPeers();
-		}
-
-		if (this.state.currentPage === 'dashboard') {
-			return this.renderMentorDashboard();
-		}
-
-		if (this.state.currentPage === 'allMentors') {
-			return this.renderAllMentors();
-		}
-
-		if (this.state.currentPage === 'myMentees') {
-			return this.renderMyMentees();
-		}
+		if (currentPage === 'Home') {
+			method = 'renderMenteeDashboard';
+		} else if (currentPage === 'My Info') {
+			method = 'renderMyProfile';
+		} else if (currentPage === 'Peers') {
+			method = 'renderPeers';
+		} else if (currentPage  === 'My Mentor') {
+			method = 'renderMentorProfile';
+		} else if (currentPage  === 'Dashboard') {
+			method =  'renderMentorDashboard';
+		} else if (currentPage  === 'Profile') {
+			// TO BE DONE!!
+		} else if (currentPage  === 'Mentees') {
+			method =  'renderMyMentees' ;
+		} else if (currentPage  === 'Mentors') {
+			method = 'renderAllMentors';
+		} else if (currentPage  === 'Config') {
+			method = 'renderAdminPortal';
+		} 
+		return this[method]();
 	}
 
 	renderNav () {
-		if (this.state.level === 'mentee') {
-			return (
-				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.menteeLinks} profilePhoto={this.state.userPhoto}/>
-			)
-		} else if (this.state.level === 'admin') {
-			return (
-				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.adminLinks} profilePhoto={this.state.userPhoto}/>
-			)
-		} else if (this.state.level === 'mentor') {
-			return (
-				<Navigation handleNavClick={this.handleNavChange.bind(this)} links={this.state.mentorLinks} profilePhoto={this.state.userPhoto}/>
-			)
-			
-		}
+		let { level, userPhoto } =this.state;
+		let key = (level || 'mentee') + 'Links';
+		let links = this.state[key]; 
+
+		return (
+			<Navigation 
+				handleNavClick={this.handleNavChange.bind(this)} 
+				links={links} 
+				profilePhoto={userPhoto}
+			/>
+		)
 	}
 
-	
 	render() {
 		var content = this.renderBody();
 		var nav = this.renderNav();
@@ -263,12 +260,5 @@ class Mentee extends React.Component {
 		)
 	}
 }
-
-
-Mentee.propTypes = {
-	handleNavClick: PropTypes.func,
-	links: PropTypes.array.isRequired,
-	mentor: PropTypes.object
-};
 
 export default Mentee;
