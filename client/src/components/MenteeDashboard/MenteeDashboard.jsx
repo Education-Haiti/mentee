@@ -80,16 +80,21 @@ class MenteeDashboard extends React.Component {
     }
 
 	calculatePercentCompleteness(items) {
-        let totalItems = Object.keys(items).length;
-        let amountCompleted = 0; 
-
-        for (var key in items) {
-            if (items[key] === true) {
-                amountCompleted++;
-            }
+		if (items !== undefined) {
+			let totalItems = Object.keys(items).length;
+			let amountCompleted = 0; 
+	
+			for (var key in items) {
+				if (items[key] === true) {
+					amountCompleted++;
+				}
+			}
+			let percentComp = Math.floor((amountCompleted/totalItems)*100);
+			this.setState({ percentComplete: percentComp});
+		} else {
+			this.setState({ percentComplete: 0});
 		}
-		let percentComp = Math.floor((amountCompleted/totalItems)*100);
-		this.setState({ percentComplete: percentComp});
+        
     }
 
 	identifyMentor(theEmail) { // identifying mentee on database NO LONGER NEEDED HERE !!!

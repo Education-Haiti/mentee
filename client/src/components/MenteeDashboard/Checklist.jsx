@@ -24,9 +24,14 @@ class Checklist extends React.Component {
     getChecklist(theEmail) {
         axios.get(`/users/checklist/${theEmail}`)
             .then((response) => {
-                this.setState({ items: response.data[0].checklist }, () => {
+                if (response.data[0] === undefined) {
+                    this.setState({ items: {} });
+                } else {
+                    this.setState({ items: response.data[0].checklist }, () => {
                     this.props.calcCompleteness(this.state.items);
                 });
+                }
+                
             })
             .catch((error) => {
                 console.log('Axios error in getting checklist : ', error);
@@ -98,6 +103,7 @@ class Checklist extends React.Component {
     render() {
         let addItemComp = null;
         let addItemButton = null;
+        let checkListItems = null;
         if (this.state.addItem === true) {
             addItemComp = 
             <div className="addItemContainer">
@@ -118,13 +124,10 @@ class Checklist extends React.Component {
                    Add an item
             </button>
         }
-        return (
-            <div>
-                <div className="checklist">
-                    <div className="checklist-title">
-                        CHECKLIST
-                    </div>
 
+        if (this.state.items !== undefined) {
+            checkListItems = (
+                <div>
                     {
                         Object.keys(this.state.items).map((keyName, keyIndex) => {
                             return <div className="checklist-item-container" key = { keyIndex }>
@@ -144,6 +147,19 @@ class Checklist extends React.Component {
                                     </div>
                         })
                     }
+                </div>
+            )
+        }
+        return (
+
+            <div>
+                <div className="checklist">
+                    <div className="checklist-title">
+                        CHECKLIST
+                    </div>
+
+                    {checkListItems}
+                    
                 
                 </div>
                 
