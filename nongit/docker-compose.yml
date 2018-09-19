@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mentees:
+    container_name: mentees
+    restart: on-failure
+    build: .
+    ports:
+      - '4390:4390'
+    depends_on: 
+      - mongodatabase
+  mongodatabase:
+    container_name: mongodatabase
+    restart: always
+    # build: ./database
+    image: mongo
+    volumes:
+      - ./data:/data/db:rw
+    ports:
+      - 27017:27017

@@ -1,12 +1,36 @@
 const mongoose = require('mongoose');
 
-var connection = mongoose.connect('mongodb://localhost:27017/users', { // users is the name of the database
-    useNewUrlParser: true,
+var connection = mongoose.connect('mongodb://localhost:27017/users', { // users is the name of the database. use localhost instead of mongodatabase when not dockerizing
+    useNewUrlParser: true,   
+}).catch(err => {
+    console.log('Error in connecting with mongoose !!: ', err);
 });
+
+const options = {
+    autoIndex: false, // Don't build indexes
+    reconnectTries: 30, // Retry up to 30 times
+    reconnectInterval: 500, // Reconnect every 500ms
+    poolSize: 10, // Maintain up to 10 socket connections
+    // If not connected, return errors immediately rather than waiting for reconnect
+    bufferMaxEntries: 0
+  }
+
+const connectWithRetry = () => {
+  console.log('MongoDB connection with retry')
+  mongoose.connect("mongodb://mongodatabase:27017/users", options).then(()=>{
+    console.log('MongoDB is connected')
+  }).catch(err=>{
+    console.log('MongoDB connection unsuccessful, retry after 5 seconds.')
+    setTimeout(connectWithRetry, 5000)
+  })
+}
+
+connectWithRetry();
 
 console.log('Connected to Mongoose (user)');
 
 let userSchema = mongoose.Schema({
+    id: { type : Number , unique : true, dropDups: true  }, // drop duplicates if a given piece of data is being passed in more than once
     full_name: String,
     sex: String, 
     email: String,
@@ -637,7 +661,7 @@ let sampleData7 = {
 
 let sampleData8 = {
     full_name: 'Jean-Luc V.', 
-    sex: 'F', 
+    sex: 'M', 
     email: 'jpvertil@hotmail.com',
     school: 'SLG!', 
     level: 'mentor',
@@ -1122,14 +1146,14 @@ let sampleData14 = {
 //     console.log(result);
 // })
 
-//  saveUser(sampleData);
+  saveUser(sampleData);
 //  saveUser(sampleData2);
 //  saveUser(sampleData3);
 //  saveUser(sampleData4);
 //  saveUser(sampleData5);
 //  saveUser(sampleData6);
 //  saveUser(sampleData7);
-//  saveUser(sampleData8);
+ saveUser(sampleData8);
 //  saveUser(sampleData9);
 //  saveUser(sampleData10);
 //  saveUser(sampleData11);

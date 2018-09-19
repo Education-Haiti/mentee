@@ -1,0 +1,47 @@
+{
+  "name": "mentee",
+  "version": "1.0.0",
+  "description": "mentee portal",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "webpack -d --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jvertil, coniekp",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/client": "^4.5.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "env2": "^2.2.2",
+    "express": "^4.16.3",
+    "history": "^4.7.2",
+    "mongodb": "^3.1.4",
+    "mongoose": "^5.2.12",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.3",
+    "passport-slack": "0.0.7",
+    "path": "^0.12.7",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-circular-progressbar": "^1.0.0",
+    "react-dom": "^16.4.2",
+    "react-router": "^3.0.5",
+    "react-router-dom": "^4.3.1",
+    "request": "^2.88.0",
+    "slackbots": "^1.1.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  }
+}
