@@ -68,14 +68,15 @@
 	height: 100vh;
 }
 
-body {
+/* body {
 	font-family: Hevetica, sans-serif;
 	color: green;
-	width: 100%;
+	width: 120%;
 	height: 100%;
 	min-height: 100%;
 	margin:0px;
-}
+	overflow: auto;
+} */
 .welcome-text {
 	font-weight: bold;
 	font-size: 30px;
@@ -461,7 +462,7 @@ input {
 .profile-card-field {
 	background-color: whitesmoke;
 	color: #234060;
-	width: 300px;
+	width: 350px;
 	font-size: 11pt;
 	text-decoration: none;
 }
@@ -485,9 +486,10 @@ html {
 body {
 	font-family: Hevetica, sans-serif;
 	color: #67777f;
-	width: 100%;
+	width: 150%;
 	height: 100%;
 	margin:0px;
+	overflow: scroll;
 }
 
 button {
