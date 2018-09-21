@@ -164,7 +164,7 @@ class MentorProfileCard extends React.Component {
         return (
             <div>
               <div className="mentor-d-profile-card-container column">
-                <img className="mentor-d-profile-card-photo" src={this.state.displayPhoto}/>
+                <img className="mentor-d-profile-card-photo" src={this.state.displayPhoto || 'https://s3.amazonaws.com/educationhaiti/pending.png'}/>
                 <div className="mentor-d-profile-card-name">
                     {this.props.mentor.full_name}
                 </div>

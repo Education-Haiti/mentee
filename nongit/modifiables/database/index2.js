@@ -1,31 +1,31 @@
 const mongoose = require('mongoose');
 
-var connection = mongoose.connect('mongodb://localhost:27017/users', { // users is the name of the database. use localhost instead of mongodatabase when not dockerizing
+var connection = mongoose.connect('mongodb://mongodatabase:27017/users', { // users is the name of the database. use localhost instead of mongodatabase when not dockerizing
     useNewUrlParser: true,   
 }).catch(err => {
     console.log('Error in connecting with mongoose !!: ', err);
 });
 
-// const options = {
-//     autoIndex: false, // Don't build indexes
-//     reconnectTries: 30, // Retry up to 30 times
-//     reconnectInterval: 500, // Reconnect every 500ms
-//     poolSize: 10, // Maintain up to 10 socket connections
-//     // If not connected, return errors immediately rather than waiting for reconnect
-//     bufferMaxEntries: 0
-//   }
+const options = {
+    autoIndex: false, // Don't build indexes
+    reconnectTries: 30, // Retry up to 30 times
+    reconnectInterval: 500, // Reconnect every 500ms
+    poolSize: 10, // Maintain up to 10 socket connections
+    // If not connected, return errors immediately rather than waiting for reconnect
+    bufferMaxEntries: 0
+  }
 
-// const connectWithRetry = () => {
-//   console.log('MongoDB connection with retry')
-//   mongoose.connect("mongodb://mongodatabase:27017/users", options).then(()=>{
-//     console.log('MongoDB is connected')
-//   }).catch(err=>{
-//     console.log('MongoDB connection unsuccessful, retry after 5 seconds.')
-//     setTimeout(connectWithRetry, 5000)
-//   })
-// }
+const connectWithRetry = () => {
+  console.log('MongoDB connection with retry')
+  mongoose.connect("mongodb://mongodatabase:27017/users", options).then(()=>{
+    console.log('MongoDB is connected')
+  }).catch(err=>{
+    console.log('MongoDB connection unsuccessful, retry after 5 seconds.')
+    setTimeout(connectWithRetry, 5000)
+  })
+}
 
-// connectWithRetry();
+connectWithRetry();
 
 console.log('Connected to Mongoose (user)');
 
@@ -263,7 +263,7 @@ let removeUser = (theEmail) => {
 }
 
 let sampleData = {
-    full_name: 'Jean-Pierre Vertil', 
+    full_name: 'JP Superuser', 
     sex: 'M', 
     email: 'jvertil@nd.edu',
     school: 'Saint-Louis de Gonzague', 

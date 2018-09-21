@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, '../client/dist/')));
 
 
 // Again, we define a port we want to listen to
-const PORT=3009;
+const PORT=80;
 
 // Lets start our server
 app.listen(PORT, function () {
