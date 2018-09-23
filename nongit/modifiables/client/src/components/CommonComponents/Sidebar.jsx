@@ -5,7 +5,7 @@ const Sidebar = (props) => {
 	//let { profilePhoto } = props;
 	return (
 		<div className="sidebar">
-			<img className="profile-photo-holder" src={props.profilePhoto}/>
+			<img className="profile-photo-holder" src={props.profilePhoto || 'https://s3.amazonaws.com/educationhaiti/pending.png' }/>
 		</div>
 	)
 }

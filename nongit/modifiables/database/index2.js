@@ -203,7 +203,6 @@ let updateMenteeInfo = (theEmail, newMenteeInfo) => {
             sex: newMenteeInfo.sex,
             hometown: newMenteeInfo.hometown,
             school: newMenteeInfo.school,
-            grade: newMenteeInfo.grade,
             email: newMenteeInfo.email,
             phone_number: newMenteeInfo.phone_number,
             parent1_name: newMenteeInfo.parent1_name,
@@ -237,6 +236,7 @@ let updateMentorInfo = (theEmail, newMentorInfo) => {
             undergraduate_school: newMentorInfo.undergraduate_school,
             graduate_school: newMentorInfo.graduate_school,
             majors: newMentorInfo.majors,
+            employer: newMentorInfo.employer,
             linked_in_page: newMentorInfo.linked_in_page,
             facebook_page: newMentorInfo.facebook_page,
             twitter_page: newMentorInfo.twitter_page    

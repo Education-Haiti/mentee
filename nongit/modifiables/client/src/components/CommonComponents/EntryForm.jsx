@@ -10,7 +10,6 @@ class EntryForm extends React.Component {
 			sex: this.props.user.sex,
 			hometown: this.props.user.hometown,
 			school: this.props.user.school,
-			grade: this.props.user.grade,
 			email: this.props.user.email,
 			phone_number: this.props.user.phone_number,
 			parent1_name: this.props.user.parent1_name,
@@ -27,7 +26,8 @@ class EntryForm extends React.Component {
 			majors: this.props.user.majors,
 			linked_in_page: this.props.user.linked_in_page,
 			facebook_page: this.props.user.facebook_page,
-			twitter_page: this.props.user.twitter_page
+			twitter_page: this.props.user.twitter_page,
+			employer: this.props.user.employer
 
 		}
 		this.handleChange = this.handleChange.bind(this);

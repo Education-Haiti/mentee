@@ -101,6 +101,11 @@ class MyProfile extends React.Component {
 				value: user.majors
 			},
 			{
+				key: 'employer',
+				label: 'Employer',
+				value: user.employer
+			},
+			{
 				key: 'linked_in_page',
 				label: 'LinkedIn Link',
 				value: user.linked_in_page
@@ -145,11 +150,6 @@ class MyProfile extends React.Component {
 				key: 'school',
 				label: 'School',
 				value: user.school
-			},
-			{
-				key: 'grade',
-				label: 'Grade',
-				value: user.grade
 			},
 			{
 				key: 'email',

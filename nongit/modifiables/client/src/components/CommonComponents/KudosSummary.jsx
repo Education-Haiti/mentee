@@ -33,7 +33,6 @@ class KudosSummary extends React.Component {
     }
 
     handleShowKudosGiven() {
-        console.log(this.props);
         this.setState({ showKudosReceived: false });
     }
 

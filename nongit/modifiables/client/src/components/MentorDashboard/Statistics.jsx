@@ -53,18 +53,19 @@ class Statistics extends React.Component {
                     mentees2 +=1;
                 } else if (currentUser.grade === "1") {
                     mentees1 += 1;
-                } else if (currentUser.grade === "t") {
+                } else if (currentUser.grade === "T") {
                     menteesT += 1;
                 }
             }
         }
 
-        this.setState({ totalMentors: totalMentors });
-        this.setState({ totalMentees: totalMentees });
-        this.setState({ mentees3: mentees3 });
-        this.setState({ mentees2: mentees2 });
-        this.setState({ mentees1: mentees1 });
-        this.setState({ menteesT: menteesT });
+        this.setState({ totalMentors: totalMentors,
+                        totalMentees: totalMentees,
+                        mentees3: mentees3,
+                        mentees2: mentees2,
+                        mentees1: mentees1,
+                        menteesT: menteesT,
+        });
     }
 
     render () {
