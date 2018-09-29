@@ -178,6 +178,7 @@ button {
 	margin-bottom: 15px;
 	margin-left: 10px;
 	margin-right: 10px;
+	white-space: pre-wrap;
 }
 
 .checklist-x-symbol {
@@ -330,6 +331,7 @@ input {
 	display: flex;
 	flex-direction: column;
 	width: 350px;
+	white-space: pre-wrap;
 }
 
 .kudos-card-name {
@@ -817,12 +819,14 @@ button:hover {
 	color: #234060;
 	text-align: center;
 	font-weight: bold;
+	white-space: pre-wrap;
 }
 
 .mentee-d-profile-mentor-name {
 	font-size: 8pt;
 	color: #234060;
 	text-align: center;
+	white-space: pre-wrap;
 }
 
 .mentor-d-profile-details {
@@ -966,6 +970,7 @@ button:hover {
   .warnings-summary-text {
 	  font-size: 8pt;
 	  color: #234060;
+	  white-space: pre-wrap;
   }
 
   .give-warning-container {

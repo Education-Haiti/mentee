@@ -263,23 +263,23 @@ let removeUser = (theEmail) => {
 }
 
 let sampleData = {
-    full_name: 'JP Superuser', 
+    full_name: 'Superuser', 
     sex: 'M', 
-    email: 'jvertil@nd.edu',
+    email: 'vertil.jp@gmail.com',
     school: 'Saint-Louis de Gonzague', 
     level: 'mentor',
     grade: 'admin',
     phone_number: '409-454-5188',
-    facebook_page: 'https://www.facebook.com/jeanpierre.vertil',
-    twitter_page: 'https://twitter.com/jpvertil',
-    linked_in_page: 'https://www.linkedin.com/in/jvertil/',
-    current_city: 'Charlottesville',
+    facebook_page: '',
+    twitter_page: '',
+    linked_in_page: '',
+    current_city: '',
     current_state: 'VA',
     current_country: 'USA',
-    undergraduate_school: 'University of Notre Dame',
+    undergraduate_school: '',
     graduate_school: '',
-    majors: 'Electrical Engineering + Economics',
-    employer: 'Sigora Group',
+    majors: '',
+    employer: '',
     number_kudos_received: 1,
     checklist: {
         "MLT": true,
@@ -295,7 +295,7 @@ let sampleData = {
         },
 
         {
-            name: "Christina Bastion",
+            name: "Christina Bastien",
             date: "09/01/2018",
             message: "helping me design an assignment for my mentee",
             email: "christiti14@gmail.com"

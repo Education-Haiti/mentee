@@ -217,7 +217,7 @@ class GiveKudos extends React.Component {
 
     updateSlackChannels(theChannel) {
             axios.post('/users/slack/kudos', {
-                message: `NEW KUDOS! @${this.state.displayName} gave a kudos to @${this.state.usernames[this.state.receiverEmail]} : " ${this.state.kudosMessage} " \n\n *** Let's keep helping each other! ***`,
+                message: `NEW KUDOS! @${this.state.displayName} gave a kudos to @${this.state.usernames[this.state.receiverEmail]} : " ${this.state.kudosMessage} " \n\n *** Let's keep the kudos coming! ***`,
                 channel: theChannel
             })
             .then((response) => {
